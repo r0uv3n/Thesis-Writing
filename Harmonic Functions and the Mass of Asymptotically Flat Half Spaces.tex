@@ -1,0 +1,254 @@
+%&template.fmt
+\PassOptionsToPackage{style=alphabetic}{biblatex}
+\documentclass[titlepage,numbers=noenddot,headinclude,oneside,%
+footinclude=true,cleardoublepage=empty,%
+BCOR=5mm,paper=a4,fontsize=11pt,%
+english,%lockflag%
+]{scrartcl}
+\usepackage[definetheorems]{hrftex}
+\endofdump
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\addbibresource{ZoteroBibliographyPositiveMassTheoremBachelorThesis.bib}
+
+
+\newcommand{\ext}{\operatorname{ext}} % for the exterior region
+\newcommand{\mass}[2]{\mathfrak{m}_{(#1,#2)}} % for the ADM mass
+
+
+\DeclareFunction+{\sheafsections}[1,]{\Gamma}{#1}
+
+\newcommand{\todomark}{%
+    \colorbox{purple}{%
+        \textnormal\ttfamily\bfseries\color{white}%
+        TODO%
+    }%
+}
+\newcommand{\todo}[1][]{%
+    \ifstrempty{#1}{%
+        \def\todotext{Todo}%
+    }{%
+        \def\todotext{Todo: #1}%
+    }%
+    \todomark%
+    {%
+        \marginpar{%
+            \raggedright\normalfont\sffamily\scriptsize\todotext%
+        }%
+    }%
+}
+
+\title{Harmonic Functions and the Positive Mass Theorem for Asymptotically Flat Half-Spaces}
+\author{Henry Ruben Fischer}
+\begin{document}
+
+\selectlanguage{english}
+\pagenumbering{roman}
+\theoremstyle{plain}
+\makeatletter
+\begin{titlepage}
+\begin{center}
+
+\textsc{\LARGE \@title}
+
+\vspace{2cm}
+
+\includegraphics[width=0.3\textwidth]{Logo.pdf}
+
+\vspace{1.5cm}
+
+\Large Bachelor's Thesis in Mathematics \\
+\Large eingereicht an der Fakultät für Mathematik und Informatik\\
+\Large der Georg-August-Universität Göttingen\\
+am \today\\
+
+\vspace{1cm}
+\small{von}\\
+
+\large{\@author}
+\vspace{1cm}
+
+\small{Erstgutachter:}\\
+
+\large{Prof.~Dr.~Thomas~Schick}
+
+\vspace{1cm}
+
+\small{Zweitgutachter:}\\
+
+\large{Prof.~Dr.~Max~Wardetzki}
+
+\end{center}
+\end{titlepage}
+\makeatother
+
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\section{Introduction}
+
+\todo{Add historical context and applications of the Positive Mass theorem.}
+
+In the following, we will explore the relatively new proof of the Positive Mass theorem using (spacetime) harmonic functions, and in particular consider the case of rigidity. We will then look at how these functions look in some simple example cases. Finally, we will will apply this method to the Positive Mass theorem on asymptotically flat half spaces with connected (non-compact) boundary, acquiring an explicit lower bound for the mass in the process, \ie we will prove the following theorem (all notation and concepts will be introduced later):
+
+\begin{theorem}
+    Let \( (M,g) \) be an asymptotically flat half-space \( (M,g) \) of dimension \( n=3 \) with horizon boundary \( \Sigma\subset M \), associated exterior region \( M_{\ext} \) and connected non-compact boundary \( \boundary{M} \). Let \( (x_1,x_2,x_3) \) be asymptotically flat coordinates such that outside of a compact set, \( M \) is diffeomorphic to \( \Set{x\in \reals^3_+\given \abs{x}>1} \). Assume that the following three conditions hold
+    \begin{itemize}
+        \item \( R(g)\geq 0 \) in \( M_{\ext} \).
+        \item \( H(\boundary{M},g)\geq 0 \) on \( M_{\ext}\cap \boundary{M} \).
+    \end{itemize}
+    Then there exists a unique harmonic function \( u \) on \( M_{\ext} \) asymptotic to \( x_3 \) fulfilling zero Dirichlet boundary conditions on \( \boundary{M}\cap M_{\ext} \) and zero Neumann boundary conditions on \( \Sigma \), and we have
+    \begin{equation*}
+        m\geq \int_{M_{\ext}}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R(g)\abs{\nabla u}}\odif{V}+\int_{\boundary{M}\cap M_{\ext}}H(\boundary{M},g)\abs{\nabla u}\odif{A}\geq 0,
+    \end{equation*}
+    where \( m \) is the ADM mass of \( M \). Equality \( m=0 \) occurs if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \). 
+     
+\end{theorem}
+
+
+
+\section{Prerequisites}
+% The following will require some prerequite definitions and identities. We will in the following always assume that \( M \) is a smooth, connected manifold.
+% \begin{definition}[Riemannian metric]
+%   A \emph{Riemannian metric} \( g \) is a positive-definite, inner product smoothly assigned to each point in \( M \), \ie a section of \( \cotangentspace{M}\symmetricproduct \cotangentspace{M} \) (where \( \symmetricproduct \) is the symmetric product).
+% \end{definition}
+
+In the following let \( M \) always be a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection.
+
+Note that by \( \nabla \) we will always denote the covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=df \), and \( \grad f=(\differential f)^\sharp \), such that in coordinates \( df \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i f \).
+% We will require some basic identities from Riemannian geometry:
+% \begin{fact}[Koscul formula]
+%   Let \( \Gamma \) be the Levi-Civita connection. 
+% \end{fact}
+
+We will often be considering \( M \) as a three dimensional spacelike surface embedded in a larger \( 3+1 \)-dimensional Lorentzian manifold \( \tilde{M} \) (for the signature of the metric of \( \tilde{M} \) we choose the convention \( (-,+,+,+) \)), such that the induced metric on \( M \) is positive definite. \( M \) itself will also often have a boundary \( \boundary{M} \). Thus some basic facts about submanfolds will be helpful. Most of the following is from \cite[Chapter~2.1]{leeGeometricRelativity2019}.
+
+{ \newcommand{\Mconnection}{\nabla}\newcommand{\Sigmaconnection}{\hat{\nabla}}
+Let \( \Sigma^m \) be a submanifold of (pseudo-)Riemannian manifolds \( (M^n,g) \) (equipped with Levi-Civita connection \( \Mconnection \)). We have an induced metric \( \gamma=\restrict{g}{\tangentbundle{\Sigma}} \) (also called the \emph{first fundamental form}).
+\begin{fact}
+  Denoting the Levi-Civita connection of \( (\Sigma,\gamma) \) by \( \Sigmaconnection \), we have for any \( p\in \Sigma \), tangent vector \( v\in \tangentspace{p}{\Sigma} \) and \( Y\in \sheafsections{\tangentbundle{\Sigma}} \),
+  \begin{equation*}
+    \Sigmaconnection_X Y=(\Mconnection_X \tilde{Y})^\top,
+  \end{equation*}
+  where \( \tilde{Y} \) is any extension of \( Y \) to a vector field on \( M \). Here \( (\blank)^\top \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \).
+
+  \todo{This might be too similar to \cite[2.1]{leeGeometricRelativity2019}}
+\end{fact}
+Thus \( \Sigma \) intrinsically contains information about tangential parts of tangential derivatives. But this information does not determine the orthogonal part! This motivates the following definition:
+\begin{definition}[Second fundamental form]
+    The \emph{second fundamental form} of \( \Sigma \) is a tensor \( \mathbf{A}\in \sheafsections{\cotangentbundle{\Sigma}\tensorproduct \cotangentbundle{\Sigma}\tensorproduct \normalbundle{\Sigma}} \) such that
+    \begin{equation*}
+        \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp,
+    \end{equation*}
+    where \( (\blank)^\perp \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \).
+\end{definition}  
+
+\begin{fact}
+    \( \mathbf{A}(X,Y)=\mathbf{A}(Y,X) \), \ie \( \mathbf{A} \) is symmetric (since \( \Mconnection_X Y-\Mconnection_Y X=\commutator{X}{Y}\in \tangentspace{\Sigma} \)). 
+\end{fact}
+\begin{definition}
+    The \emph{mean curvature vector} \( \mathbf{H} \) is the trace of \( \mathbf{A} \) over \( \tangentspace{p}{\Sigma} \), \ie for an orthonormal basis \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{\Sigma} \) we define
+    \begin{equation*}
+        \mathbf{H}\definedas \sum_{i=1}^{m}\mathbf{A}(e_i,e_i).
+    \end{equation*}
+\end{definition}
+If \( \Sigma \) is an orientable hypersurface of \( M \), we can choose a normal direction \( \nu \) (if \( \Sigma \) has an interior and exterior, we typically implicitly choose \( \nu \) to be the outward normal). Then we define
+\begin{equation*}
+    A(X,Y)\definedas g(\mathbf{A(X,Y)},-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\trace;_\gamma(A).
+\end{equation*}
+We also call \( A \) the second fundamental form and \( H \) the mean curvature. Note that we have
+\begin{equation*}
+    A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu).
+\end{equation*}
+
+The following (which is \parencite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is one of the main facts we will require:
+\begin{fact}
+    Given a hypersurace \( \Sigma \) in \( (M,g) \) and a smooth function \( f \) on \( M \),
+    \begin{equation*}
+        \laplacian_M f=\laplacian_\Sigma +\Mconnection_\nu\Mconnection_\nu f+H \Mconnection_\nu f.
+    \end{equation*}
+\end{fact}
+\begin{proof}
+    Choose an orthonormal frame \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{M} \) and \( e_1,\dotsc,e_{n-1}\in \tangentspace{p}{\Sigma} \) and \( e_n=\nu \), then
+    \begin{align*}
+        \laplacian_g f&=\sum_{i=1}^{n}(\Mconnection\Mconnection f)(e_i,e_i)\\
+        &=\Mconnection_M \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i} (\grad_M f),e_i)\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i}(\grad_{\Sigma}f+\nu\cdot \Mconnection_\nu f),e_i)\\
+        &=\begin{aligned}[t]
+            &\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\gamma(\Sigmaconnection_{e_i}(\grad_{\Sigma} f),e_i)+\underbrace{g(\mathbf{A}(e_i,\grad{\Sigma}),e_i)}_{=0}\\
+            &+\Mconnection_{
+        e_i}\Mconnection_{\nu}f\cdot \underbrace{g(\nu,e_i)}_{=0}+\Mconnection_{\nu}f\cdot g(\Mconnection_{e_i}\nu,e_i))
+        \end{aligned}\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\Sigmaconnection\Sigmaconnection f)(e_i,e_i)+\Mconnection_\nu f\cdot \sum_{i=1}^{n-1}A(e_i,e_i)\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\laplacian_{\Sigma}f+\Mconnection_{\nu}f\cdot H.
+    \end{align*}
+\end{proof}
+}
+
+% The basic objects we will study are the following: 
+% \begin{definition}[Asymptotically flat manifold]
+%     Let \( (M,g) \) be \( 3 \)-dimensional.
+% \end{definition}
+
+We will now establish the necessary definitions (mostly adapted from \cite{almarazPositiveMassTheorem2016}, \cite{eichmairDoublingAsymptoticallyFlat2023} and \cite{brayHarmonicFunctionsMass2019}) to state the main result of this thesis.
+\begin{definition}[Asymptotically flat half-space]
+    Let \( (M,g) \) be a connected, complete Riemannian manifold of dimension 3, with scalar curvature \( R \) and a non-compact boundary \( \boundary{M} \) with mean curvature \( H \) (computed as the divergence along \( \boundary{M} \) of an outward pointing unit normal \( \nu \)).
+
+    We call \((M,g) \) an \emph{asymptotically flat half-space} with decay rate \( \tau>0 \) if there exists a compact subset \( K \) such that \( M\setminus K \) consists of a finite number of connected components \(M_{\mathrm{end}}^i \) called \emph{ends}, such that for each of these ends there exists a diffeomorphism \( \Phi\maps M_{\mathrm{end}}^i \to \Set{x\in \reals^3_+\given \abs{x}>1} \) and such that in the coordinate system given by this diffeomorphism we have the following asymptotic as \( r\goesto \infty \):
+    \begin{equation}
+        \abs{\partial^l(g_{ij}-\delta_{ij})}=O(r^{-\tau-l})
+    \end{equation}
+    for \( l=0,1,2 \). Here \( r=\abs{x} \) and \( \delta \) is the Euclidean metric on \( \reals^3_+=\Set{x\in \reals^3\given x_3\geq 0} \). 
+\end{definition}    
+% In the following, we will often use the Einstein summation convention with the index ranges \( i,j,\dotsc=1,\dotsc,3\) and \( \alpha,\beta,\dotsc=1,2 \). Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentspace{\boundary{M}} \), while \( \partial_n \) points inwards.
+\begin{definition}\label{def:half_space_mass}
+    If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and given by
+    \begin{equation*}
+        \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\frac{1}{r}\p*{\sum_{i,j=1}^3\int_{\reals^3_+\cap S_r^{2}(0)}\big[(\partial_j g)(\partial_i,\partial_j)-(\partial_i g)(\partial_j,\partial_i)\big]x^j\odif{A}+\sum_{\alpha=1}^2\int_{S_r^{1}=(\reals^2\times \Set{0})\cap S_r^2(0)}g(\partial_\alpha,\partial_n)x^\alpha\odif{l}},
+    \end{equation*}
+    where the integrals are computed in the asymptotically flat chart.
+\end{definition}
+\begin{remark}
+    In the definition above, thefactor \( 1/(16\pi) \)  is a normalization factor used also for the ADM mass of asymptotically flat manifolds with the full \( \reals^n \) as a model space, where it ensures that we recover the mass of the Schwarzschild solution. 
+    
+    Note that thus in our case of asymptotically flat half-space, the mass of a \emph{half Schwarzschild space} \( M_m=\Set{x\in \reals^3_+\given \abs{x}>(m/2)^{1/(n-2)}} \) with conformal metric
+    \begin{equation*}
+        g_m=\p*{1+\frac{m}{2\abs{x}}}^{2}\delta,\quad m>0
+    \end{equation*}
+    will be
+    \begin{equation*}
+        \mass{M_m,g_m}=\frac{m}{2},
+    \end{equation*}
+    which is half the ADM mass of the standard Schwarzschild space.
+\end{remark}
+In \cite{almarazPositiveMassTheorem2016}, Almaraz, Barbosa, and de Lima showed that this mass is well defined and a geometric invariant, and, in fact, non-negative under suitable energy conditions:
+\begin{theorem}\label{thm:positive_mass_theorem_for_half_spaces}
+    For \( (M,g) \) as above in \cref{def:half_space_mass}, if \( R\geq 0 \) and \( H\geq 0 \) on \( M \) and \( \boundary{M} \) respectively, then
+    \begin{equation*}
+        \mass{M}{g}\geq 0,
+    \end{equation*}  
+    with equality occurring if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \).
+\end{theorem}
+For the positive mass theorem on 3-dimensional asymptotically flat manifolds modeled on the full \( \reals^3 \), recently \parencite{brayHarmonicFunctionsMass2019} a new method using harmonic functions has been used to achieve a relatively elementary proof of the above theorem and in particular an explicit lower bound for the mass. This thesis will attempt to establish an equivalent result for the case of asymptotically flat half spaces. We will need two further definitions adopted from \cite{eichmairDoublingAsymptoticallyFlat2023} to unterstand the statement of our main result.
+\begin{definition}
+    Let \( \Sigma\subset M  \) be a compact seperating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the noncompact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
+
+    We say that an \( (M,g) \) has horizon boundary \( \Sigma \) if \( \Sigma \) is a non-empty compact minimal (\ie having zero mean curvature) hypersurface, whose connected components are all either closed or free boundary hypersurfaces such that \( M(\Sigma)\setminus \Sigma \) contains no minimal closed or free boundary hypersurfaces. \( \Sigma \) is also called an \emph{outer most minimal surface} and the region \( M(\Sigma) \) outside \( \Sigma \) is called an \emph{exterior region}.
+\end{definition}
+\begin{remark}
+    By \cite[Lemma 2.3]{koerberRiemannianPenroseInequality2020} if \( H\geq 0 \) on \( \boundary{M} \), then there either exists a unique horizon boundary \( \Sigma\subset M \) or contains no compact hypersurfaces.
+\end{remark}
+The main result of this thesis is then the following, which will prove \cref{thm:positive_mass_theorem_for_half_spaces} as a corollary:
+\begin{theorem}
+    For \( (M,g) \) as above in \( \cref{def:half_space_mass} \), if \( R\geq 0 \) and \( H\geq 0 \) on \( M \) and \( \boundary{M} \) respectively, then there exists a unique harmonic function \( u \) asymptotic to the linear function \( x_3 \) and satisfying Dirichlet boundary conditions on \( \boundary{M} \) and Neumann boundary conditions on the horizon boundary \( \Sigma \), and we have
+    \begin{equation*}
+        \mass{M}{g}\geq \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R(g)\abs{\nabla u}}\odif{V}+\frac{1}{16\pi}\int_{\boundary{M}\cap M(\Sigma)}H(\boundary{M},g)\abs{\nabla u}\odif{A}\geq 0.
+    \end{equation*} 
+\end{theorem} 
+
+Proposition 3.8 in \enquote{A positive mass theorem for
+asymptotically flat manifolds with
+a non-compact boundary} is super important! We have nice harmonic functions which are themselves asymptotically flat coordinates. 3.9 then gives uniqueness, which we can use along with a doubling argument along the horizon boundary to show existence of asymptotically flat coordinates for the case with non empty horizon boundary.
+\printbibliography
+
+
+\end{document}
