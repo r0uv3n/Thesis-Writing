@@ -1,0 +1,117 @@
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{brown}{rgb}{0.647,0.165,0.165}
+\definecolor{darkgray}{rgb}{0.663,0.663,0.663}
+\definecolor{gray}{rgb}{0.745,0.745,0.745}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{lightgray}{rgb}{0.827,0.827,0.827}
+\definecolor{orange}{rgb}{1,0.647,0}
+\definecolor{pink}{rgb}{1,0.753,0.796}
+\definecolor{purple}{rgb}{0.627,0.125,0.941}
+\definecolor{violet}{rgb}{0.933,0.51,0.933}
+\definecolor{yellow}{rgb}{1,1,0}
+\definecolor{darkblue}{rgb}{0,0,0.545}
+\definecolor{darkcyan}{rgb}{0,0.545,0.545}
+\definecolor{darkgreen}{rgb}{0,0.392,0}
+\definecolor{darkmagenta}{rgb}{0.545,0,0.545}
+\definecolor{darkorange}{rgb}{1,0.549,0}
+\definecolor{darkred}{rgb}{0.545,0,0}
+\definecolor{gold}{rgb}{1,0.843,0}
+\definecolor{lightblue}{rgb}{0.678,0.847,0.902}
+\definecolor{lightcyan}{rgb}{0.878,1,1}
+\definecolor{lightgreen}{rgb}{0.565,0.933,0.565}
+\definecolor{lightyellow}{rgb}{1,1,0.878}
+\definecolor{navy}{rgb}{0,0,0.502}
+\definecolor{seagreen}{rgb}{0.18,0.545,0.341}
+\definecolor{turquoise}{rgb}{0.251,0.878,0.816}
+\definecolor{cyan}{rgb}{0,1,1}
+\definecolor{lime}{rgb}{0.75,1,0}
+\definecolor{magenta}{rgb}{1,0,1}
+\definecolor{olive}{rgb}{0.5,0.5,0}
+\definecolor{teal}{rgb}{0,0.5,0.5}
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{white}{rgb}{1,1,1}
+\begin{tikzpicture}[ipe import]
+  \draw[darkred, thick, dashed]
+    (258.9145, 698.945)
+     .. controls (260.3923, 714.0513) and (244.3007, 741.4727) .. (235.516, 746.4808)
+     .. controls (226.7313, 751.489) and (225.2537, 734.084) .. (223.7758, 718.9777)
+     .. controls (222.298, 703.8713) and (220.82, 691.0637) .. (229.6047, 686.0555)
+     .. controls (238.3893, 681.0473) and (257.4367, 683.8387) .. cycle;
+  \node[ipe node, anchor=north east, font=\large, text=darkred]
+     at (226.448, 642.354) {$\Sigma$};
+  \node[ipe node, font=\large, text=darkred]
+     at (252.71, 723.227) {$\Sigma$};
+  \draw[darkgreen, very thick, ->]
+    (208.984, 582.085)
+     -- (182.714, 555.015);
+  \draw[darkblue, very thick, ->]
+    (418.2361, 758.6806)
+     -- (440.6377, 781.7076);
+  \draw[darkred, very thick, ->]
+    (295.876, 673.394)
+     -- (301.729, 706.144);
+  \node[ipe node, font=\large]
+     at (22.595, 592.509) {$\partial M$};
+  \node[ipe node, anchor=north west, font=\large, text=darkgreen]
+     at (191.359, 563.923) {$\nu$};
+  \node[ipe node, anchor=north west, font=\large, text=darkblue]
+     at (428.079, 768.553) {$\mu$};
+  \node[ipe node, anchor=north west, font=\large, text=darkred]
+     at (299.439, 693.332) {$n_\Sigma $};
+  \node[ipe node, anchor=north east, font=\large, rgb color={text=0.424 0.424 0.424}]
+     at (491.915, 586.611) {$S_{r}^{1}$};
+  \node[ipe node, anchor=south west, font=\large, text=darkblue]
+     at (458.655, 702.195) {$S_{r,+}^2$};
+  \filldraw[very thick, ->, fill=darkgray]
+    (496, 592)
+     -- (527.455, 592);
+  \node[ipe node, font=\large]
+     at (506.807, 593.223) {$\theta$};
+  \draw[darkred, thick, dashed]
+    (320.792, 620.695)
+     .. controls (354.304, 645.287) and (326.624, 667.469) .. (296.9852, 673.1883)
+     .. controls (267.3463, 678.9077) and (235.7487, 668.1643) .. (226.0798, 658.8745)
+     .. controls (216.411, 649.5847) and (228.671, 641.7483) .. (233.9793, 630.5627)
+     .. controls (239.2877, 619.377) and (237.6443, 604.842) .. (241.3269, 596.4795)
+     .. controls (245.0095, 588.117) and (254.018, 585.927) .. (254.018, 585.927);
+  \node[ipe node, font=\large]
+     at (96, 736) {$M$};
+  \draw[thick]
+    (0.3169, 592)
+     .. controls (33.6241, 592) and (64.4022, 592) .. (80, 592);
+  \draw[darkgreen, very thick]
+    (80, 592)
+     .. controls (110.702, 592.524) and (120.271, 593.182) .. (130.667, 594.667)
+     .. controls (149.333, 597.333) and (170.667, 602.667) .. (186.667, 597.333)
+     .. controls (202.667, 592) and (213.333, 576) .. (224, 568)
+     .. controls (234.667, 560) and (245.333, 560) .. (250.667, 573.333)
+     .. controls (256, 586.667) and (256, 613.333) .. (266.667, 626.667)
+     .. controls (277.333, 640) and (298.667, 640) .. (314.667, 626.667)
+     .. controls (330.667, 613.333) and (341.333, 586.667) .. (352, 576)
+     .. controls (362.667, 565.333) and (373.333, 570.667) .. (381.333, 578.667)
+     .. controls (389.333, 586.667) and (394.667, 597.333) .. (402.667, 602.667)
+     .. controls (410.667, 608) and (421.333, 608) .. (429.333, 605.333)
+     .. controls (437.333, 602.667) and (442.667, 597.333) .. (448, 594.667)
+     .. controls (453.333, 592) and (458.667, 592) .. (470.061, 592)
+     .. controls (472.203, 592) and (474.457, 592) .. (496, 592);
+  \node[ipe node, anchor=north west, text=darkgreen]
+     at (381.333, 578.667) {$(\partial M)_r$};
+  \draw[thick]
+    (496, 592)
+     .. controls (496, 592) and (517.062, 592) .. (595, 592.201);
+  \draw[darkblue, thick]
+    (496.5267, 592.1768)
+     .. controls (476.688, 674.0913) and (459.0892, 705.1293) .. (438.9839, 732.8074)
+     .. controls (418.8786, 760.4856) and (396.2667, 784.804) .. (365.696, 799.7629)
+     .. controls (335.1252, 814.7218) and (296.5955, 820.3213) .. (254.6783, 806.7756)
+     .. controls (212.7611, 793.2298) and (167.4564, 760.5388) .. (134.2448, 710.4355)
+     .. controls (101.0331, 660.3323) and (79.9145, 592.8168) .. (79.9145, 592.8168);
+  \pic[ipe mark large, rgb color={draw=0.424 0.424 0.424}]
+     at (496, 592) {ipe disk};
+  \filldraw[rgb color={draw=0.424 0.424 0.424}, fill=white]
+    (80, 592)
+     .. controls (80.0001, 592.1013) and (80.0001, 592.152) .. (80.0001, 592.152);
+  \pic[ipe mark large, rgb color={draw=0.424 0.424 0.424}]
+     at (80, 592) {ipe disk};
+\end{tikzpicture}
