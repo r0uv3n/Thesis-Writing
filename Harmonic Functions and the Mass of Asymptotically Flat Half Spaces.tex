@@ -19,11 +19,13 @@ english,%lockflag%
 \usetikzlibrary{arrows.meta,patterns}
 
 \newcommand{\ext}{\mathrm{ext}} % for the exterior region
-\newcommand{\Mend}{M_{\mathrm{ext}}} % for the exterior region
+\newcommand{\Mend}{M_{\mathrm{end}}} % for an end of M region
 \newcommand{\mass}[2]{\mathfrak{m}_{(#1,#2)}} % for the ADM mass
 
 
 \DeclareFunction+{\sheafsections}[1,]{\Gamma}{#1}
+\DeclareFunction+{\smallo}[1,]{o}{#1}
+\DeclareFunction+{\bigo}[1,]{O}{#1}
 
 \newcommand{\todomark}{%
     \colorbox{purple}{%
@@ -96,7 +98,9 @@ am \today\\
 
 \todo{Add historical context and applications of the Positive Mass theorem.}
 
-In the following, we will explore the relatively new proof of the Positive Mass theorem using (spacetime) harmonic functions, and in particular consider the case of rigidity. We will then look at how these functions look in some simple example cases. Finally, we will will apply this method to the Positive Mass theorem on asymptotically flat half spaces with connected (non-compact) boundary, acquiring an explicit lower bound for the mass in the process, \ie we will prove the following theorem (all notation and concepts will be introduced later):
+The (spacetime) positive mass theorem is a central result in the study of general relativity and differential geometry, originally proved by Richard Schoen and Shing-Tung Yau in 1979 \parencite{schoenProofPositiveMass1979} employing stable minimal hypersurfaces and independently by Edward Witten in 1981 \parencite{wittenNewProofPositive1981} using spinor techniques.
+
+In the following, we will explore a relatively new proof of the Positive Mass theorem using (spacetime) harmonic functions, and in particular consider the case of rigidity. We will then look at how these harmonic functions look in some simple example cases. Finally, we will will apply this method to the Positive Mass theorem on asymptotically flat half spaces with connected (non-compact) boundary, acquiring an explicit lower bound for the mass in the process, \ie we will prove the following theorem (notation and concepts will be introduced later):
 
 \begin{theorem}
     Let \( (M,g) \) be an asymptotically flat half-space \( (M,g) \) of dimension \( n=3 \) with horizon boundary \( \Sigma\subset M \), associated exterior region \( M(\Sigma) \) and connected non-compact boundary \( \boundary{M} \). Let \( (x_1,x_2,x_3) \) be asymptotically flat coordinates such that outside of a compact set, \( M \) is diffeomorphic to \( \Set{x\in \reals^3_+\given \abs{x}>1} \). Assume that the following three conditions hold
@@ -109,10 +113,23 @@ In the following, we will explore the relatively new proof of the Positive Mass 
         m\geq \int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R(g)\abs{\nabla u}}\odif{V}+\int_{\boundary{M}\cap M(\Sigma)}H(\boundary{M},g)\abs{\nabla u}\odif{A}\geq 0,
     \end{equation*}
     where \( m \) is the ADM mass of \( M \). Equality \( m=0 \) occurs if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \). 
-     
 \end{theorem}
+\subsection{Physical Motivation}
+The positive mass theorem was originally motivated by the study of general relativity, but is also (particularly in the so-called time-symmetric or Riemannian case) of independent importance to differential geometry. We will do a quick exposition of both of these perspectives.
 
+Physically, a less general statement can informally be expressed as the following: 
 
+Consider a static (\ie time-independent) mass distribution \( \rho \) in \( \reals^3 \) that is compactly supported in some finite volume \( V \) (it would suffice if the mass distribution fell off sufficiently quickly towards infinity, but this case is easier to reason about).
+
+Then in the Newtonian Theory of Gravity, this mass distribution would at large distances look like a point mass of some total mass \( M \). Due to the linear nature of Newtonian gravity, we can calculate that \( M \) is just \( \int \rho \odif{V} \).
+
+But when we consider Einstein's Theory of Gravity (via General Relativity), though we can still assign a total mass, now called the \emph{ADM mass} \( M \) (in practice this takes the form of an integral expression over large coordinate spheres, where we take the limit as the radius goes to infinity), we lose the linearity of Newtonian Gravity and we cannot anymore identify \( M \) with the integral of the individual masses anymore. Here our mass distribution bends spacetime in some (possibly very complicated) way, but the ADM mass tells us that his spacetime geometry asymptotically looks like the geometry around a Schwarzschild black hole of mass \( M \).
+
+The positive mass theorem now says that even though we lose the relation to the integral of the mass distribution, we retain at least some good behaviour of the mass: If the mass distribution is non-negative everywhere, then we also have \( M\geq 0 \), \ie there exists no configuration of positive masses (however complicated) that acts like a black hole of negative mass (a white hole) at large distances. Compare \cite[Chapter 7]{leeGeometricRelativity2019} for more details.
+
+When expressing this theorem mathematically, we leave behind a lot of the physical details. In particular, we directly consider the scalar curvature \( R \) instead of the mass distribution (since the scalar curvature is proportional to mass in General Relativity). Since we define the ADM mass in terms of the asymptotic geometric behaviour as well, we reduce the physical statement to a purely geometric one. This leads us to another approach to motivate the theorem, at least for the time-symmetric case (this formulation is from \cite[page 1]{braySpacetimeHarmonicFunctions2021}):
+
+Every compactly supported perturbation of the Euclidean metric on \( \reals^n \) must somewhere decrease its scalar curvature. This is a kind of extremality property of the Euclidean metric. It follows directly from the Geroch conjecture -- the fact that the torus \( \mathbb{T}^n \) does not admit a metric of positive scalar curvature -- by identifying the ends of a large coordinate cube (containing the compact set on which the perturbation takes place). The Riemannian positive mass theorem then is an extension of this extremality property to the nonnegativity of the ADM-mass on manifolds that are \emph{asymptotically euclidean} instead of straight up equal to the euclidean geometry outside a compact set. We'll call these manifolds \emph{asymptotically flat}.
 
 \section{Prerequisites}
 % The following will require some prerequite definitions and identities. We will in the following always assume that \( M \) is a smooth, connected manifold.
@@ -122,7 +139,7 @@ In the following, we will explore the relatively new proof of the Positive Mass 
 
 In the following let \( M \) always be a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection.
 
-Note that by \( \nabla \) we will always denote the covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=df \), and \( \grad f=(\differential f)^\sharp \), such that in coordinates \( df \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i f \).
+Note that by \( \nabla \) we will always denote the covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=df \), and \( \grad f=(\differential f)^\sharp \), such that in coordinates \( df \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i     f \).
 % We will require some basic identities from Riemannian geometry:
 % \begin{fact}[Koscul formula]
 %   Let \( \Gamma \) be the Levi-Civita connection. 
@@ -196,27 +213,24 @@ The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is
 % \begin{definition}[Asymptotically flat manifold]
 %     Let \( (M,g) \) be \( 3 \)-dimensional.
 % \end{definition}
-
+\section{The mass of an asymptotically flat half-space}
 We will now establish the necessary definitions (mostly adapted from \cite{almarazPositiveMassTheorem2016}, \cite{eichmairDoublingAsymptoticallyFlat2023} and \cite{brayHarmonicFunctionsMass2019}) to state the main result of this thesis.
 \begin{definition}[Asymptotically flat half-space]
     Let \( (M,g) \) be a connected, complete Riemannian manifold of dimension 3, with scalar curvature \( R \) and a non-compact boundary \( \boundary{M} \) with mean curvature \( H \) (computed as the divergence along \( \boundary{M} \) of an outward pointing unit normal \( \nu \)).
 
     We call \((M,g) \) an \emph{asymptotically flat half-space} with decay rate \( \tau>0 \) if there exists a compact subset \( K \) such that \( M\setminus K \) consists of a finite number of connected components \(M_{\mathrm{end}}^i \) called \emph{ends}, such that for each of these ends there exists a diffeomorphism \( \Phi\maps M_{\mathrm{end}}^i \to \Set{x\in \reals^3_+\given \abs{x}>1} \) and such that in the coordinate system given by this diffeomorphism we have the following asymptotic as \( r\goesto \infty \):
     \begin{equation}
-        \abs{\partial^l(g_{ij}-\delta_{ij})}=O(r^{-\tau-l})
+        \abs{\partial^l(g_{ij}-\delta_{ij})}=\bigo{r^{-\tau-l}}
     \end{equation}
     for \( l=0,1,2 \). Here \( r=\abs{x} \) and \( \delta \) is the Euclidean metric on \( \reals^3_+=\Set{x\in \reals^3\given x_3\geq 0} \). 
 \end{definition}    
-In the following, we will often use the Einstein summation convention with the index ranges \( i,j,\dotsc=1,\dotsc,3\) and \( \alpha,\beta,\dotsc=1,2 \). Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentspace{\boundary{M}} \), while \( \partial_n \) points inwards.
+In the following, we will often use the Einstein summation convention with the index ranges \( i,j,\dotsc=1,\dotsc,3\) and \( \alpha,\beta,\dotsc=1,2 \). We write \( T_{(\text{indices}),i} \) and \( T_{(\text{indices});i} \) for the partial and covariant derivative of \( T \) in the direction \( x_i \). Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentspace{\boundary{M}} \), while \( \partial_n \) points inwards.
 \begin{definition}\label{def:half_space_mass}
-    If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and given by
+    If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and (introducing the notation \( C_i \) for the coordinate dependent quantity \( \sum_jj (g_{ij,j}-g_{jj,i}) \)) given by
     \begin{equation*}
-        \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\p[Bigg]{\begin{aligned}[t]
-            &\int_{\cap \sphere_{r,+}^{2}}\big[g_{ij,j}-g_{jj,i}\big]\mu^i\odif{A}\\
-            &+\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}
-        \end{aligned}},
+        \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\Biggl(\int_{\sphere_{r,+}^{2}}C_i\mu^i\odif{A}+\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}\Biggr),
     \end{equation*}
-    where the integrals are computed in the asymptotically flat chart, \( \sphere_{r,+}^{2}(0)=\Set{\reals}^3_+\cap \sphere_r^2(0) \) is a large upper coordinate hemisphere with outward unit normal \( \mu \), and \( \theta \) is the outward pointing unit co-normal to \( \sphere_{r}^1=(\Set{\reals}^2\times \Set{0})\cap \sphere_r^2(0)=\boundary{\sphere_{r,+}^2} \), oriented as the boundary of \( (\boundary{M})_r\subset \boundary{M} \)
+    where the integrals are computed in the asymptotically flat chart, \( \sphere_{r,+}^{2}(0)=\Set{\reals}^3_+\cap \sphere_r^2(0) \) is a large upper coordinate hemisphere with outward unit normal \( \mu \), and \( \theta \) is the outward pointing unit co-normal to \( \sphere_{r}^1=(\Set{\reals}^2\times \Set{0})\cap \sphere_r^2(0)=\boundary{\sphere_{r,+}^2} \), oriented as the boundary of \( (\boundary{M})_r\subset \boundary{M} \).
 \end{definition}
 \begin{figure}[H]
     \centering
@@ -233,7 +247,7 @@ In the following, we will often use the Einstein summation convention with the i
     \end{equation*}
     will be
     \begin{equation*}
-        \mass{M_m,g_m}=\frac{m}{2},
+        \mass{M_m}{g_m}=\frac{m}{2},
     \end{equation*}
     which is half the ADM mass of the standard Schwarzschild space.
 \end{remark}
@@ -247,7 +261,7 @@ In \cite{almarazPositiveMassTheorem2016}, Almaraz, Barbosa, and de Lima showed t
 \end{theorem}
 For the positive mass theorem on 3-dimensional asymptotically flat manifolds modeled on the full \( \reals^3 \), recently \parencite{brayHarmonicFunctionsMass2019} a new method using harmonic functions has been used to achieve a relatively elementary proof of the above theorem and in particular an explicit lower bound for the mass. This thesis will attempt to establish an equivalent result for the case of asymptotically flat half spaces. We will need two further definitions adopted from \cite{eichmairDoublingAsymptoticallyFlat2023} to unterstand the statement of our main result.
 \begin{definition}
-    Let \( \Sigma\subset M  \) be a compact seperating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the noncompact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
+    Let \( \Sigma\subset M  \) be a compact separating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the noncompact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
 
     We say that an \( (M,g) \) has horizon boundary \( \Sigma \) if \( \Sigma \) is a non-empty compact minimal (\ie having zero mean curvature) hypersurface, whose connected components are all either closed or free boundary hypersurfaces such that \( M(\Sigma)\setminus \Sigma \) contains no minimal closed or free boundary hypersurfaces. \( \Sigma \) is also called an \emph{outer most minimal surface} and the region \( M(\Sigma) \) outside \( \Sigma \) is called an \emph{exterior region}.
 \end{definition}
@@ -267,7 +281,7 @@ asymptotically flat manifolds with
 a non-compact boundary} is super important! We have nice harmonic functions which are themselves asymptotically flat coordinates. 3.9 then gives uniqueness, which we can use along with a doubling argument along the horizon boundary to show existence of asymptotically flat coordinates for the case with non empty horizon boundary.
 
 \section{Main basic identity}
-The basic identity underlying the method of harmonic functions is the following (this is a special case of \cite[Proposition 3.2 in][]{hirschSpacetimeHarmonicFunctions2021} and slightly more general than \cite[Proposition 4.2 in]{brayHarmonicFunctionsMass2019}):
+The basic identity underlying the method of harmonic functions is the following (this is a special case of \cite[Proposition 3.2]{hirschSpacetimeHarmonicFunctions2021} and slightly more general than \cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}):
 {\newcommand{\maxu}{\bar{u}}
 \newcommand{\minu}{\underline{u}}
 \newcommand{\nonzeroboundary}{\partial_{\neq 0}\Omega}
@@ -281,7 +295,7 @@ The basic identity underlying the method of harmonic functions is the following 
 \section{Existence and uniqueness of asymptotically linear harmonic functions}
 To use \Cref{prop:main_identity}, we will require harmonic functions with properties as in \Cref{thm:main_result}. More specifically we will require asymptotically linear harmonic coordinates on \( M(\Sigma) \) (for \( \Sigma \) the horizon boundary of \( M \)) with certain boundary conditions, \ie \( \tilde{x}_1,\tilde{x}_2,\tilde{x}_3 \) such that 
 \begin{gather*}
-    \laplacian \tilde{x}_i=0\quad \quad \partial_{n_\Sigma}\tilde{x}_i=0 \text{on \( \Sigma \)}\quad \tilde{x}_i-x_i\in C_{1-\tau+\varepsilon}^{2,\alpha}\quad i=1,2,3\\
+    \laplacian \tilde{x}_i=0\quad \quad \partial_{n_\Sigma}\tilde{x}_i=0 \text{ on \( \Sigma \)}\qquad \tilde{x}_i-x_i\in C_{1-\tau+\varepsilon}^{2,\alpha}\quad i=1,2,3\\
     \partial_\nu \tilde{x}_\alpha=0 \text{ on \( \boundary{M} \cap M(\Sigma) \), for \( \alpha=1,2 \)}\qquad \tilde{x}_3=0 \text{ on \( \boundary{M}\cap M(\Sigma) \)}
 \end{gather*}
 for some \( \varepsilon>0 \) and \( 0<\alpha<1 \).
@@ -318,7 +332,7 @@ To prove the following proposition in generality, we will require a special case
 \begin{proof}
     We first show existence and uniqueness for the case \( \Sigma=\emptyset \), then extend to \( \Sigma\neq \emptyset \) via a reflection argument along \( \Sigma \).
  
-    \begin{proofenumerate}[label=Step \arabic*.]
+    \begin{proofenumerate}[label=\textbf{Step \arabic*.}]
         \item \cite[Proposition 3.8]{almarazPositiveMassTheorem2016} proves existence for \( \Sigma=\emptyset \) and one end. But by replacing the \( x_i \) in the proof with arbitrary smooth extensions of the \( x_i^j \) (which are defined on open sets with disjoint closures) with \( \restrict{x_i}{\Mend^j}=x_i^j  \), \( \restrict{x_3}{\boundary{M}}=0 \), we can easily generalise the statement to multiple ends.
 
 
@@ -329,11 +343,11 @@ To prove the following proposition in generality, we will require a special case
         \end{equation*}
         We have
         \begin{equation*}
-            (\delta_i^j-Q_i^j)\tilde{x}_j-a_i=\tilde{x}_i-\tilde{x}_i'=o(r^{1/2}) \quad \text{as \( r\goesto \infty \)},
+            (\delta_i^j-Q_i^j)\tilde{x}_j-a_i=\tilde{x}_i-\tilde{x}_i'=\smallo{r^{1/2}} \quad \text{as \( r\goesto \infty \)},
         \end{equation*}
         and further
         \begin{equation*}
-            (\delta_i^j-Q_i^j)(x_j-\tilde{x}_j)-a_i=o(r^{1/2})
+            (\delta_i^j-Q_i^j)(x_j-\tilde{x}_j)-a_i=\smallo{r^{1/2}}
         \end{equation*}
         which implies 
         \begin{equation*}
@@ -369,7 +383,7 @@ To prove the following proposition in generality, we will require a special case
 \section{Proof of the Mass Lower Bound}
 We proceed by constructing a proof parallel to \cite[Section 6]{brayHarmonicFunctionsMass2019} and \cite[Section 6]{hirschSpacetimeHarmonicFunctions2021}. 
 
-To this end, let \( (M,g) \) be an asymptotically flat half-space and horizon boundary \( \Sigma \) with asymptotically flat harmonic coordinates \( x_1,x_2,x_3 \) as in \cref{prop:existence_and_uniqueness}. Note that from now on we will again consider \( M \) to only have a single end \( \Mend \) and that although we call \( x_1,x_2,x_3 \) are defined on all of \( M(\Sigma) \) and we call them harmonic coordinates, they are only guaranteed to form a coordinate system in \( \Mend \).
+To this end, let \( (M,g) \) be an asymptotically flat half-space and horizon boundary \( \Sigma \) with asymptotically flat harmonic coordinates \( x_1,x_2,x_3 \) as in \Cref{prop:existence_and_uniqueness}. Note that from now on we will again consider \( M \) to only have a single end \( \Mend \) and that although we call \( x_1,x_2,x_3 \) are defined on all of \( M(\Sigma) \) and we call them harmonic coordinates, they are only guaranteed to form a coordinate system in \( \Mend \).
 
 \todo{The above wording is very similar to \cite[Section 6]{hirschSpacetimeHarmonicFunctions2021}.}
 
@@ -383,29 +397,58 @@ Further define
     \sphere_L^1&=\Set{x\in \Mend \given (x_1)^2+(x_2)^2=L^2,\logicspace 0=x_3}=\boundary{C_L}=C_L\cap \boundary{M}\\
     (\boundary{M})_L&=\Set{x\in \boundary{M}\cap M(\Sigma)\given (x_1)^2+(x_2)^2\leq L}
 \end{align*}
-and let \( \Omega_L \) be the compact component of \( M(\Sigma)\setminus C_L \). By an argument similar to the proof of \cite[Proposition 4.1]{bartnikMassAsymptoticallyFlat1986}, we can compute the mass as
+and let \( \Omega_L \) be the compact component of \( M(\Sigma)\setminus C_L \). 
+% By an argument similar to the proof of \cite[Proposition 4.1]{bartnikMassAsymptoticallyFlat1986}
+By \Cref{prop:mass_independent_of_exhausting_sequence}, which can be proven by just slightly modifying the proof of \cite[Proposition 3.7]{almarazPositiveMassTheorem2016}, we can compute the mass as
 \begin{equation*}
     \mass{M}{g}=\lim_{L \goesto \infty}\left( \int_{C_L}(g_{ij,j}-g_{jj,i})\mu^i\odif{A}+\int_{\sphere^1_L}g_{\alpha 3}\theta^\alpha\odif{l} \right)
 \end{equation*}
-where now \( \mu \) is the outward unit normal to \( C_L \) and \( \theta \) is as in \( \cref{def:half_space_mass} \). We delegate the details here to the Appendix, see \cref{prop:mass_independent_of_exhausting_sequence}.
+where now \( \mu \) is the outward unit normal to \( C_L \) and \( \theta \) is as in \( \Cref{def:half_space_mass} \). We delegate the details here to the Appendix, see \Cref{prop:mass_independent_of_exhausting_sequence}.
+
+We now want to apply \Cref{prop:main_identity} to \( u=x_3 \). Note that for large enough \( L \), we can be sure that \( \abs{\nabla u}\neq 0 \) on \( \boundary{\Omega_L} \), since on \( \Omega_L\cap \boundary{M}\subset\boundary{M} \) we always always     
+
 \newpage
 \appendix
 \section{Different Exhausting Sequences for Computation of the Mass}
 \begin{proposition}\label{prop:mass_independent_of_exhausting_sequence}
-    Suppose that \( (M,g) \) is an asymptotically flat half space with asymptotically flat coordinates \( x_1,x_2,x_3 \). Let \( \Set{D_k^3}_1^{\infty} \) be an exhaustion of \( M \) by closed sets such that the sets \( S_k=\boundary{D_k} \) are connected \( 2 \)-dimensional submanifolds (smooth almost everywhere) of \( M \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
+    Suppose that \( (M,g) \) is an asymptotically flat half space with asymptotically flat coordinates \( x_1,x_2,x_3 \) on \( \Mend \) (fulfilling the conditions of \Cref{def:half_space_mass}). Let \( \Set{D_k^3}_{k=1}^{\infty} \) be an exhaustion of \( M \) by closed sets with \( \boundary{D_k}=S_k\cup (D_k\cap \boundary{M}) \), where \( S_k \) is a connected \( 2 \)-dimensional submanifold (smooth almost everywhere) of the end \( \Mend \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
     \begin{gather*}
-        R_k\definedas \inf \Set{\abs{x}\given x\in S_k}\goesto \infty\quad \text{as \( k\goesto \infty \)},\\
+        R_k\definedas \inf_{x\in S_k} \abs{x}\goesto \infty\quad \text{as \( k\goesto \infty \)},\\
         R_k^2\cdot \abs{S_k} \text{ is bounded as \( k\goesto \infty \)},
     \end{gather*}
-    and \( R_1\geq R_0 \), where \( \abs{S_k} \), the area of \( S_k \), and \( \abs{x} \) are as usual calculated with respect to the euclidean background metric. Then
+    and \( R_1\geq R_0 \), where \( \abs{S_k} \), the area of \( S_k \), and \( \abs{x} \) are as usual calculated with respect to the euclidean background metric (possible since we are in \( \Mend \)). Then
     \begin{equation*}
-        \mass{M}{g}=\lim_{k \goesto \infty}\int_{S_k}\int_{\cap \sphere_{r,+}^{2}}\big[g_{ij,j}-g_{jj,i}\big]\mu^i\odif{A}\\
-        +\int_{\boundary{S_k}}g_{\alpha 3}\theta^\alpha\odif{l}
+        \mass{M}{g}=\lim_{k \goesto \infty}\int_{S_k}\int_{\sphere_{r,+}^{2}}C_i\tilde{\mu}^i\odif{A}+\int_{\boundary{S_k}}g_{\alpha 3}\tilde{\theta}^\alpha\odif{l}
     \end{equation*}
-    is independent of the sequence \( S_k \), where as in \cref{def:half_space_mass} \( \mu^i \) is the outward normal to \( S_k \) and \( \theta^\alpha \) the co-normal to \( \boundary{S_k} \) oriented as the boundary of the compact component of \( \boundary{M}\setminus \boundary{S_k} \).
+    is independent of the sequence \( S_k \), where as in \Cref{def:half_space_mass} \( \tilde{\mu}^i \) is the outward normal to \( S_k \) and \( \tilde{\theta}^\alpha \) the co-normal to \( \boundary{S_k} \) oriented as the boundary of the compact component of \( \boundary{M}\setminus \boundary{S_k} \).
 \end{proposition}
 \begin{proof}
-    \todo{Prove this}
+    Let \( \tilde{D}_k\definedas \Set{x\in D_k\given \abs{x}\geq R_k} \) (this is the part of \( D_k \) extending beyond the biggest coordinate hemisphere that is possible to inscribe in \( D_k \)). Then \( \boundary{\tilde{D}_k}=S_k \cup \sphere^2_{R_k,+}\cup (\tilde{D}_k\cap \boundary{M}) \) and \( \boundary+{\tilde{D}_k\cap \boundary{M}}=(S_k\cap \boundary{M})\cup (\sphere^1_{R_k}) \).
+
+
+
+    As in \cite[Proposition 3.7]{almarazPositiveMassTheorem2016}, we get (using \cite[Equations 3.16 and 3.17]{almarazPositiveMassTheorem2016})
+    \begin{align*}
+        \int_{\tilde{D}_k}{R}\odif{V}&=\begin{gathered}[t]
+            \int_{S_k}C_i\tilde{\mu}^i \odif{A}-\int_{\sphere^2_{R_k,+}}C_i\mu^i\odif{A}\\
+            +\int_{\tilde{D}_k \cap \boundary{M}}C_i\nu^i \odif{A}+\int_{\tilde{D}_k}\bigo{r^{-2\tau-2}},
+        \end{gathered}\\
+        \int_{\tilde{D}_k\cap \boundary{M}}C_i \nu^i\odif{A}&=\begin{gathered}[t]
+            \int_{S_k\cap \boundary{M}}g_{\alpha 3}\tilde{\theta}^\alpha\odif{l}-\int_{\sphere{R_k}^1}g_{\alpha,3}\theta^\alpha\odif{l}\\
+                -2\int_{\tilde{D}_k\cap \boundary{M}}H+\int_{\tilde{D}\cap \boundary{M}}\bigo{r^{-2\tau-1}},
+        \end{gathered}
+    \end{align*}
+    and thus
+    \begin{equation*}
+        \begin{aligned}[t]
+        &\rphantom{=}\abs[Bigg]{\int_{S_k}C_i \tilde{\mu}^i \odif{A}+\int_{S_k\cap \boundary{M}}g_{\alpha 3}\tilde{\theta}^\alpha\odif{l}-\p[Bigg]{\int_{\sphere^2_{R_k,+}}C_i\mu^i \odif{A}+\int_{\sphere^1_{R_k}}g_{\alpha 3}\theta^\alpha\odif{l}}}\\
+        &\leq \int_{\tilde{D}_k}\bigo(r^{-2tau-2})+\abs{R}\odif{V}+\int_{\tilde{D}_k\cap \boundary{M}}\bigo(r^{-2tau-1})+\abs{H}\odif{A}\\
+        &\leq \int_{M\setminus D_k}\bigo(r^{-2tau-2})+\abs{R}\odif{V}+\int_{(\boundary{M})\setminus D_k}\bigo(r^{-2tau-1})+\abs{H}\odif{A}\\
+        \end{aligned}
+    \end{equation*}
+    Since \( R\in L^1(M) \) and \( H\in L^1(\boundary{M}) \), the fact that the \( D_k \) exhaust \( M \) (together with \( r>R_k \) in \( M\setminus D_k \)) implies that the integrals over \( R \) and \( H \) on the right hand side vanish in the limit \( k\goesto \infty \). Similarly, since \( \tau>1/2 \), the integrals over \( \bigo(r^{-2tau-2}) \) and \( \bigo(r^{-2tau-1}) \) also vanish in this limit. 
+     
+    We learn that using the \( S_k \) to compute the mass yields the same result as using coordinate spheres (as we used in our original \Cref{def:half_space_mass}).
 \end{proof}
 \printbibliography
 \end{document}
