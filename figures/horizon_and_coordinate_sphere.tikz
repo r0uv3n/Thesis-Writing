@@ -1,36 +1,37 @@
 \definecolor{red}{rgb}{1,0,0}
 \definecolor{blue}{rgb}{0,0,1}
-\definecolor{brown}{rgb}{0.647,0.165,0.165}
-\definecolor{darkgray}{rgb}{0.663,0.663,0.663}
-\definecolor{gray}{rgb}{0.745,0.745,0.745}
 \definecolor{green}{rgb}{0,1,0}
-\definecolor{lightgray}{rgb}{0.827,0.827,0.827}
-\definecolor{orange}{rgb}{1,0.647,0}
-\definecolor{pink}{rgb}{1,0.753,0.796}
-\definecolor{purple}{rgb}{0.627,0.125,0.941}
-\definecolor{violet}{rgb}{0.933,0.51,0.933}
 \definecolor{yellow}{rgb}{1,1,0}
+\definecolor{orange}{rgb}{1,0.647,0}
+\definecolor{gold}{rgb}{1,0.843,0}
+\definecolor{purple}{rgb}{0.627,0.125,0.941}
+\definecolor{gray}{rgb}{0.745,0.745,0.745}
+\definecolor{brown}{rgb}{0.647,0.165,0.165}
+\definecolor{navy}{rgb}{0,0,0.502}
+\definecolor{pink}{rgb}{1,0.753,0.796}
+\definecolor{seagreen}{rgb}{0.18,0.545,0.341}
+\definecolor{turquoise}{rgb}{0.251,0.878,0.816}
+\definecolor{violet}{rgb}{0.933,0.51,0.933}
 \definecolor{darkblue}{rgb}{0,0,0.545}
 \definecolor{darkcyan}{rgb}{0,0.545,0.545}
+\definecolor{darkgray}{rgb}{0.663,0.663,0.663}
 \definecolor{darkgreen}{rgb}{0,0.392,0}
 \definecolor{darkmagenta}{rgb}{0.545,0,0.545}
 \definecolor{darkorange}{rgb}{1,0.549,0}
 \definecolor{darkred}{rgb}{0.545,0,0}
-\definecolor{gold}{rgb}{1,0.843,0}
 \definecolor{lightblue}{rgb}{0.678,0.847,0.902}
 \definecolor{lightcyan}{rgb}{0.878,1,1}
+\definecolor{lightgray}{rgb}{0.827,0.827,0.827}
 \definecolor{lightgreen}{rgb}{0.565,0.933,0.565}
 \definecolor{lightyellow}{rgb}{1,1,0.878}
-\definecolor{navy}{rgb}{0,0,0.502}
-\definecolor{seagreen}{rgb}{0.18,0.545,0.341}
-\definecolor{turquoise}{rgb}{0.251,0.878,0.816}
-\definecolor{cyan}{rgb}{0,1,1}
 \definecolor{lime}{rgb}{0.75,1,0}
+\definecolor{teal}{rgb}{0,0.5,0.5}
+\definecolor{cyan}{rgb}{0,1,1}
 \definecolor{magenta}{rgb}{1,0,1}
 \definecolor{olive}{rgb}{0.5,0.5,0}
-\definecolor{teal}{rgb}{0,0.5,0.5}
 \definecolor{black}{rgb}{0,0,0}
 \definecolor{white}{rgb}{1,1,1}
+\definecolor{mygrey}{rgb}{0.424,0.424,0.424}
 \begin{tikzpicture}[ipe import]
   \draw[darkred, thick, dashed]
     (258.9145, 698.945)
@@ -46,8 +47,8 @@
     (208.984, 582.085)
      -- (182.714, 555.015);
   \draw[darkblue, very thick, ->]
-    (418.2361, 758.6806)
-     -- (440.6377, 781.7076);
+    (418.236, 758.681)
+     -- (440.638, 781.708);
   \draw[darkred, very thick, ->]
     (295.876, 673.394)
      -- (301.729, 706.144);
@@ -60,9 +61,9 @@
   \node[ipe node, anchor=north west, font=\large, text=darkred]
      at (299.439, 693.332) {$n_\Sigma $};
   \node[ipe node, anchor=north east, font=\large, rgb color={text=0.424 0.424 0.424}]
-     at (491.915, 586.611) {$S_{r}^{1}$};
+     at (491.915, 586.611) {$\sphere_{r}^{1}$};
   \node[ipe node, anchor=south west, font=\large, text=darkblue]
-     at (458.655, 702.195) {$S_{r,+}^2$};
+     at (458.655, 702.195) {$\sphere_{r,+}^2$};
   \filldraw[very thick, ->, fill=darkgray]
     (496, 592)
      -- (527.455, 592);
@@ -101,17 +102,17 @@
     (496, 592)
      .. controls (496, 592) and (517.062, 592) .. (595, 592.201);
   \draw[darkblue, thick]
-    (496.5267, 592.1768)
-     .. controls (476.688, 674.0913) and (459.0892, 705.1293) .. (438.9839, 732.8074)
-     .. controls (418.8786, 760.4856) and (396.2667, 784.804) .. (365.696, 799.7629)
-     .. controls (335.1252, 814.7218) and (296.5955, 820.3213) .. (254.6783, 806.7756)
-     .. controls (212.7611, 793.2298) and (167.4564, 760.5388) .. (134.2448, 710.4355)
-     .. controls (101.0331, 660.3323) and (79.9145, 592.8168) .. (79.9145, 592.8168);
-  \pic[ipe mark large, rgb color={draw=0.424 0.424 0.424}]
-     at (496, 592) {ipe disk};
-  \filldraw[rgb color={draw=0.424 0.424 0.424}, fill=white]
+    (496.527, 592.177)
+     .. controls (476.688, 674.091) and (459.089, 705.129) .. (438.9837, 732.8072)
+     .. controls (418.8783, 760.4853) and (396.2667, 784.8037) .. (365.696, 799.7627)
+     .. controls (335.1253, 814.7217) and (296.5957, 820.3213) .. (254.6785, 806.7757)
+     .. controls (212.7613, 793.23) and (167.4567, 760.539) .. (134.245, 710.4358)
+     .. controls (101.0333, 660.3325) and (79.9145, 592.817) .. (79.9145, 592.817);
+  \node[minimum size=3pt, circle, draw, fill=mygrey, mygrey]
+     at (496, 592) {};
+  \filldraw[mygrey, fill=white]
     (80, 592)
      .. controls (80.0001, 592.1013) and (80.0001, 592.152) .. (80.0001, 592.152);
-  \pic[ipe mark large, rgb color={draw=0.424 0.424 0.424}]
-     at (80, 592) {ipe disk};
+  \node[minimum size=3pt,circle, draw, fill=mygrey, mygrey]
+     at (80, 592) {}
 \end{tikzpicture}

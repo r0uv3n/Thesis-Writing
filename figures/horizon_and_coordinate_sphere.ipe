@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70218" creator="Ipe 7.2.27">
-<info created="D:20230615183927" modified="D:20230616143330"/>
+<ipe version="70218" creator="Ipe 7.2.28">
+<info created="D:20230615183927" modified="D:20230913185005"/>
 <ipestyle name="tikz">
 <symbol name="arrow/normal(spx)">
 <path stroke="sym-stroke" pen="sym-pen" cap="1" join="1">
@@ -691,8 +691,8 @@ h
 <text transformations="translations" pos="191.359 563.923" stroke="darkgreen" type="label" width="6.538" height="5.147" depth="0" valign="top" size="large" style="math">\nu</text>
 <text matrix="1 0 0 1 -2.4449 2.76037" transformations="translations" pos="430.524 765.793" stroke="darkblue" type="label" width="7.043" height="5.152" depth="2.32" valign="top" size="large" style="math">\mu</text>
 <text transformations="translations" pos="299.439 693.332" stroke="darkred" type="label" width="13.602" height="5.151" depth="1.79" valign="top" size="large" style="math">n_\Sigma </text>
-<text matrix="1 0 0 1 -4.08526 -5.38926" transformations="translations" pos="496 592" stroke="0.424" type="label" width="12.628" height="9.48" depth="2.95" halign="right" valign="top" size="large" style="math">S_{r}^{1}</text>
-<text matrix="1 0 0 1 300.291 -52.4647" transformations="translations" pos="158.364 754.66" stroke="darkblue" type="label" width="20.222" height="9.47" depth="4.51" valign="bottom" size="large" style="math">S_{r,+}^2</text>
+<text matrix="1 0 0 1 -4.08526 -5.38926" transformations="translations" pos="496 592" stroke="0.424" type="label" halign="right" valign="top" size="large" style="math">\sphere_{r}^{1}</text>
+<text matrix="1 0 0 1 300.291 -52.4647" transformations="translations" pos="158.364 754.66" stroke="darkblue" type="label" valign="bottom" size="large" style="math">\sphere_{r,+}^2</text>
 <path stroke="black" fill="darkgray" pen="very thick" arrow="normal/normal">
 496 592 m
 527.455 592 l
@@ -709,13 +709,6 @@ h
 254.018 585.927 c
 </path>
 <text matrix="1 0 0 1 64 -32" transformations="translations" pos="32 768" stroke="black" type="label" width="12.574" height="8.169" depth="0" valign="baseline" size="large" style="math">M</text>
-<path stroke="black" fill="lightgray" dash="dotted" opacity="30%" stroke-opacity="opaque">
--64 416 m
--64 416 l
--64 416 l
--64 416 l
-h
-</path>
 <path stroke="black" pen="thick">
 0.316928 592 m
 33.6241 592
