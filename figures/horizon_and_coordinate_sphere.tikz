@@ -114,5 +114,5 @@
     (80, 592)
      .. controls (80.0001, 592.1013) and (80.0001, 592.152) .. (80.0001, 592.152);
   \node[minimum size=3pt,circle, draw, fill=mygrey, mygrey]
-     at (80, 592) {}
+     at (80, 592) {};
 \end{tikzpicture}

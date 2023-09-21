@@ -8,6 +8,7 @@ BCOR=5mm,paper=a4,fontsize=11pt,%
 english,%lockflag%
 ]{scrartcl}
 \usepackage[definetheorems,numberwithin=section]{hrftex}
+\usepackage[nodayofweek]{datetime}
 \endofdump
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \addbibresource{ZoteroBibliographyPositiveMassTheoremBachelorThesis.bib}
@@ -34,6 +35,7 @@ english,%lockflag%
 \DeclareFunction+{\sheafsections}[1,]{\Gamma}{#1}
 \DeclareFunction+{\smallo}[1,]{o}{#1}
 \DeclareFunction+{\bigo}[1,]{O}{#1}
+\DeclareFunction-{\gtrace}[2,1]{\operatorname{tr}_{#1}}{#2}
 
 \newcommand{\todomark}{%
     \colorbox{purple}{%
@@ -104,13 +106,12 @@ am \today\\
 \pagenumbering{arabic}
 \section{Introduction}
 
-\todo{Add historical context and applications of the Positive Mass theorem.}
 
 The (spacetime) positive mass theorem is a central result in the study of general relativity and differential geometry, originally proved by Richard Schoen and Shing-Tung Yau in 1979 \parencite{schoenProofPositiveMass1979} employing stable minimal hypersurfaces and independently by Edward Witten in 1981 \parencite{wittenNewProofPositive1981} using spinor techniques.
 
 In the following, we will explore a relatively new proof of the Positive Mass theorem using (spacetime) harmonic functions, and in particular consider the case of rigidity. We will then look at how these harmonic functions look in some simple example cases. Finally, we will will apply this method to the Positive Mass theorem on asymptotically flat half spaces with connected (non-compact) boundary, acquiring an explicit lower bound for the mass in the process, \ie we will prove the following theorem (notation and concepts will be introduced later):
 
-\begin{theorem}
+\begin{theorem}\label{thm:first_statement_of_results}
     Let \( (M,g) \) be an asymptotically flat half-space \( (M,g) \) of dimension \( n=3 \) with horizon boundary \( \Sigma\subset M \), associated exterior region \( M(\Sigma) \) and connected non-compact boundary \( \boundary{M} \). Let \( (x_1,x_2,x_3) \) be asymptotically flat coordinates such that outside of a compact set, \( M \) is diffeomorphic to \( \Set{x\in \reals^3_+\given \abs{x}>r_0} \) for some \( r_0>0 \). Assume that the following three conditions hold
     \begin{itemize}
         \item \( R\geq 0 \) in \( M(\Sigma) \).
@@ -122,104 +123,31 @@ In the following, we will explore a relatively new proof of the Positive Mass th
     \end{equation*}
     where \( m \) is the ADM mass of \( M \). Equality \( m=0 \) occurs if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \). 
 \end{theorem}
-\subsection{Physical Motivation}
-The positive mass theorem was originally motivated by the study of general relativity, but is also (particularly in the so-called time-symmetric or Riemannian case) of independent importance to differential geometry. We will do a quick exposition of both of these perspectives.
 
-Physically, a less general statement can informally be expressed as the following: 
+On \formatdate{15}{6}{2023}, a preprint \cite{batistaHarmonicLevelSet2023} was published on the arXiv, titled \enquote{A harmonic level set proof of a positive mass theorem} by Rondinelle Batista and Levi Lopes de Lima. Batista and de Lima prove the same result while using primarily the same methods as this thesis (the proof of rigidity in this thesis is different and more elementary). I only noticed the arXiv preprint on \formatdate{13}{9}{2023}, after my own proof of \cref{thm:first_statement_of_results} was already completed and written up.
+
+\subsection{Physical Motivation}
+The positive mass theorem was originally motivated by the study of general relativity, but is also (particularly in the so-called time-symmetric or Riemannian case) of independent importance to differential geometry. We will do a quick exposition of both of these perspectives. Physically, a less general version of the positive mass theorem can informally be expressed as the following: 
 
 Consider a static (\ie time-independent) mass distribution \( \rho \) in \( \reals^3 \) that is compactly supported in some finite volume \( V \) (it would suffice if the mass distribution fell off sufficiently quickly towards infinity, but this case is easier to reason about).
 
-Then in the Newtonian Theory of Gravity, this mass distribution would at large distances look like a point mass of some total mass \( M \). Due to the linear nature of Newtonian gravity, we can calculate that \( M \) is just \( \int \rho \odif{V} \).
+Then in the Newtonian theory of gravity, this mass distribution would at large distances look like a point mass of some total mass \( M \). Due to the linear nature of Newtonian gravity, we can calculate that \( M \) is just \( \int \rho \odif{V} \).
 
-But when we consider Einstein's Theory of Gravity (via General Relativity), though we can still assign a total mass, now called the \emph{ADM mass} \( M \) (in practice this takes the form of an integral expression over large coordinate spheres, where we take the limit as the radius goes to infinity), we lose the linearity of Newtonian Gravity and we cannot anymore identify \( M \) with the integral of the individual masses anymore. Here our mass distribution bends spacetime in some (possibly very complicated) way, but the ADM mass tells us that his spacetime geometry asymptotically looks like the geometry around a Schwarzschild black hole of mass \( M \).
+But when we consider Einstein's theory of gravity (via General Relativity), though we can still assign a total mass, now called the \emph{ADM mass} \( M \) (in practice this takes the form of an integral expression over large coordinate spheres, where we take the limit as the radius goes to infinity), we lose the linearity of Newtonian Gravity and we cannot anymore identify \( M \) with the integral of the individual masses. Here our mass distribution bends spacetime in some (possibly very complicated) way, but the ADM mass tells us that his spacetime geometry asymptotically looks like the geometry around a Schwarzschild black hole of mass \( M \).
 
-The positive mass theorem now says that even though we lose the relation to the integral of the mass distribution, we retain at least some good behaviour of the mass: If the mass distribution is non-negative everywhere, then we also have \( M\geq 0 \), \ie there exists no configuration of positive masses (however complicated) that acts like a black hole of negative mass (a white hole) at large distances. Compare \cite[Chapter 7]{leeGeometricRelativity2019} for more details.
+The positive mass theorem now states that even though we lose the relation to the integral of the mass distribution, we retain at least some good behaviour of the mass: If the mass distribution is non-negative everywhere, then we also have \( M\geq 0 \), \ie there exists no configuration of positive masses (however complicated) that acts like a black hole of negative mass (a white hole) at large distances. Compare \cite[Chapter 7]{leeGeometricRelativity2019} for more details.
 
-When expressing this theorem mathematically, we leave behind a lot of the physical details. In particular, we directly consider the scalar curvature \( R \) instead of the mass distribution (as the scalar curvature is proportional to mass density in static spacetimes). Since we define the ADM mass in terms of the asymptotic geometric behaviour as well, we reduce the physical statement to a purely geometric one. This leads us to another approach to motivate the theorem, at least for the time-symmetric case (this formulation is from \cite[page 1]{braySpacetimeHarmonicFunctions2021}):
+When expressing this theorem mathematically, we leave behind a lot of the physical details. In particular, we directly consider the scalar curvature \( R \) instead of the mass distribution (as the scalar curvature is proportional to mass density in static spacetimes). Since we define the ADM mass in terms of the asymptotic geometric behaviour as well, we reduce the physical statement to a purely geometric one. This leads us to another approach to motivate the theorem, at least for the time-symmetric case (the following formulation is from \cite[1]{braySpacetimeHarmonicFunctions2021}):
 
 Every compactly supported perturbation of the Euclidean metric on \( \reals^n \) must somewhere decrease its scalar curvature. This is a kind of extremality property of the Euclidean metric. It follows directly from the Geroch conjecture -- the fact that the torus \( \mathbb{T}^n \) does not admit a metric of positive scalar curvature -- by identifying the ends of a large coordinate cube (containing the compact set on which the perturbation takes place). The Riemannian positive mass theorem then is an extension of this extremality property to the nonnegativity of the ADM-mass on manifolds that are \emph{asymptotically euclidean} instead of straight up equal to the euclidean geometry outside a compact set. We'll call these manifolds \emph{asymptotically flat}.
 
+These ideas extend naturally to \emph{asymptotically flat half spaces} (which asymptotically look like \( \reals^n_+ \) instead of \( \reals_+ \)). One application of the positive mass theorem for these asymptotically flat half-spaces is during the proof \parencite{almarazConvergenceScalarflatMetrics2015} of the convergence of a  certain Yamabe-type flow on compact manifolds \( N \) with boundary \( \boundary{N} \). The asymptotically flat half spaces appear during a step where it is necessary to look at \( N\setminus \Set{x} \) for \( x\in \boundary{N} \). 
+
 \section{Prerequisites}
-To read this thesis, a basic understanding of Riemannian manifolds is required. For anyone with basic knowledge about differential geometry (definitions of manifolds, tangent bundles and differential forms), an introduction of the relevant concepts from Riemannian geometry can be found in the appendix (\cref{sec:basic_riemannian_geometry}). Note that \emph{only concepts relevant to the current thesis} will  be introduced, \eg we will define scalar curvature without having talked about the Riemannian curvature tensor. For a more complete look at especially Riemannian Geometry, see \cite[Chapters 1 and 2]{petersenRiemannianGeometry2006}. For an introduction to differential geometry and manifolds, see \cite{leeIntroductionSmoothManifolds2012}.
+To read this thesis, a basic understanding of Riemannian manifolds as well as in particular some facts about Riemannian submanifolds are required. For anyone with basic knowledge about differential geometry (definitions of manifolds, tangent bundles and differential forms), an introduction of the relevant concepts from Riemannian geometry can be found in the appendix (\cref{sec:basic_riemannian_geometry} and \cref{sec:riemannian_submanifolds}). For a more complete look at especially Riemannian Geometry, see \cite[Chapters 1 and 2]{petersenRiemannianGeometry2006}. For an introduction to differential geometry and manifolds, see \cite{leeIntroductionSmoothManifolds2012}.
 
-In the following let \( M \) always be a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection.
+We will in this thesis always let \( M \) denote a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection. Note that by \( \nabla \) we will always denote this covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=\odif{f} \), and \( \grad f=(\odif{f})^\sharp \), such that in coordinates \( \odif{f} \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i     f \).
 
-Note that by \( \nabla \) we will always denote the covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=df \), and \( \grad f=(\differential f)^\sharp \), such that in coordinates \( df \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i     f \).
-% We will require some basic identities from Riemannian geometry:
-% \begin{fact}[Koscul formula]
-%   Let \( \Gamma \) be the Levi-Civita connection. 
-% \end{fact}
-
-We will often be considering \( M \) as a three dimensional spacelike surface embedded in a larger \( 3+1 \)-dimensional Lorentzian manifold \( \tilde{M} \) (for the signature of the metric of \( \tilde{M} \) we choose the convention \( (-,+,+,+) \)), such that the induced metric on \( M \) is positive definite. \( M \) itself will also often have a boundary \( \boundary{M} \). Thus some basic facts about submanfolds will be helpful. Most of the following is from \cite[Chapter~2.1]{leeGeometricRelativity2019}.
-
-{ \newcommand{\Mconnection}{\nabla}\newcommand{\Sigmaconnection}{\hat{\nabla}}
-Let \( \Sigma^m \) be a submanifold of (pseudo-)Riemannian manifolds \( (M^n,g) \) (equipped with Levi-Civita connection \( \Mconnection \)). We have an induced metric
-\begin{equation}
-    \gamma=\restrict{g}{\tangentbundle{\Sigma}}\label{eq:first_fundamental_form}
-\end{equation} (also called the \emph{first fundamental form}). This metric in turn defines a Levi-Civita connection on the \( \Sigma \), which fulfills the following relation:
-\begin{fact}
-  Denoting the Levi-Civita connection of \( (\Sigma,\gamma) \) by \( \Sigmaconnection \), we have for any \( p\in \Sigma \), tangent vector \( X\in \tangentspace{p}{\Sigma} \) and \( Y\in \sheafsections{\tangentbundle{\Sigma}} \),
-  \begin{equation*}
-    \Sigmaconnection_X Y=(\Mconnection_X \tilde{Y})^\top,
-  \end{equation*}
-  where \( \tilde{Y} \) is any extension of \( Y \) to a vector field on \( M \). Here \( (\blank)^\top \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \).
-
-  \todo{This might be too similar to \cite[2.1]{leeGeometricRelativity2019}}
-\end{fact}
-Thus \( \Sigma \) intrinsically contains information about tangential parts of tangential derivatives. But this information does not determine the orthogonal part! This motivates the following definition:
-\begin{definition}[Second fundamental form]
-    The \emph{second fundamental form} of \( \Sigma \) is a tensor \( \mathbf{A}\in \sheafsections{\cotangentbundle{\Sigma}\tensorproduct \cotangentbundle{\Sigma}\tensorproduct \normalbundle{\Sigma}} \) such that for \( X,Y\in \tangentspace{p}{\Sigma} \)
-    \begin{equation*}
-        \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp,
-    \end{equation*}
-    where \( (\blank)^\perp \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to the normal space \( \normalspace{p}{\Sigma} \). Here \( \tilde{Y} \) is again any extension of \( Y \) to a vector field on \( M \).
-\end{definition}  
-Note that although \( \Mconnection \) is not a tensor (\ie it depends on the behaviour of the vector field \( \tilde{Y} \) around a point \( p \)), the second fundamental form \( \mathbf{A} \) \emph{is} tensorial. In both of the above definitions, we did not have to extend \( X \) to a vector field, since \( \Mconnection \) only depends on the value of \( X \) at \( p \).
-
-\begin{fact}
-    \( \mathbf{A}(X,Y)=\mathbf{A}(Y,X) \), \ie \( \mathbf{A} \) is symmetric, since for any extensions \( \tilde{X},\tilde{Y} \) of \( X,Y \) we have \( \Mconnection_X Y-\Mconnection_Y X=\commutator{X}{Y}\in \tangentspace{\Sigma} \).
-\end{fact}
-\begin{proof}
-    Recall that when treating our vector fields as derivations we can also compute the Lie Bracket  as \( \commutator{X}{Y}(f)=X(Y(f))-Y(X(f)) \). This does obviously not depend on whether the ambient manifold of \( X \) and \( Y \) is \( \Sigma \) or \( M \), and thus the resulting vector field \( \commutator{X}{Y} \) must be a vector field on \( \Sigma \). 
-\end{proof}
-\begin{definition}
-    The \emph{mean curvature vector} \( \mathbf{H} \) is the trace of \( \mathbf{A} \) over \( \tangentspace{p}{\Sigma} \), \ie for an orthonormal basis \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{\Sigma} \) we define
-    \begin{equation*}
-        \mathbf{H}\definedas \sum_{i=1}^{m}\mathbf{A}(e_i,e_i).
-    \end{equation*}
-\end{definition}
-If \( \Sigma \) is an orientable hypersurface of \( M \), we can choose a normal direction \( \nu \) (if \( \Sigma \) has an interior and exterior, we typically implicitly choose \( \nu \) to be the outward normal). Then we define
-\begin{equation*}
-    A(X,Y)\definedas g(\mathbf{A(X,Y)},-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\trace;_\gamma(A).
-\end{equation*}
-We also call \( A \) the second fundamental form and \( H \) the mean curvature. Note that we have
-\begin{equation*}
-    A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu).
-\end{equation*}
-
-The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is one of the main facts we will require:
-\begin{fact}\label{fact:laplacian_and_hypersurface_laplacian}
-    Given a hypersurface \( \Sigma \) in \( (M,g) \) and a smooth function \( f \) on \( M \),
-    \begin{equation*}
-        \laplacian_M f=\laplacian_\Sigma +\Mconnection_\nu\Mconnection_\nu f+H \Mconnection_\nu f.
-    \end{equation*}
-\end{fact}
-\begin{proof}
-    Choose an orthonormal frame \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{M} \) and \( e_1,\dotsc,e_{n-1}\in \tangentspace{p}{\Sigma} \) and \( e_n=\nu \), then
-    \begin{align*}
-        \laplacian_M f&=\sum_{i=1}^{n}(\Mconnection\Mconnection f)(e_i,e_i)\\
-        &=\Mconnection_M \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i} (\grad_M f),e_i)\\
-        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i}(\grad_{\Sigma}f+\nu\cdot \Mconnection_\nu f),e_i)\\
-        &=\begin{aligned}[t]
-            &\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\gamma(\Sigmaconnection_{e_i}(\grad_{\Sigma} f),e_i)+\underbrace{g(\mathbf{A}(e_i,\grad{\Sigma}),e_i)}_{=0}\\
-            &+\Mconnection_{
-        e_i}\Mconnection_{\nu}f\cdot \underbrace{g(\nu,e_i)}_{=0}+\Mconnection_{\nu}f\cdot g(\Mconnection_{e_i}\nu,e_i))
-        \end{aligned}\\
-        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\Sigmaconnection\Sigmaconnection f)(e_i,e_i)+\Mconnection_\nu f\cdot \sum_{i=1}^{n-1}A(e_i,e_i)\\
-        &=\Mconnection_\nu \Mconnection_\nu f+\laplacian_{\Sigma}f+\Mconnection_{\nu}f\cdot H.
-    \end{align*}
-\end{proof}
-}
 We will have to also discuss some basic topological properties of the level sets of the functions we will be looking at.
 \begin{definition}[Euler Characteristic]
     For a compact, connected, oriented surface \( \Sigma \) (two-dimensional manifold with boundary), the \emph{Euler characteristic} is given by
@@ -257,20 +185,16 @@ The following theorem (a version of the maximum principle) will then help contro
     \end{align*}
     But we always have either \( u=0 \) or \( \partial_n u=0 \) on \( \boundary{\Omega} \), and we conclude that \( \abs{\nabla u}=0 \) everywhere, \ie that \( u \) is constant on \( \Omega \) (since \( \Omega \) only has one connected component).
 \end{proof}
-% One of the main reasons for why the current technique does not readily seem to extend to higher dimensions is its reliance on the following theorem (which is specific to two dimensions).
-% \begin{theorem}[Gauss-Bonnet Theorem]\label{thm:gauss-bonnet}
-%    Let \( \Sigma \) be a compact two-dimensional Riemannian manifold with boundary \( \boundary{\Sigma} \). Let \( K \) be the Gaussian curvature of \( M \) and let \( \kappa \) be the geodesic curvature of \( \boundary{\Sigma} \). Then
-%    \begin{equation*}
-%     \int_\Sigma K \odif{A}+\int_{\boundary{\Sigma}}=2\pi \chi(\Sigma),
-%    \end{equation*} 
-%    where \( \chi(\Sigma) \) is the Euler characteristic of \( \Sigma \).
-% \end{theorem}
-% For a proof see \cite[Chapter 4.3]{RiemannianGeometry2006}.
+One of the main reasons for why the current technique does not readily seem to extend to higher dimensions is its reliance on the following theorem (which is specific to two dimensions).
+\begin{theorem}[Gauss-Bonnet Theorem]\label{thm:gauss-bonnet}
+   Let \( \Sigma \) be a compact two-dimensional Riemannian manifold with boundary \( \boundary{\Sigma} \). Let \( K \) be the Gaussian curvature of \( M \) and let \( \kappa \) be the geodesic curvature of \( \boundary{\Sigma} \). Then
+   \begin{equation*}
+    \int_\Sigma K \odif{A}+\int_{\boundary{\Sigma}}=2\pi \chi(\Sigma),
+   \end{equation*} 
+   where \( \chi(\Sigma) \) is the Euler characteristic of \( \Sigma \).
+\end{theorem}
+For a proof see \cite[Chapter 4.3]{petersenRiemannianGeometry2006}.
 
-% The basic objects we will study are the following: 
-% \begin{definition}[Asymptotically flat manifold]
-%     Let \( (M,g) \) be \( 3 \)-dimensional.
-% \end{definition}
 \section{The mass of an asymptotically flat half-space}
 We will now establish the necessary definitions (mostly adapted from \cite{almarazPositiveMassTheorem2016}, \cite{eichmairDoublingAsymptoticallyFlat2023} and \cite{brayHarmonicFunctionsMass2019}) to state the main result of this thesis.
 \begin{definition}[Asymptotically flat half-space]\label{def:asymptotically_flat_half_space}
@@ -278,13 +202,14 @@ We will now establish the necessary definitions (mostly adapted from \cite{almar
 
     We call \((M,g) \) an \emph{asymptotically flat half-space} with decay rate \( \tau>0 \) if there exists a compact subset \( K \) such that \( M\setminus K \) consists of a finite number of connected components \(M_{\mathrm{end}}^i \) called \emph{ends}, such that for each of these ends there exists a diffeomorphism \( \Phi\maps M_{\mathrm{end}}^i \to \Set{x\in \reals^3_+\given \abs{x}>r_0} \) and such that in the coordinate system given by this diffeomorphism we have the following asymptotic as \( r\goesto \infty \):
     \begin{equation}
-        \abs{\partial^l(g_{ij}-\delta_{ij})}=\bigo{r^{-\tau-l}}
+        \abs{\partial^l(g_{ij}-\delta_{ij})}=\bigo{r^{-\tau-l}}\label{eq:def_asymptotically_flat}
     \end{equation}
     for \( l=0,1,2 \). Here \( r=\abs{x} \) and \( \delta \) is the Euclidean metric on \( \reals^3_+=\Set{x\in \reals^3\given x_3\geq 0} \). 
 \end{definition}
 \begin{notation}
-    In the following, we will often use the Einstein summation convention with the index ranges \( i,j,\dotsc=1,\dotsc,3\) and \( \alpha,\beta,\dotsc=1,2 \): Latin indices appearing both  will be summed over from \( 1  \) to \( 3 \) (in general this would be \( n \), the dimension of our manifold) and repeated 
-\end{notation}. We write \( T_{(\text{indices}),i} \) and \( T_{(\text{indices});i} \) for the partial and covariant derivative of \( T \) in the direction \( x_i \). Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentspace{\boundary{M}} \), while \( \partial_n \) points inwards.
+    In the following, we will often use the Einstein summation convention with the index ranges \( i,j,\dotsc=1,\dotsc,3\) and \( \alpha,\beta,\dotsc=1,2 \): Repeated Latin indices will be summed over from \( 1  \) up to \( 3 \) (in general this would be up to \( n \), the dimension of our manifold) and repeated Greek indices will be summed over from \( 1 \) up to \( 2 \) (in general this would be up to \( n-1\)).
+\end{notation}
+Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentspace{\boundary{M}} \), while \( \partial_n \) points inwards.
 \begin{definition}\label{def:half_space_mass}
     If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and (introducing the notation \( G_i \) for the coordinate dependent quantity \( \sum_j (g_{ij,j}-g_{jj,i}) \), compare \cite[text]{almarazPositiveMassTheorem2016} where instead \( C_i \) is used) given by
     \begin{equation*}
@@ -298,19 +223,19 @@ We will now establish the necessary definitions (mostly adapted from \cite{almar
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/horizon_and_coordinate_sphere.tikz}
-    \caption{A cross section of a 3-dimensional asymptotically flat half space with horizon boundary and a large coordinate sphere (from \cref{def:half_space_mass}). Note that the black points on the boundary of \( (\boundary{M})_r \) are actually part of the circle \( \sphere^1_r \)}
+    \caption{A cross section of a 3-dimensional asymptotically flat half space with horizon boundary and a large coordinate sphere (from \cref{def:half_space_mass}). Note that the grey points on the boundary of \( (\boundary{M})_r \) are just the part of the circle \( \sphere^1_r \) visible in this cross section.}
     \label{fig:horizon_and_coordinate_sphere}
 \end{figure}
 \begin{remark}\label{rem:mass_normalization}
     In the definition above, the factor \( 1/(16\pi) \)  is a normalization factor used also for the ADM mass of asymptotically flat manifolds with the full \( \reals^n \) as a model space, where it ensures that we recover the mass of the Schwarzschild solution. 
     
-    Note that thus in our case of asymptotically flat half-space, the mass of a \emph{half Schwarzschild space} \( M_m=\Set{x\in \reals^3_+\given \abs{x}>(m/2)^{1/(n-2)}} \) with the conformal metric
+    Note that thus in our case of asymptotically flat half-space, the mass of a \emph{half Schwarzschild space} \( M_{m,+}=\Set{x\in \reals^n_+\given \abs{x}\geq(m/2)^{1/(n-2)}} \) with the conformal metric
     \begin{equation*}
-        g_m=\p*{1+\frac{m}{2\abs{x}}}^{2}\delta,\quad m>0
+        g_m=\omega^4 \cdot \delta,\qquad \text{where } \omega=1+\frac{m}{2\abs{x}}\delta,\quad m>0
     \end{equation*}
     will be
     \begin{equation*}
-        \mass{M_m}{g_m}=\frac{m}{2},
+        \mass{M_{m,+}}{g_m}=\frac{m}{2},
     \end{equation*}
     which is half the ADM mass of the standard Schwarzschild space.
 \end{remark}
@@ -322,7 +247,8 @@ In \cite{almarazPositiveMassTheorem2016}, Almaraz, Barbosa, and de Lima showed t
     \end{equation*}  
     with equality occurring if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \).
 \end{theorem}
-For the positive mass theorem on 3-dimensional asymptotically flat manifolds modeled on the full \( \reals^3 \), recently \parencite{brayHarmonicFunctionsMass2019} a new method using harmonic functions has been used to achieve a relatively elementary proof of the above theorem and in particular an explicit lower bound for the mass. This thesis will attempt to establish an equivalent result for the case of asymptotically flat half spaces. We will need two further definitions adopted from \cite{eichmairDoublingAsymptoticallyFlat2023} to unterstand the statement of our main result.
+
+For the positive mass theorem on 3-dimensional asymptotically flat manifolds modeled on the full \( \reals^3 \), recently \parencite{brayHarmonicFunctionsMass2019} a new method using harmonic functions has been used to achieve a relatively elementary proof of the above theorem and in particular an explicit lower bound for the mass. The goal of this thesis is to establish an equivalent result for the case of asymptotically flat half spaces. We will need two further definitions adopted from \cite{eichmairDoublingAsymptoticallyFlat2023} to unterstand the statement of our main result.
 \begin{definition}
     Let \( \Sigma\subset M  \) be a compact separating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the noncompact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
 
@@ -346,33 +272,148 @@ The main result of this thesis is then the following, which will prove \cref{thm
 % asymptotically flat manifolds with
 % a non-compact boundary} is super important! We have nice harmonic functions which are themselves asymptotically flat coordinates. 3.9 then gives uniqueness, which we can use along with a doubling argument along the horizon boundary to show existence of asymptotically flat coordinates for the case with non empty horizon boundary.
 
-\section{An Example: The Half-Schwarzschild space}
-In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_m \) (which has mass \( m/2 \)). We will now try our harmonic function technique on this space and (numerically) compute the actual lower bound given by our technique.
+\section{An example calculation}
+In the following we will discuss the harmonic function technique on some examples and also (numerically) compute the actual lower bound given by our result. 
 
-Define first \( \omega\definedas 1+\frac{m}{2\abs{x}} \). Then
-\section{Main basic identity}
-The basic identity underlying the method of harmonic functions is the \cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}:
+
+\subsection{Introducing some different Schwarzschild half-spaces}
+In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_{m,+} \) (which has mass \( m/2 \)). There are many other, less symmetric half-spaces resulting from the full Schwarzschild space. One possibility is
+\begin{equation*}
+    M_{m,\geq a}=\Set{x\in \reals^3\given x_3>a}
+\end{equation*}
+for some \( a<0 \), equipped with the same metric \( g=\omega^4\cdot \delta \) as the normal Schwarzschild space. We further identify \( M_{m,+} \) with \( M_{m,\geq 0} \).
+
+
+Note that \( g_m=\omega^4 \delta \) is just the Euclidean metric multiplied by a strictly positive function. Metrics that are related in such a way are called \emph{conformal} (since there is a \emph{conformal transformation}, \ie an angle preserving map, between the manifolds \( (M_{m,+},g_m) \) and \( (M_{m,+},\delta) \)).
+
+\begin{lemma}
+    The boundary \( \boundary{M_{m,\geq a}} \) has positive mean curvature for \( a> 0 \).
+
+    For \( a=0 \), let \( \Sigma = \Set{x\in \reals^3_+\given \abs{x}=m/2} \). Then \( \Sigma \) is a free horizon boundary component (\ie has zero mean curvature and is orthogonal to \( \boundary{M_{m,+}}\setminus \Sigma \)). Furthermore \( \boundary{M_{m,+}}\setminus \Sigma \) also has zero mean curvature.
+\end{lemma}
+We already know the mean curvature of these different surfaces when considered as surfaces under the background metric \( \delta \). It will thus be helpful to find a formula for how the mean curvature changes under a conformal change of metric. We delegate the details of this to \cref{sec:conformal_changes_of_metric}.
+\begin{proof}
+    Let \( f=\Ln{\omega^2} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
+    \begin{equation*}
+        H_{g}=e^{-f}(H_{\delta}-2 g(\grad f,n)),
+    \end{equation*}'
+    where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n \) is the normal vector to the surface used to compute the mean curvature.
+
+    We can compute
+    \begin{equation*}
+        \grad f=-\frac{4}{\abs{x}\cdot \omega}\begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix}.
+    \end{equation*}
+
+        
+
+    
+    For \( a=0 \) the manifold is furthermore symmetric under reflection along the \( (x_3=0) \)-plane, and thus the mean curvature vector \( \mathbf{H} \) on \( \boundary{M_{m,+}}\setminus \Sigma \) must be symmetric under this reflection as well, and as it is orthogonal to the plane by definition, we must have \( \mathbf{H}=0 \) and thus \( H=0 \).
+\end{proof}
+
+For \( a<0 \)  we would also have to remove the interior of the horizon if we wanted \( M_{m,\geq a} \) to be an asymptotically flat half-space, since the metric blows up near the origin (we could also remove some other bounded open neighborhood of the origin). But in this case the noncompact boundary \( \boundary{M_{m,\geq a}} \) will have negative mean curvature and the positive mass theorem will not apply. Thus we are only interested in \( a\geq 0 \).
+\subsection{Finding the asymptotically linear harmonic coordinates}
+
+
+We can reduce the Laplacian \( \laplacian_g \) for a metric conformally euclidean metric \( g \) to \( \laplacian_{\delta} \):
+\begin{lemma}\label{lem:laplacian_on_schwarzschild}
+    In the above notation, we have on \( \reals^3\setminus \zeroset \)
+    \begin{equation*}
+        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u).
+    \end{equation*}
+\end{lemma}
+\begin{remark}
+    This formula is specific to our case, where in particular \( M_{m,\geq a} \) has zero scalar curvature (except for at the origin, but the origin never lies in \( M_{m,\geq a} \)). In general the above conformal invariance is fulfilled not by \( \laplacian_g \) but by the conformal Laplacian \( L_g=\laplacian_g-\frac{n-2}{4(n-1)} \) (see also \cite[Definition 3]{curryIntroductionConform}).
+\end{remark}
+\begin{proof}[Proof of \Cref{lem:laplacian_on_schwarzschild}]
+    Note first that \( \laplacian_\delta \omega=0 \) on \( \reals^3\setminus \zeroset \). Using \cref{lem:laplacian_in_terms_of_metric_determinant}, we then obtain
+    \begin{equation*}
+        \begin{aligned}[t]
+            \laplacian_g(u)\begin{aligned}[t]
+                &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b u)\\
+                &=\frac{1}{\omega^6}\partial_a(\omega^{2}\cdot \delta^{ab} \partial_b u)\\
+                &=\frac{1}{\omega^6}\delta^{ab}\partial_a(\omega^2 \partial_b(\omega\cdot u))\\
+                &=\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega \partial_b u)+\partial_a \omega\cdot \partial_b u)\\
+                &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)
+                &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
+                &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
+                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u).
+            \end{aligned}
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+Thus, finding harmonic functions \( u_i \) on \( (M_{m,\geq a},g) \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) on \( (M_{m,\geq a},\delta)  \). For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics:
+\begin{equation*}
+    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=-\infty}^\infty \sum_{m=-\ell}^\ell \tilde{u}^m_{i,\ell} r^\ell Y^m_{\ell}(\theta,\varphi),
+\end{equation*}
+where \( \tilde{u}^m_{i,\ell} \) are real coefficients and \( Y^m_{\ell} \) the spherical harmonics.
+% \begin{equation*}
+%     Y^m_{\ell}(\theta,\varphi)=N^m_\ell P^m_{\ell}(\Cos{\theta})e^{im\varphi},
+% \end{equation*}
+% where \( P^m_{\ell} \) are the associated Legendre polynomials.
+
+We want our \( u_i \) to be asymptotic to the asymptotically flat coordinates \( x_i \). A necessary condition is in particular that (see beginning of \cref{sec:existence_and_uniqueness} and the definition of the weighted Hölder space in \cite[Section 3]{almarazPositiveMassTheorem2016})
+\begin{equation*}\label{eq:weakly_asymptotically_linear}
+    \sup_M \abs{\nabla_j u_i-x_i} \abs{x}^{1-\tau+\varepsilon}<\infty
+\end{equation*}
+for all \( i,j \) and any \( \varepsilon>0 \). Note that for \( M_g \) the strongest possible choice for the asymptotic falloff parameter \( \tau \) is \( \tau=1 \) (compare \cref{eq:def_asymptotically_flat}).Thus for \( j=0 \) in \cref{eq:weakly_asymptotically_linear} we have \( \sup_M \abs{u_i-x_i}\cdot \abs{x}^\varepsilon<\infty \), \ie \( u_i-x_i=\bigo{\abs{x}^0} \). Then for \( \tilde{u}_i \) this implies
+\begin{equation*}
+    \begin{aligned}[t]
+        (\tilde{u}_i-x_i)&=u_i\cdot (1+m/2\abs{x})-x_i\\
+        &=(u_i-x_i)-m\frac{m\cdot x_i}{2\abs{x}}\\
+        &=\bigo{\abs{x}^0}.
+    \end{aligned}
+\end{equation*}
+
+Hence we can conclude for the expansion in terms of solid harmonics, that \( \tilde{u}^m_{i,\ell}=0 \) for all \( \varepsilon>1 \) and that
+\begin{equation*}
+    \sum_{m=-1}^1 \tilde{u}^m_{i,\varepsilon}r Y^m_l(\theta,\varphi)=x_i.
+\end{equation*}
+
+It remains to find the remaining \( \tilde{u}^m_{i,\ell} \) such that the boundary conditions on the \( u_i \) are satisfied. We will treat the cases \( M_{m,+}=M_{m,\geq 0} \) and \( M_{m,\geq a} \) for \( a>0 \) separately:
+\begin{description}
+    \item[Boundary conditions for \( M_{m,+} \)] Note that the horizon boundary of \( M_{m,+} \) is given in our coordinates by \( \Sigma=\Set{x\in \reals^3_+\given \abs{x}=m/2} \). At this point, since \( \Sigma \) has mean curvature \( H=0 \), we could also consider \( \Sigma \) as part of the noncompact boundary of \( M \) and just consider a Dirichlet condition on all of \( \boundary{M} \), 
+
+    The Neumann boundary condition on \( \Sigma \) then becomes
+    \begin{align*}
+        \begin{aligned}[t]
+            0&=\evaluateat{\partial_{r} (\tilde{u}_i(r,\theta,\varphi)/\omega)}{r=m/2}\\
+            &=\evaluateat{\frac{2(r(m+2r)\partial_r \tilde{u}_i(r,\theta,\varphi)+m\cdot \tilde{u}_i(r,\theta,\varphi))}{(m+2r)^2}}{r=m/2}\\
+            &=\frac{m\partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)}{2m}
+        \end{aligned}\\
+        \implies 
+    \end{align*}
+\end{description}
+
+\section{Main basic integral inequality}
+
+The main tool which also motivates our use of harmonic functions is the following integral inequality relating scalar curvature to derivatives of harmonic:
 {\newcommand{\maxu}{\bar{u}}
 \newcommand{\minu}{\underline{u}}
 \newcommand{\nonzeroboundary}{\partial_{\neq 0}\Omega}
-\begin{proposition}\label{prop:main_identity}
-    Let \( (\Omega,g) \) be a compact 3-dimensional manifold with boundary \( \boundary{\Omega}=P_1\disjointunion P_2 \) (smooth almost everywhere), having outward unit normal \( n \). Let \( u\maps \Omega\to \reals \) be a harmonic function (\ie \( \laplacian u=0 \)) such that \( \partial_{n_{P_1}}u=0 \) on \( P_1 \). If \( \maxu \) and \( \minu \) denote the maximum and minimum of \( u \) and \( S_t \) are \( t \)-level sets of \( u \), then
+\begin{proposition}[{{\cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}}}]\label{prop:main_inequality}
+    Let \( (\Omega,g) \) be a compact 3-dimensional oriented Riemannian manifold with boundary \( \boundary{\Omega}=P_1\disjointunion P_2 \) (smooth almost everywhere), having outward unit normal \( n \). Let \( u\maps \Omega\to \reals \) be a harmonic function (\ie \( \laplacian u=0 \)) such that \( \partial_{n_{P_1}}u=0 \) on \( P_1 \). If \( \maxu \) and \( \minu \) denote the maximum and minimum of \( u \) and \( S_t \) are \( t \)-level sets of \( u \), then
     \begin{multline*}
         \int_{\minu}^{\maxu} \p[\Big]{\int_{S_t} \frac{1}{2}\p[\Big]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{A}+\int_{\boundary{S_t^L}\cap P_1}H_{P_1}\odif{l}}\odif{t}\\
         \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap P_2}k_{\boundary{S_t^L}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{n} \abs{\nabla u}\odif{A},
     \end{multline*} 
     where \( \chi(S_t) \) denotes the Euler characteristic of the level sets, \( \kappa_{\boundary{S_t^L}} \) denotes the geodesic curvature of \( \boundary{S_t^L} \) and \( H_{P_1} \) denotes the mean curvature of \( P_1 \).
 
-    The integrand for the integral over \( P_2 \) is defined when \( \abs{\nabla u}\neq 0 \). By Sard's Theorem \parencite{sardMeasureCriticalValues1942} the set where \( \abs{\nabla u}=0 \) has measure \( 0 \) and we'll ignore it by abuse of notation (we should really write the integral over as being over \( \tilde{P}_2=P_2\cap \Set{\abs{\nabla u}\neq 0} \), but that gets cumbersome).
+    The integrand for the integral over \( P_2 \) is defined when \( \abs{\nabla u}\neq 0 \). By Sard's Theorem \parencite{sardMeasureCriticalValues1942} the set where \( \abs{\nabla u}=0 \) has measure \( 0 \) and we'll ignore it by abuse of notation (we should really write the integral as being over \( \tilde{P}_2=P_2\cap \Set{\abs{\nabla u}\neq 0} \), but that gets cumbersome).
 \end{proposition}
 }
-\section{Existence and uniqueness of asymptotically linear harmonic functions}
-To use \cref{prop:main_identity}, we will require harmonic functions with properties as in \cref{thm:main_result}. More specifically we will require asymptotically linear harmonic coordinates on \( M(\Sigma) \) (for \( \Sigma \) the horizon boundary of \( M \)) with certain boundary conditions.
+\section{Existence and uniqueness of asymptotically linear harmonic functions}\label{sec:existence_and_uniqueness}
+To use \cref{prop:main_inequality}, we will require harmonic functions with properties as in \cref{thm:main_result}. More specifically we will require asymptotically linear harmonic coordinates on \( M(\Sigma) \) (for \( \Sigma \) the horizon boundary of \( M \)) with certain boundary conditions.
 
 That is we want functions \( \tilde{x}_1,\tilde{x}_2,\tilde{x}_3 \) that
 \begin{itemize}
     \item are harmonic, \ie \( \laplacian \tilde{x}_i=0 \) in \( M \), for \( i=1,2,3 \)
-    \item are asymptotic to our standard asymptotically half-euclidean coordinates on \(  \Mend \), \ie \( \tilde{x}_i-x_i\in C_{1-\tau+\varepsilon}^{2,\alpha}(M) \) for some \( \varepsilon>0 \) and \( 0<\alpha<1 \). For a definition of the weighted Hölder space \( C_\gamma^{k,\alpha}(M) \) see \cite[682]{almarazPositiveMassTheorem2016}. Important for us is mostly that this condition ensures that our \( \tilde{x}_i \) themselves form an asymptotically flat coordinate system.
+    \item are asymptotic to our standard asymptotically half-euclidean coordinates on \(  \Mend \), \ie \( \tilde{x}_i-x_i\in C_{1-\tau+\varepsilon}^{2,\alpha}(M) \) for some \( \varepsilon>0 \) and \( 0<\alpha<1 \). 
+    For a precise definition of the weighted Hölder space \( C_\gamma^{k,\alpha}(M) \) see \cite[Section 3]{almarazPositiveMassTheorem2016}.
+    % For this thesis the following will suffice: A function \( u \) is en element of \( C_{\gamma}^{k,\alpha}(M) \) if
+    % \begin{equation*}
+    %     \norm{u}_{C_{\gamma}^{k,\alpha}(M)}=\sum_{i=0}^{k}\sup_M r^{-\gamma+i}\abs{\nabla^i u}+\sup_{x,y}(\Min+{r(x),r(y)})^{-\gamma+k+\alpha}
+    % \end{equation*}
+    Important for us is mostly that this condition ensures that our \( \tilde{x}_i \) themselves form an asymptotically flat coordinate system.
 
 
     \item fulfill boundary conditions on \( \boundary{M} \) mimicking the behaviour of the standard coordinates on Euclidean half space, \ie
@@ -499,12 +540,12 @@ where now \( \mu \) is the outward unit normal to \( C_L \) and \( \theta \) is 
 
 \newcommand{\nonzeroboundary}{\partial_{\neq 0}M^L}\newcommand{\maxu}{\bar{u}}
 \newcommand{\minu}{\underline{u}}
-To prove our main result, the inequality \cref{thm:main_result}, we will recover the mass as the boundary term at infinity of \cref{prop:main_identity} applied to \( u=x_3 \) and \( \Omega=\Omega_L \).
+To prove our main result, the inequality \cref{thm:main_result}, we will recover the mass as the boundary term at infinity of \cref{prop:main_inequality} applied to \( u=x_3 \) and \( \Omega=\Omega_L \).
 
 
 Write \( S_t^L\definedas \Set{u=t}\cap \Omega_L \). Setting \( P_1=\Sigma\) and \( P_2=C_L\cup (\boundary{M})_L \) yields (since \( \Sigma \) is a minimal surface, \ie \( H_{P_1}=H_\Sigma=0 \))
 \begin{equation}
-    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{V} \leq\int_{0}^{L}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}}\odif{t}+ \int_{C_L\cup (\boundary{M})_L}\partial_{n} \abs{\nabla u}\odif{A},\label{eq:just_insert_cylinder_into_main_identity}
+    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{V} \leq\int_{0}^{L}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}}\odif{t}+ \int_{C_L\cup (\boundary{M})_L}\partial_{n} \abs{\nabla u}\odif{A},\label{eq:just_insert_cylinder_into_main_inequality}
 \end{equation}
 where \( \kappa_{t,L} \) is the geodesic curvature of \( S_{t}^L \cap T_L\) viewed as the boundary of \( S_t^L \).
 
@@ -512,11 +553,11 @@ We claim that if \( t\in \ointerval{0}{L} \) is a regular value of \( u \) (\ie 
 
 Note now \( u-t \) is still harmonic, has Dirichlet boundary condition \( u-t=0 \) on \( S' \), and Neumann boundary condition \( \partial_n (u-t)=0 \) on \( \Sigma \). Hence we can apply \cref{thm:maximum_principle} and get that \( u \) must be constant on \( E \), which contradicts the assumption that \( t \) is a regular value.
 
-Thus \( S_t^L \) consists of a single connected component and meets \( T_L \) along a circle. In particular, we can apply \cref{eq:def_euler_characteristic} with \( b\geq 1 \) and get \( \chi(S_t^L)\leq 1 \). Then \cref{eq:just_insert_cylinder_into_main_identity} becomes
+Thus \( S_t^L \) consists of a single connected component and meets \( T_L \) along a circle. In particular, we can apply \cref{eq:def_euler_characteristic} with \( b\geq 1 \) and get \( \chi(S_t^L)\leq 1 \). Then \cref{eq:just_insert_cylinder_into_main_inequality} becomes
 \begin{equation}
     \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{V} \leq2\pi L- \int_{0}^{L}\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}\odif{t}+ \int_{C_L\cup (\boundary{M})_L}\partial_{n} \abs{\nabla u}\odif{A}.\label{eq:starting_point_individual_computations}
 \end{equation}
-It now only remains to compute the boundary terms in \cref{eq:starting_point_individual_computations}. We start with the following, which insert just the equivalent of \cite[Lemma 6.1 and Lemma 6.2]{brayHarmonicFunctionsMass2019} for our half cylinder (note also that we choose the cylinder with symmetry axis in direction \( x_3 \) and \( u=x_3 \), while Bray et al.~choose the symmetry axis in direction \( x_1 \) and \( u=x_1 \)). The proof proceed just as in \cite{brayHarmonicFunctionsMass2019}
+It now only remains to compute the boundary terms in \cref{eq:starting_point_individual_computations}. We start with the following, which insert just the equivalent of \cite[Lemma 6.1 and Lemma 6.2]{brayHarmonicFunctionsMass2019} for our half cylinder (note also that we choose the cylinder with symmetry axis in direction \( x_3 \) and \( u=x_3 \), while Bray et al.~choose the symmetry axis in direction \( x_1 \) and \( u=x_1 \)). The proof proceed just as in \cite[Lemma 6.1 and Lemma 6.2]{brayHarmonicFunctionsMass2019}
 \begin{lemma}\label{lem:cylinder_boundary_term}
     In the notation fixed above, we have
     \begin{equation*}
@@ -606,7 +647,7 @@ Now the positive mass theorem follows as corollary:
         \item{\( (M,g)\isomorphic(\reals^3_{+},\delta) \implies \mass{M}{g}=0   \):} In standard coordinates, \( g \) is constant and thus \( G_i \) is surely \( 0 \). Since also \( g_{13}=g_{23}=0 \) everywhere, we have \( \mass{M}{g}=0 \) directly from \cref{def:half_space_mass}. 
         \item{\(  \mass{M}{g}=0 \implies (M,g)\isomorphic(\reals^3_{+},\delta) \):} 
 
-        Notice that \cref{eq:main_result} (together with \( H\geq 0 \)) directly implies that \( H=0 \). This then allows us to apply \cref{prop:main_identity} to \( u=x_{\alpha} \) for \( \alpha=1,2 \). We do this by using horizontal half-cylinders (let \( \beta=3-\alpha \) be the other direction with Neumann boundary condition on \( \boundary{M} \)), defining
+        Notice that \cref{eq:main_result} (together with \( H\geq 0 \)) directly implies that \( H=0 \). This then allows us to apply \cref{prop:main_inequality} to \( u=x_{\alpha} \) for \( \alpha=1,2 \). We do this by using horizontal half-cylinders (let \( \beta=3-\alpha \) be the other direction with Neumann boundary condition on \( \boundary{M} \)), defining
         \begin{align*}
             D_L^{\pm}&\definedas\Set{x\in \Mend\given (x_\beta)^2+(x_3)^2\leq L^2,\logicspace x_3\geq 0,\logicspace x_\alpha=\pm L},\\
             T_L&\definedas\Set{x\in \Mend\given (x_\beta)^2+(x_3)^2=L^2,\tau 0\leq x_3,\logicspace -L\leq x_\alpha\leq L},\\
@@ -615,7 +656,7 @@ Now the positive mass theorem follows as corollary:
             (\boundary{M})_L&\definedas \boundary{M}\cap \Omega_L,\\
             S_t^L&=\Set{x_\alpha=t}\cap \Omega_L,
         \end{align*} 
-        and setting \( P_1=\Sigma\cup (\boundary{M})_L \) and \( P_2=C_L \) (instead of \( P_1=\Sigma \) and \( P_2=C_L\cup (\boundary{M})_L \), as we did for \( u=x_3 \)). Since all of \( P_1 \) is a minimal surface (has zero mean curvature), we get the following equivalent of \cref{eq:just_insert_cylinder_into_main_identity}
+        and setting \( P_1=\Sigma\cup (\boundary{M})_L \) and \( P_2=C_L \) (instead of \( P_1=\Sigma \) and \( P_2=C_L\cup (\boundary{M})_L \), as we did for \( u=x_3 \)). Since all of \( P_1 \) is a minimal surface (has zero mean curvature), we get the following equivalent of \cref{eq:just_insert_cylinder_into_main_inequality}
         \begin{equation*}
             \frac{1}{2}\int_{\Omega_L}\frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 x_\alpha}}{\abs{\nabla x_\alpha}}+R}\odif{V}\leq \int_{-L}^L(2\pi \chi(S_t^L)-\int_{\boundary{S_t^L}\cap  T_L}\kappa_{t,L})+\int_{C_L} \partial_n \abs{\nabla u}.
         \end{equation*}
@@ -717,7 +758,10 @@ Now the positive mass theorem follows as corollary:
     A \emph{Riemannian manifold} \( (M,g) \) is a smooth manifold \( M \) with a positive-definite, inner product \( g_p \) smoothly assigned to each point in \( M \), \ie a positive definite section \(g\in \sheafsections{\cotangentspace{M}\symmetricproduct \cotangentspace{M}} \) (where \( \symmetricproduct \) is the symmetric product). We call \( g \) a \emph{Riemannian metric}.
 \end{definition}
 \begin{remark}
-    A metric allows us to convert between vectors and covectors, \ie we have an isomorphism
+    A \emph{Pseudo-Riemannian manifold} is equipped with a \emph{Pseudo-Riemannian metric} instead: Here the inner product on each tangentspace is not necessarily positive-definite anymore. We will most often consider \( 3+1 \)-dimensional \emph{Lorentzian manifolds}, where the metric has signature \( (-,+,+,+) \). We call the first coordinate the \emph{time coordinate} and the other three \emph{spacial coordinates}. All of the following constructions extend without modification to Lorentzian manifolds.
+\end{remark}
+\begin{remark}
+    A metric allows us to convert between vectors and covectors, \ie we have an isomorphism (called the \emph{musical isomorphism})
     \begin{equation*}
         \tangentspace{p}{M}\to \cotangentspace{p}{M}\qquad v\mapsto v^\flat,
     \end{equation*}
@@ -728,8 +772,14 @@ Now the positive mass theorem follows as corollary:
     In coordinates this map is given by lowering the index of our vector \ie \( v^a\rightsquigarrow g_{ab}v^b=v_a \).
 \end{remark}
 \begin{remark}
-    A \emph{Pseudo-Riemannian manifold} is equipped with a \emph{Pseudo-Riemannian metric} instead: Here the inner product on each tangentspace is not necessarily positive-definite anymore. We will most often consider \( 3+1 \)-dimensional \emph{Lorentzian manifolds}, where the metric has signature \( (-,+,+,+) \). We call the first coordinate the \emph{time coordinate} and the other three \emph{spacial coordinates}.
+    Recall that on any manifold, we can always contract one covariant and one contravariant index of a tensor. This is equivalent to taking the trace of the endomorphism \( \tangentspace{p}{M}\to \tangentspace{p}{M} \) given by this \( \sheafsections{\tangentbundle{M}\tensorproduct \cotangentbundle{M}} \) part of the tensor.
+    
+    In the presence of a metric, the \emph{musical isomorphism} allows us to raise and lower arbitrary indices and thus contract (originally) covariant with covariant indices and contravariant with contravariant tensors, \ie if we have a tensor \( T_{ij\dotsc} \) we can compute the contraction \( \gtrace{g}+{T}_{\dotsc}=g^{ij}T_{ij\dotsc} \). This is equivalent to choosing an orthonormal basis \( X_i \) and dual basis \( X^i \) and evaluating
+    \begin{equation*}
+        \gtrace{g}+{T}(\cdots)=\sum_{i}T(X_i,X_i,\cdots).
+    \end{equation*}
 \end{remark}
+
 Riemannian manifolds enable us to not only take derivatives of functions as is possible on all smooth manifolds, but of all tensor fields:
 \begin{definition}
     A \emph{covariant derivative} (or sometimes \emph{(affine) connection}) is an \( \reals \)-linear map \( \nabla\maps \sheafsections{\tangentspace{M}}\to \sheafsections{\cotangentspace{M}\tensorproduct \tangentspace{M}} \) such that the product rule
@@ -743,10 +793,13 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
         \item \( \nabla(T\tensorproduct T')=\nabla T\tensorproduct T'+T\tensorproduct \nabla T' \), \ie a Leibniz rule for the tensor product.
         \item The covariant derivative commutes with taking traces (contracting a covariant and a contravariant part of a tensor):
         \begin{equation*}
-            \nabla_Y (\trace T)=\trace \nabla_Y(T).
+            \nabla_Y (\trace{T})=\trace+{\nabla_Y(T)}.
         \end{equation*}
     \end{enumerate}
 \end{definition}
+\begin{notation}    
+    We write \( T_{(\text{indices}),i} \) and \( T_{(\text{indices});i} \) for the partial and covariant derivative of \( T \) in the direction \( x_i \).
+\end{notation}
 \begin{remark}
     Note that \( \nabla_Y X \) is tensorial in \( Y \) (since \( \nabla X \) is a tensor), \ie if \( Y  \) is a vector field then \( (\nabla_Y X)(p) \) only depends on \( Y(p) \) at a point \( p\in M \). But \( \nabla_Y X \) is \emph{not} tensorial in \( X \), only linear (\ie \( \nabla_Y (X+aX')=\nabla_Y X+ a\nabla_Y X' \)), instead \( (\nabla_Y X)(p) \) depends on the behaviour of \( X \) around \( p \) (as is to be expected for a derivative)
 \end{remark}
@@ -757,6 +810,25 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
     \end{equation*}
     then the first product rule involving functions and vector fields is just another incarnation of our product rule for tensors.
 \end{remark}
+\begin{remark}
+    We can define higher covariant derivatives, \eg
+    \begin{equation*}
+        \nabla^2_{X,Y}(Z)(\cdots)=(\nabla(\nabla Z))(X,Y).
+    \end{equation*}
+    In coordinates we can then compute that
+    \begin{equation*}
+        \begin{aligned}[t]
+            (\nabla^2_{X,Y}Z)^a&=X^b Y^c \nabla_b\nabla_c Z^a\\
+            &=X^b \nabla_b (Y^c \nabla_c Z^a)-(X^b \nabla_b Y^c)(\nabla_c Z^a)\\
+            &=(\nabla_X \nabla_Y Z)^a-(\nabla_{\nabla_X Y}Z)^a.
+        \end{aligned}
+    \end{equation*}
+    Note that, since coordinate vector fields commute, we have
+    \begin{equation*}
+        \nabla^2_{a,b}=\nabla_a \nabla_b-\nabla_b \nabla_a.
+    \end{equation*}
+\end{remark}
+
 \begin{remark}
     Writing \( \nabla_i \) for \( \nabla_{\partial_i} \) in coordinates, we note that the covariant derivative differs from the (coordinate dependent) partial derivative by a linear correction term given by the \emph{Christoffel symbol} (also sometimes called the connection coefficients) \( \Gamma^a_{b c} \):
     \begin{equation*}
@@ -790,24 +862,65 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
         \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).
     \end{equation*}
 \end{theorem}
-\begin{remark}
-    We can define higher covariant derivatives, \eg
+
+\begin{definition}
+    We define the Laplacian (also called Laplace-Beltrami-Operator)
     \begin{equation*}
-        \nabla^2_{X,Y}(Z)(\cdots)=(\nabla(\nabla Z))(X,Y).
+        \laplacian{f}=;_g(\nabla^2 f)=\nabla^a \nabla_a f.
     \end{equation*}
-    In coordinates we can then compute that
+\end{definition}
+\begin{lemma}\label{lem:laplacian_in_terms_of_metric_determinant}
+    If \( M \) is Riemannian and equipped with the Levi-Civita-connection,
+    \begin{equation*}
+        \laplacian{f}=\frac{1}{\sqrt{\det{g}}}\partial_{a}(\sqrt{\det{g}}\partial^a f).
+    \end{equation*}    
+\end{lemma}
+\begin{proof}
+    Our proof proceeds entirely in coordinates. Note first that (for \( I \) the identity matrix)
+    \begin{equation*}
+        \det'(I)=\trace;.
+    \end{equation*}
+    Then consider the function
+    \begin{equation*}
+        f(A)=\det{A}=\det{g}\cdot \det(\inverse{g}\cdot A).
+    \end{equation*}
+    Taking the derivative and evaluating at \( A=g \) then gives
+    \begin{equation*}
+        \det'(g)(T)=\det{g}\cdot \trace{\inverse{g}\cdot T},
+    \end{equation*}
+    and thus
     \begin{equation*}
         \begin{aligned}[t]
-            (\nabla^2_{X,Y}Z)^a&=X^b Y^c \nabla_b\nabla_c Z^a\\
-            &=X^b \nabla_b (Y^c \nabla_c Z^a)-(X^b \nabla_b Y^c)(\nabla_c Z^a)\\
-            &=(\nabla_X \nabla_Y Z)^a-(\nabla_{\nabla_X Y}Z)^a.
+            \partial_a \det{g}&=\det{g}\cdot \trace{\inverse{g}\cdot \partial_i g}\\
+            &=\det{g}g^{bc}\partial_{a}g_{bc}.
         \end{aligned}
     \end{equation*}
-    Note that, since coordinate vector fields commute, we have
+
+    Thus we can compute
     \begin{equation*}
-        \nabla^2_{a,b}=\nabla_a \nabla_b-\nabla_b \nabla_a.
+        \begin{aligned}[t]
+            \Gamma^{a}_{ab}&=\frac{1}{2}g^{ac}(\partial_a g_{bc}+\partial_b g_{ac}-\partial_c g_{ab})\\
+            &=\frac{1}{2}g^{bc}\partial_b g_{ac}
+            &=\frac{1}{2\det{g}}\partial_b(\det{g})\\
+            &=\frac{1}{\sqrt{\det{g}}}\partial_b(\sqrt{\det{g}}),
+        \end{aligned}
     \end{equation*}
-\end{remark}
+    where the second equality is due to the fact that (because of symmetry of \( g \))
+    \begin{equation*}
+        g^{ac}\partial_{a}g_{bc}=g^{ca}\partial_c g_{ba}.
+    \end{equation*}
+
+    Then
+    \begin{equation*}
+        \begin{aligned}[t]
+            \nabla^a \nabla_a f&= \nabla^a \partial_a f\\
+            &=\partial^a \partial_a f+\Gamma^a_{ab} \partial^b f\\
+            &=\frac{1}{\sqrt{\det{g}}}\cdot \sqrt{\det{g}}\partial^a\partial_a f+\frac{1}{\sqrt{\det{g}}}\cdot (\partial_b \sqrt{\det{g}})(\partial^b f)\\
+            &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}\partial^a f).
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+
 
 One major difference between the covariant and our usual partial derivatives is that covariant derivatives in different directions do not necessarily commute. The failure of this commutativity is one way to understand and measure curvature:
 \begin{definition}[Riemann curvature tensor]
@@ -828,19 +941,107 @@ Oftentimes, the \( 4 \) indices of the Riemann curvature tensor are both unwield
 \begin{definition}
     We define the \emph{Ricci curvature} as
     \begin{equation*}
-        \Ricci(X,Y)\definedas\trace{X\mapsto R(X,Y)Z}
+        \Ricci(X,Y)\definedas\trace+{X\mapsto R(X,Y)Z}
     \end{equation*}
     or, in coordinates,
     \begin{equation*}
         \Ricci_{ab}=R^c_{acb}.
     \end{equation*}
 \end{definition}
-We will require the Ricci curvature only once during this thesis, as a stepping stone for our main identity. A lot more important will be the scalar curvature, which in General Relativity is proportional to mass density for static spacetimes, and thus is central formulating the positive mass theorem in purely geometric terms:
+We will require the Ricci curvature only once during this thesis, as a stepping stone for our main integral inequality. A lot more important will be the scalar curvature, which in General Relativity is proportional to mass density for static spacetimes, and thus is central formulating the positive mass theorem in purely geometric terms:
 \begin{definition}
     We define the \emph{scalar curvature} as
     \begin{equation*}
-        R\definedas \trace;_g \Ricci=g^{ij}\Ricci_{ij}.
+        R\definedas \gtrace{g}{\Ricci}=g^{ij}\Ricci_{ij}.
     \end{equation*}
 \end{definition}
+
+\section{Riemannian submanifolds}\label{sec:riemannian_submanifolds}
+
+We will often be considering a three dimensional spacelike hypersurface (defined in \cref{def:spacelike_hypersurface})  \( M \) embedded in a larger \( 3+1 \)-dimensional Lorentzian manifold \( \tilde{M} \) (for the signature of the metric of \( \tilde{M} \) we choose the convention \( (-,+,+,+) \)), such that the induced metric on \( M \) is positive definite. \( M \) itself will also often have a boundary \( \boundary{M} \). Thus some basic facts about Riemannian submanifolds will be helpful. Most of the following is from \cite[Chapter~2.1]{leeGeometricRelativity2019}.
+
+{ \newcommand{\Mconnection}{\nabla}\newcommand{\Sigmaconnection}{\hat{\nabla}}
+Let \( \Sigma^m \) be a submanifold of (pseudo-)Riemannian manifolds \( (M^n,g) \) (equipped with Levi-Civita connection \( \Mconnection \)).
+\begin{remark}
+    \( g \) induces a metric
+    \begin{equation}
+        \gamma=\restrict{g}{\tangentbundle{\Sigma}}\label{eq:first_fundamental_form}
+    \end{equation} 
+    (also called the \emph{first fundamental form}) on \( \Sigma^m  \). 
+
+    If \( \Sigma^m \) is Riemannian inside a Lorentzian manifold \( M^n \), \ie if the induced metric \( \gamma \) is positive definite, then we call \( \Sigma^m \) a \emph{spacelike submanifold}.\label{def:spacelike_hypersurface}
+\end{remark}
+This metric \( \gamma \) in turn defines a Levi-Civita connection on \( \Sigma \), which fulfills the following relation:
+\begin{fact}
+  Denoting the Levi-Civita connection of \( (\Sigma,\gamma) \) by \( \Sigmaconnection \), we have for any \( p\in \Sigma \), tangent vector \( X\in \tangentspace{p}{\Sigma} \) and \( Y\in \sheafsections{\tangentbundle{\Sigma}} \),
+  \begin{equation*}
+    \Sigmaconnection_X Y=(\Mconnection_X \tilde{Y})^\top,
+  \end{equation*}
+  where \( \tilde{Y} \) is any extension of \( Y \) to a vector field on \( M \). Here \( (\blank)^\top \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \).
+
+  % I really don't think so anymore, this is probably very fine (I copied a lot more elsewhere).
+  % \todo{This might be too similar to \cite[2.1]{leeGeometricRelativity2019}}
+\end{fact}
+Thus \( \Sigma \) intrinsically contains information about tangential parts of tangential derivatives. But this information does not determine the orthogonal part! This motivates the following definition:
+\begin{definition}[Second fundamental form]
+    The \emph{second fundamental form} of \( \Sigma \) is a tensor \( \mathbf{A}\in \sheafsections{\cotangentbundle{\Sigma}\tensorproduct \cotangentbundle{\Sigma}\tensorproduct \normalbundle{\Sigma}} \) such that for \( X,Y\in \tangentspace{p}{\Sigma} \)
+    \begin{equation*}
+        \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp,
+    \end{equation*}
+    where \( (\blank)^\perp \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to the normal space \( \normalspace{p}{\Sigma} \). Here \( \tilde{Y} \) is again any extension of \( Y \) to a vector field on \( M \).
+\end{definition}  
+Note that although \( \Mconnection \) is not a tensor (\ie it depends on the behaviour of the vector field \( \tilde{Y} \) around a point \( p \)), the second fundamental form \( \mathbf{A} \) \emph{is} tensorial. In both of the above definitions, we did not have to extend \( X \) to a vector field, since \( \Mconnection \) only depends on the value of \( X \) at \( p \).
+
+\begin{fact}
+    \( \mathbf{A}(X,Y)=\mathbf{A}(Y,X) \), \ie \( \mathbf{A} \) is symmetric, since for any extensions \( \tilde{X},\tilde{Y} \) of \( X,Y \) we have \( \Mconnection_X Y-\Mconnection_Y X=\commutator{X}{Y}\in \tangentspace{\Sigma} \).
+\end{fact}
+\begin{proof}
+    Recall that when treating our vector fields as derivations we can also compute the Lie Bracket  as \( \commutator{X}{Y}(f)=X(Y(f))-Y(X(f)) \). This does obviously not depend on whether the ambient manifold of \( X \) and \( Y \) is \( \Sigma \) or \( M \), and thus the resulting vector field \( \commutator{X}{Y} \) must be a vector field on \( \Sigma \). 
+\end{proof}
+\begin{definition}
+    The \emph{mean curvature vector} \( \mathbf{H} \) is the trace of \( \mathbf{A} \) over \( \tangentspace{p}{\Sigma} \), \ie for an orthonormal basis \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{\Sigma} \) we define
+    \begin{equation*}
+        \mathbf{H}\definedas \sum_{i=1}^{m}\mathbf{A}(e_i,e_i).
+    \end{equation*}
+\end{definition}
+If \( \Sigma \) is an orientable hypersurface of \( M \), we can choose a normal direction \( \nu \) (if \( \Sigma \) has an interior and exterior, we typically implicitly choose \( \nu \) to be the outward normal). Then we define
+\begin{equation*}
+    A(X,Y)\definedas g(\mathbf{A(X,Y)},-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace{\gamma}+{A}.
+\end{equation*}
+We also call \( A \) the second fundamental form and \( H \) the mean curvature. Note that we have
+\begin{equation*}
+    A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu).
+\end{equation*}
+\begin{remark}
+    With this definition, the mean curvature of a twodimensional surface is the sum of the mean curvatures, not the mean. The definition of the mean curvature as
+    \begin{equation*}
+        H=\frac{1}{n}\gtrace{\gamma}+{A},
+    \end{equation*}
+    where \( n \) is the dimension of the manifold, is also common, but most of our references use the same definition as we do.
+\end{remark}
+
+The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is the main fact we will require to deal with calculations on the noncompact boundary of our objects of interest (asymptotically flat half-spaces):
+\begin{fact}\label{fact:laplacian_and_hypersurface_laplacian}
+    Given a hypersurface \( \Sigma \) in \( (M,g) \) and a smooth function \( f \) on \( M \),
+    \begin{equation*}
+        \laplacian_M f=\laplacian_\Sigma +\Mconnection_\nu\Mconnection_\nu f+H \Mconnection_\nu f.
+    \end{equation*}
+\end{fact}
+\begin{proof}
+    Choose an orthonormal frame \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{M} \) and \( e_1,\dotsc,e_{n-1}\in \tangentspace{p}{\Sigma} \) and \( e_n=\nu \), then
+    \begin{align*}
+        \laplacian_M f&=\sum_{i=1}^{n}(\Mconnection\Mconnection f)(e_i,e_i)\\
+        &=\Mconnection_M \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i} (\grad_M f),e_i)\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}g(\Mconnection_{e_i}(\grad_{\Sigma}f+\nu\cdot \Mconnection_\nu f),e_i)\\
+        &=\begin{aligned}[t]
+            &\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\gamma(\Sigmaconnection_{e_i}(\grad_{\Sigma} f),e_i)+\underbrace{g(\mathbf{A}(e_i,\grad{\Sigma}),e_i)}_{=0}\\
+            &+\Mconnection_{
+        e_i}\Mconnection_{\nu}f\cdot \underbrace{g(\nu,e_i)}_{=0}+\Mconnection_{\nu}f\cdot g(\Mconnection_{e_i}\nu,e_i))
+        \end{aligned}\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\Sigmaconnection\Sigmaconnection f)(e_i,e_i)+\Mconnection_\nu f\cdot \sum_{i=1}^{n-1}A(e_i,e_i)\\
+        &=\Mconnection_\nu \Mconnection_\nu f+\laplacian_{\Sigma}f+\Mconnection_{\nu}f\cdot H.
+    \end{align*}
+\end{proof}
+}
 \printbibliography
 \end{document}
