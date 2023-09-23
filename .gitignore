@@ -301,3 +301,6 @@ TSWLatexianTemp*
 #*Notes.bib
 figures/horizon_and_coordinate_sphere.ipe.autosave.ipe
 figures/horizon_and_coordinate_sphere.tex
+
+# python stuff
+.venv
