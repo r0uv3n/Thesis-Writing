@@ -2,7 +2,7 @@
 # # The harmonic function method and the mass of some Schwarzschild half-spaces - Computations and Graphs
 
 # %% [markdown]
-# In this Jupyter Notebook, we will do two main things for our examples from Section 4:
+# In this Jupyter Notebook, we will do two main things for our examples from Section 9:
 # - Compute the lower bound given by Theorem 3.9
 # - Plot the level sets and function values of the harmonic coordinates
 
@@ -110,7 +110,7 @@ for x, u in zip(coords,harmonic_coords):
   u._compute_covariant_component = make_u_method(x,u)
 
 # %% [markdown]
-# And define $u_3$ for the modified Schwarzschild space $M_{m,\!\!\geq a}$ for $a>0$:
+# And define $u_3$ for the modified Schwarzschild space $M_{m,\geq a}$ for $a>0$:
 
 # %%
 a = symbols("a")
@@ -131,7 +131,7 @@ for i,u in enumerate(harmonic_coords):
   display(Markdown(f"$\Delta u_{i+1}={laplacian(u).simplify()}$"))
 
 # %%
-display(Markdown(f"For $M_{{m,\!\!\geq a}}$: $\Delta u_3={laplacian(u3_modified).simplify()}$"))
+display(Markdown(f"For $M_{{m,\geq a}}$: $\Delta u_3={laplacian(u3_modified).simplify()}$"))
 
 # %% [markdown]
 # ## Computation of the lower bound
@@ -159,7 +159,7 @@ lower_bound_integrand_over_M=1/(16*sympy.pi)*(abs_hessian_u3**2/abs_nabla_u3)*om
 lower_bound_modified_integrand_over_M=1/(16*sympy.pi)*(abs_hessian_u3_modified**2/abs_nabla_u3_modified)*omega**6
 
 # %% [markdown]
-# For the boundary term we first compute the mean curvature (observe that the result agrees with our computation in Section 4)
+# For the boundary term we first compute the mean curvature (observe that the result agrees with our computation in Section 9)
 
 # %%
 normal_vector_to_noncompact_boundary = Tensor(r"\nu",1,g)
@@ -229,10 +229,10 @@ result = scipy.integrate.nquad(
 schwarzschild_half_space_mass_lower_bound = 4*result[0]
 error_estimate = 4*result[1]
 number_evaluations = result[2]['neval']
-display(Markdown(f"## Lower bound for mass $m={m_value}$ of $M_m$ calculated in ${number_evaluations}$ evaluations as ${schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
+display(Markdown(f"## Lower bound for mass (expected $m/2={m_value}/2$) of $M_{{{m_value},+}}$ calculated in ${number_evaluations}$ evaluations as ${schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
 
 # %% [markdown]
-# We can now do the same process for $M_{m,\!\!\geq a}$ for $a>0$:
+# We can now do the same process for $M_{m,\geq a}$ for $a>0$:
 
 # %%
 modified_x3range=lambda m_num,a_num:[a_num,np.inf]
@@ -273,7 +273,7 @@ result_on_boundary = scipy.integrate.nquad(
 modified_schwarzschild_half_space_mass_lower_bound = 4*result_on_M[0]+4*result_on_boundary[0]
 error_estimate_modified = 4*result_on_M[1]+4*result_on_boundary[1]
 number_evaluations_modified = result_on_M[2]['neval'] + result_on_boundary[2]['neval'] # most of these will come from the boundary integral where we set the `limit` parameter higher
-display(Markdown(f"## Lower bound for mass $m={m_value}$ of $M_{{m,\\!\!\\geq {a_value}}}$ calculated in ${number_evaluations}$ evaluations as ${modified_schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
+display(Markdown(f"## Lower bound for mass $m={m_value}$ of $M_{{m,\geq {a_value}}}$ calculated in ${number_evaluations}$ evaluations as ${modified_schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
 
 # %% [markdown]
 # We can repeat this calculation for different values of $a$ and plot the results:
@@ -314,7 +314,7 @@ def calculate_lower_bound_modified(a_value,m_value):
 #   modified_schwarzschild_half_space_mass_lower_bound,
 #   error_estimate_modified,
 #   number_evaluations_modified):
-#   display(Markdown(f"## Lower bound for mass $m={m_value}$ of $M_{{m,\!\!\geq {a_value}}}$ calculated in ${number_evaluations}$ evaluations as ${modified_schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
+#   display(Markdown(f"## Lower bound for mass $m={m_value}$ of $M_{{m,\geq {a_value}}}$ calculated in ${number_evaluations}$ evaluations as ${modified_schwarzschild_half_space_mass_lower_bound:.5f}$ with an estimated absolute error of ${error_estimate:.5f}$."))
 
 # %% [markdown]
 # Computing the values for the plot might take a while
@@ -452,7 +452,7 @@ def plot_coordinate_level_sets(coordinate,level_set_values=[0],m_value=1,a_value
   return fig
 
 # %% [markdown]
-# ### Plots for $M_{m,+}=M_{m,\!\!\geq 0}$
+# ### Plots for $M_{m,+}=M_{m,\geq 0}$
 
 # %%
 fig=plot_coordinate_level_sets(u3,[0,0.2,0.4,0.6,0.8,1])
