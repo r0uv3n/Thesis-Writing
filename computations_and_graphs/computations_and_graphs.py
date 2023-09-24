@@ -4,7 +4,7 @@
 # %% [markdown]
 # In this Jupyter Notebook, we will do two main things for our examples from Section 8:
 # - Compute the lower bound given by Theorem 3.9
-# - Plot the level sets and function values of the harmonic coordinates
+# - Plot the level sets of the harmonic coordinates
 
 # %% [markdown]
 # ### Setting up the Python environment
