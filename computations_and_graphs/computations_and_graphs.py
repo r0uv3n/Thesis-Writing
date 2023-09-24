@@ -14,7 +14,7 @@
 def is_notebook() -> bool:
     try:
         shell = get_ipython().__class__.__name__
-        if shell == 'ZMQInteractiveShell':
+        if shell in ('ZMQInteractiveShell','XPythonShell'):
             return True   # Jupyter notebook or qtconsole
         elif shell == 'TerminalInteractiveShell':
             return False  # Terminal running IPython
@@ -25,7 +25,6 @@ def is_notebook() -> bool:
 
 # %%
 if is_notebook():
-  from IPython import get_ipython
   get_ipython().run_line_magic("pip", "install gravipy matplotlib scikit-image") # this helps if this Notebook is executed from within e.g. jupyter-cloud.gwdg.de
 
 # %%

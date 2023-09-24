@@ -1,5 +1,5 @@
-%&template.fmt
-\PassOptionsToPackage{style=alphabetic}{biblatex}
+%&Harmonic_Functions_and_the_Mass_of_Asymptotically_Flat_Half_Spaces.fmt
+\PassOptionsToPackage{style=alphabetic,backend=biber}{biblatex}
 \PassOptionsToPackage{hypertexnames=false}{hyperref}
 \PassOptionsToPackage{capitalise}{cleveref}
 \documentclass[titlepage,numbers=noenddot,headinclude,oneside,%
@@ -13,6 +13,7 @@ english,%lockflag%
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \addbibresource{ZoteroBibliographyPositiveMassTheoremBachelorThesis.bib}
 \usepackage{tikzscale}
+\usepackage{listings}
 % \usepackage[toc]{appendix}
 
 \let\sphere\relax
@@ -163,7 +164,7 @@ We will have to also discuss some basic topological properties of the level sets
 
     If a non-compact space \( S \) results from a puncture of a compact space (is homotopy equivalent to \( \sigma\setminus \Set{x_1,\dotsc,x_p} \), where \( p \) is the number of punctures), then we set
     \begin{equation*}
-        \chi(S)=\chi(\Sigma)-p.\label{eq:def_euler_characteristic_noncompact}
+        \chi(S)=\chi(\Sigma)-p.\label{eq:def_euler_characteristic_non-compact}
     \end{equation*}
 \end{definition}
 The following theorem (a version of the maximum principle) will then help control the Euler characteristic of the level sets of our harmonic functions:
@@ -198,7 +199,7 @@ For a proof see \cite[Chapter 4.3]{petersenRiemannianGeometry2006}.
 \section{The mass of an asymptotically flat half-space}
 We will now establish the necessary definitions (mostly adapted from \cite{almarazPositiveMassTheorem2016}, \cite{eichmairDoublingAsymptoticallyFlat2023} and \cite{brayHarmonicFunctionsMass2019}) to state the main result of this thesis.
 \begin{definition}[Asymptotically flat half-space]\label{def:asymptotically_flat_half_space}
-    Let \( (M,g) \) be a connected, complete Riemannian manifold of dimension 3, with scalar curvature \( R \) and a non-compact boundary \( \boundary{M} \) with mean curvature \( H \) (computed as the divergence along \( \boundary{M} \) of an outward pointing unit normal \( \nu \)).
+    Let \( (M,g) \) be a connected, complete Riemannian manifold of dimension 3, with scalar curvature \( R \) and a smooth non-compact boundary \( \boundary{M} \) with mean curvature \( H \) (computed as the divergence along \( \boundary{M} \) of an outward pointing unit normal \( \nu \), see \cref{eq:def_mean_curvature,rem:mean_curvature_peculiarities} for more details on our definition and in particular the choice of sign).
 
     We call \((M,g) \) an \emph{asymptotically flat half-space} with decay rate \( \tau>0 \) if there exists a compact subset \( K \) such that \( M\setminus K \) consists of a finite number of connected components \(M_{\mathrm{end}}^i \) called \emph{ends}, such that for each of these ends there exists a diffeomorphism \( \Phi\maps M_{\mathrm{end}}^i \to \Set{x\in \reals^3_+\given \abs{x}>r_0} \) and such that in the coordinate system given by this diffeomorphism we have the following asymptotic as \( r\goesto \infty \):
     \begin{equation}
@@ -223,15 +224,15 @@ Note that, along \( \boundary{M} \), \( \Set{\partial_\alpha}_\alpha \) spans \(
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/horizon_and_coordinate_sphere.tikz}
-    \caption{A cross section of a 3-dimensional asymptotically flat half space with horizon boundary and a large coordinate sphere (from \cref{def:half_space_mass}). Note that the grey points on the boundary of \( (\boundary{M})_r \) are just the part of the circle \( \sphere^1_r \) visible in this cross section.}
+    \caption{A cross section of a 3-dimensional asymptotically flat half space with horizon boundary and a large coordinate sphere (from \cref{def:half_space_mass}). Note that the gray points on the boundary of \( (\boundary{M})_r \) are just the part of the circle \( \sphere^1_r \) visible in this cross section.}
     \label{fig:horizon_and_coordinate_sphere}
 \end{figure}
 \begin{remark}\label{rem:mass_normalization}
     In the definition above, the factor \( 1/(16\pi) \)  is a normalization factor used also for the ADM mass of asymptotically flat manifolds with the full \( \reals^n \) as a model space, where it ensures that we recover the mass of the Schwarzschild solution. 
     
-    Note that thus in our case of asymptotically flat half-space, the mass of a \emph{half Schwarzschild space} \( M_{m,+}=\Set{x\in \reals^n_+\given \abs{x}\geq(m/2)^{1/(n-2)}} \) with the conformal metric
+    Note that thus in our case of asymptotically flat half-space, the mass of a \emph{Schwarzschild half-space} \( M_{m,+}=\Set{x\in \reals^n_+\given \abs{x}\geq(m/2)^{1/(n-2)}} \) with the conformal metric
     \begin{equation*}
-        g_m=\omega^4 \cdot \delta,\qquad \text{where } \omega=1+\frac{m}{2\abs{x}}\delta,\quad m>0
+        g_m=\omega^4 \cdot \delta,\qquad \text{where } \omega=1+\frac{m}{2\abs{x}},\quad m>0
     \end{equation*}
     will be
     \begin{equation*}
@@ -250,7 +251,7 @@ In \cite{almarazPositiveMassTheorem2016}, Almaraz, Barbosa, and de Lima showed t
 
 For the positive mass theorem on 3-dimensional asymptotically flat manifolds modeled on the full \( \reals^3 \), recently \parencite{brayHarmonicFunctionsMass2019} a new method using harmonic functions has been used to achieve a relatively elementary proof of the above theorem and in particular an explicit lower bound for the mass. The goal of this thesis is to establish an equivalent result for the case of asymptotically flat half spaces. We will need two further definitions adopted from \cite{eichmairDoublingAsymptoticallyFlat2023} to unterstand the statement of our main result.
 \begin{definition}
-    Let \( \Sigma\subset M  \) be a compact separating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the noncompact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
+    Let \( \Sigma\subset M  \) be a compact separating hypersurface satisfying \( \boundary{\Sigma}=\Sigma\cap \boundary{M} \) with normal \( n_\Sigma \) pointing towards the closure \( M(\Sigma) \) of the non-compact component of \( M\setminus \Sigma \). We call a connected component \( \Sigma_0 \) of \( M \) \emph{closed} if \( \boundary{\Sigma_0}=\emptyset \) or a \emph{free boundary hypersurface} if \( \boundary{\Sigma_0}\neq 0 \) and \( n_{\Sigma_0}(x)\in \tangentspace{x}{\boundary{M}} \) for every \( x\in \Sigma_0\cap \boundary{M}=\boundary{\Sigma_0} \) (\ie if \( \Sigma_0 \) meets \( \boundary{M} \) orthogonally along its boundary).
 
     We say that an \( (M,g) \) has horizon boundary \( \Sigma \) if \( \Sigma \) is a non-empty compact minimal (\ie having zero mean curvature) hypersurface, whose connected components are all either closed or free boundary hypersurfaces such that \( M(\Sigma)\setminus \Sigma \) contains no minimal closed or free boundary hypersurfaces. \( \Sigma \) is also called an \emph{outer most minimal surface} and the region \( M(\Sigma) \) outside \( \Sigma \) is called an \emph{exterior region}.
 \end{definition}
@@ -272,117 +273,6 @@ The main result of this thesis is then the following, which will prove \cref{thm
 % asymptotically flat manifolds with
 % a non-compact boundary} is super important! We have nice harmonic functions which are themselves asymptotically flat coordinates. 3.9 then gives uniqueness, which we can use along with a doubling argument along the horizon boundary to show existence of asymptotically flat coordinates for the case with non empty horizon boundary.
 
-\section{An example calculation}
-In the following we will discuss the harmonic function technique on some examples and also (numerically) compute the actual lower bound given by our result. 
-
-
-\subsection{Introducing some different Schwarzschild half-spaces}
-In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_{m,+} \) (which has mass \( m/2 \)). There are many other, less symmetric half-spaces resulting from the full Schwarzschild space. One possibility is
-\begin{equation*}
-    M_{m,\geq a}=\Set{x\in \reals^3\given x_3>a}
-\end{equation*}
-for some \( a<0 \), equipped with the same metric \( g=\omega^4\cdot \delta \) as the normal Schwarzschild space. We further identify \( M_{m,+} \) with \( M_{m,\geq 0} \).
-
-
-Note that \( g_m=\omega^4 \delta \) is just the Euclidean metric multiplied by a strictly positive function. Metrics that are related in such a way are called \emph{conformal} (since there is a \emph{conformal transformation}, \ie an angle preserving map, between the manifolds \( (M_{m,+},g_m) \) and \( (M_{m,+},\delta) \)).
-
-\begin{lemma}
-    The boundary \( \boundary{M_{m,\geq a}} \) has positive mean curvature for \( a> 0 \).
-
-    For \( a=0 \), let \( \Sigma = \Set{x\in \reals^3_+\given \abs{x}=m/2} \). Then \( \Sigma \) is a free horizon boundary component (\ie has zero mean curvature and is orthogonal to \( \boundary{M_{m,+}}\setminus \Sigma \)). Furthermore \( \boundary{M_{m,+}}\setminus \Sigma \) also has zero mean curvature.
-\end{lemma}
-We already know the mean curvature of these different surfaces when considered as surfaces under the background metric \( \delta \). It will thus be helpful to find a formula for how the mean curvature changes under a conformal change of metric. We delegate the details of this to \cref{sec:conformal_changes_of_metric}.
-\begin{proof}
-    Let \( f=\Ln{\omega^2} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
-    \begin{equation*}
-        H_{g}=e^{-f}(H_{\delta}-2 g(\grad f,n)),
-    \end{equation*}'
-    where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n \) is the normal vector to the surface used to compute the mean curvature.
-
-    We can compute
-    \begin{equation*}
-        \grad f=-\frac{4}{\abs{x}\cdot \omega}\begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix}.
-    \end{equation*}
-
-        
-
-    
-    For \( a=0 \) the manifold is furthermore symmetric under reflection along the \( (x_3=0) \)-plane, and thus the mean curvature vector \( \mathbf{H} \) on \( \boundary{M_{m,+}}\setminus \Sigma \) must be symmetric under this reflection as well, and as it is orthogonal to the plane by definition, we must have \( \mathbf{H}=0 \) and thus \( H=0 \).
-\end{proof}
-
-For \( a<0 \)  we would also have to remove the interior of the horizon if we wanted \( M_{m,\geq a} \) to be an asymptotically flat half-space, since the metric blows up near the origin (we could also remove some other bounded open neighborhood of the origin). But in this case the noncompact boundary \( \boundary{M_{m,\geq a}} \) will have negative mean curvature and the positive mass theorem will not apply. Thus we are only interested in \( a\geq 0 \).
-\subsection{Finding the asymptotically linear harmonic coordinates}
-
-
-We can reduce the Laplacian \( \laplacian_g \) for a metric conformally euclidean metric \( g \) to \( \laplacian_{\delta} \):
-\begin{lemma}\label{lem:laplacian_on_schwarzschild}
-    In the above notation, we have on \( \reals^3\setminus \zeroset \)
-    \begin{equation*}
-        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u).
-    \end{equation*}
-\end{lemma}
-\begin{remark}
-    This formula is specific to our case, where in particular \( M_{m,\geq a} \) has zero scalar curvature (except for at the origin, but the origin never lies in \( M_{m,\geq a} \)). In general the above conformal invariance is fulfilled not by \( \laplacian_g \) but by the conformal Laplacian \( L_g=\laplacian_g-\frac{n-2}{4(n-1)} \) (see also \cite[Definition 3]{curryIntroductionConform}).
-\end{remark}
-\begin{proof}[Proof of \Cref{lem:laplacian_on_schwarzschild}]
-    Note first that \( \laplacian_\delta \omega=0 \) on \( \reals^3\setminus \zeroset \). Using \cref{lem:laplacian_in_terms_of_metric_determinant}, we then obtain
-    \begin{equation*}
-        \begin{aligned}[t]
-            \laplacian_g(u)\begin{aligned}[t]
-                &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b u)\\
-                &=\frac{1}{\omega^6}\partial_a(\omega^{2}\cdot \delta^{ab} \partial_b u)\\
-                &=\frac{1}{\omega^6}\delta^{ab}\partial_a(\omega^2 \partial_b(\omega\cdot u))\\
-                &=\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega \partial_b u)+\partial_a \omega\cdot \partial_b u)\\
-                &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)
-                &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
-                &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
-                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u).
-            \end{aligned}
-        \end{aligned}
-    \end{equation*}
-\end{proof}
-Thus, finding harmonic functions \( u_i \) on \( (M_{m,\geq a},g) \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) on \( (M_{m,\geq a},\delta)  \). For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics:
-\begin{equation*}
-    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=-\infty}^\infty \sum_{m=-\ell}^\ell \tilde{u}^m_{i,\ell} r^\ell Y^m_{\ell}(\theta,\varphi),
-\end{equation*}
-where \( \tilde{u}^m_{i,\ell} \) are real coefficients and \( Y^m_{\ell} \) the spherical harmonics.
-% \begin{equation*}
-%     Y^m_{\ell}(\theta,\varphi)=N^m_\ell P^m_{\ell}(\Cos{\theta})e^{im\varphi},
-% \end{equation*}
-% where \( P^m_{\ell} \) are the associated Legendre polynomials.
-
-We want our \( u_i \) to be asymptotic to the asymptotically flat coordinates \( x_i \). A necessary condition is in particular that (see beginning of \cref{sec:existence_and_uniqueness} and the definition of the weighted Hölder space in \cite[Section 3]{almarazPositiveMassTheorem2016})
-\begin{equation*}\label{eq:weakly_asymptotically_linear}
-    \sup_M \abs{\nabla_j u_i-x_i} \abs{x}^{1-\tau+\varepsilon}<\infty
-\end{equation*}
-for all \( i,j \) and any \( \varepsilon>0 \). Note that for \( M_g \) the strongest possible choice for the asymptotic falloff parameter \( \tau \) is \( \tau=1 \) (compare \cref{eq:def_asymptotically_flat}).Thus for \( j=0 \) in \cref{eq:weakly_asymptotically_linear} we have \( \sup_M \abs{u_i-x_i}\cdot \abs{x}^\varepsilon<\infty \), \ie \( u_i-x_i=\bigo{\abs{x}^0} \). Then for \( \tilde{u}_i \) this implies
-\begin{equation*}
-    \begin{aligned}[t]
-        (\tilde{u}_i-x_i)&=u_i\cdot (1+m/2\abs{x})-x_i\\
-        &=(u_i-x_i)-m\frac{m\cdot x_i}{2\abs{x}}\\
-        &=\bigo{\abs{x}^0}.
-    \end{aligned}
-\end{equation*}
-
-Hence we can conclude for the expansion in terms of solid harmonics, that \( \tilde{u}^m_{i,\ell}=0 \) for all \( \varepsilon>1 \) and that
-\begin{equation*}
-    \sum_{m=-1}^1 \tilde{u}^m_{i,\varepsilon}r Y^m_l(\theta,\varphi)=x_i.
-\end{equation*}
-
-It remains to find the remaining \( \tilde{u}^m_{i,\ell} \) such that the boundary conditions on the \( u_i \) are satisfied. We will treat the cases \( M_{m,+}=M_{m,\geq 0} \) and \( M_{m,\geq a} \) for \( a>0 \) separately:
-\begin{description}
-    \item[Boundary conditions for \( M_{m,+} \)] Note that the horizon boundary of \( M_{m,+} \) is given in our coordinates by \( \Sigma=\Set{x\in \reals^3_+\given \abs{x}=m/2} \). At this point, since \( \Sigma \) has mean curvature \( H=0 \), we could also consider \( \Sigma \) as part of the noncompact boundary of \( M \) and just consider a Dirichlet condition on all of \( \boundary{M} \), 
-
-    The Neumann boundary condition on \( \Sigma \) then becomes
-    \begin{align*}
-        \begin{aligned}[t]
-            0&=\evaluateat{\partial_{r} (\tilde{u}_i(r,\theta,\varphi)/\omega)}{r=m/2}\\
-            &=\evaluateat{\frac{2(r(m+2r)\partial_r \tilde{u}_i(r,\theta,\varphi)+m\cdot \tilde{u}_i(r,\theta,\varphi))}{(m+2r)^2}}{r=m/2}\\
-            &=\frac{m\partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)}{2m}
-        \end{aligned}\\
-        \implies 
-    \end{align*}
-\end{description}
 
 \section{Main basic integral inequality}
 
@@ -393,7 +283,7 @@ The main tool which also motivates our use of harmonic functions is the followin
 \begin{proposition}[{{\cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}}}]\label{prop:main_inequality}
     Let \( (\Omega,g) \) be a compact 3-dimensional oriented Riemannian manifold with boundary \( \boundary{\Omega}=P_1\disjointunion P_2 \) (smooth almost everywhere), having outward unit normal \( n \). Let \( u\maps \Omega\to \reals \) be a harmonic function (\ie \( \laplacian u=0 \)) such that \( \partial_{n_{P_1}}u=0 \) on \( P_1 \). If \( \maxu \) and \( \minu \) denote the maximum and minimum of \( u \) and \( S_t \) are \( t \)-level sets of \( u \), then
     \begin{multline*}
-        \int_{\minu}^{\maxu} \p[\Big]{\int_{S_t} \frac{1}{2}\p[\Big]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{A}+\int_{\boundary{S_t^L}\cap P_1}H_{P_1}\odif{l}}\odif{t}\\
+        \int_{\minu}^{\maxu} \int_{S_t} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{A}+\int_{\boundary{S_t^L}\cap P_1}H_{P_1}\odif{l}\odif{t}\\
         \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap P_2}k_{\boundary{S_t^L}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{n} \abs{\nabla u}\odif{A},
     \end{multline*} 
     where \( \chi(S_t) \) denotes the Euler characteristic of the level sets, \( \kappa_{\boundary{S_t^L}} \) denotes the geodesic curvature of \( \boundary{S_t^L} \) and \( H_{P_1} \) denotes the mean curvature of \( P_1 \).
@@ -435,7 +325,7 @@ That is we want functions \( \tilde{x}_1,\tilde{x}_2,\tilde{x}_3 \) that
 
 % Conveniently, there already exists a result for the case without horizon boundary. 
 
-Even though we normally only work with a single end, our proof of the existence of these functions will use a reflection argument along \( \Sigma \), which will require uniqueness and existence of our functions for the case of multiple ends and no horizon boundary, \ie \( \Sigma=\emptyset \). But it is not much harder to use this to prove existence and also uniqueness for the case with multiple ends and possibly non-empty boundary. I thus streamlines our proof to just state the following proposition for multiple ends, prove the case \( \Sigma=\emptyset \), and then use the reflection argument to prove the general case.
+Even though we normally only work with a single end, our proof of the existence of these functions will use a reflection argument along \( \Sigma \), which will require uniqueness and existence of our functions for the case of multiple ends and no horizon boundary, \ie \( \Sigma=\emptyset \). But it is not much harder to use this to prove existence and also uniqueness for the case with multiple ends and possibly non-empty boundary. It thus streamlines our proof to just state the following proposition for multiple ends, prove the case \( \Sigma=\emptyset \), and then use the reflection argument to prove the general case.
 \begin{proposition}\label{prop:existence_and_uniqueness}
     Suppose \( (M,g) \) is an asymptotically flat half-space with decay-rate \( \tau>1/2 \), asymptotically flat coordinates \( \Set{x_i}^j \) in each end \( \Mend^j \) and horizon boundary \( \Sigma \). Assume (\eg by shrinking the ends a bit) that the closures of the ends \( \Mend^j \) are disjoint. Then there exist (up to addition of constants) unique smooth functions \( \tilde{x}_1,\tilde{x}_2,\tilde{x}_3\maps M(\Sigma)\to \reals \) satisfying
     \begin{equation*}
@@ -458,8 +348,6 @@ Even though we normally only work with a single end, our proof of the existence 
         x_i^j-\tilde{x}_i\in C_{1-\tau+\varepsilon}^{2,\alpha} \quad \text{in \( \Mend^j \)}.
     \end{equation*}
     Moreover, for each end \( \Mend^j \), the functions \( \Set{\tilde{x}_i} \) form an asymptotically flat coordinate system in a neighborhood of infinity.
-    
-    \todo{Maybe change the wording here to align with our wording elsewhere?}
 \end{proposition} 
 \begin{proof}
     We first show existence and uniqueness for the case \( \Sigma=\emptyset \), then extend to \( \Sigma\neq \emptyset \) via a reflection argument along \( \Sigma \).
@@ -516,8 +404,6 @@ Even though we normally only work with a single end, our proof of the existence 
 We proceed by constructing a proof parallel to \cite[Section 6]{brayHarmonicFunctionsMass2019}.% and \cite[Section 6]{hirschSpacetimeHarmonicFunctions2021}. 
 
 To this end, let \( (M,g) \) be an asymptotically flat half-space and horizon boundary \( \Sigma \) with asymptotically flat harmonic coordinates \( x_1,x_2,x_3 \) as in \cref{prop:existence_and_uniqueness}. Note that from now on we will again consider \( M \) to only have a single end \( \Mend \) and that although \( x_1,x_2,x_3 \) are defined on all of \( M(\Sigma) \) and we call them harmonic coordinates, they are only guaranteed to form a coordinate system in \( \Mend \), \ie for \( \abs{x}>r_0 \) for some \( r_0>0 \).
-
-\todo{The above wording is very similar to \cite[Section 6]{hirschSpacetimeHarmonicFunctions2021}.}
 
 By \cite[Proposition 3.7]{almarazPositiveMassTheorem2016}, we can compute the mass in these harmonic coordinates. For \( L>r_0 \) define coordinate half-cylinders \( C_L=D_L\cup T_L \) given by
 \begin{align*}
@@ -679,7 +565,7 @@ Now the positive mass theorem follows as corollary:
         \Cref{eq:main_result} and \cref{eq:main_result_for_minimal_boundary_and_parallel_coordinates} immediately imply \( \nabla^2 x_i=0 \) for all \( i=1,2,3 \). Then
         \begin{equation*}
             \begin{aligned}[t]
-                \nabla (g(\partial_j,\partial_k))=\nabla(g(\nabla x_j,\nabla x_k))\\
+                \nabla (g(\partial_j,\partial_k))&=\nabla(g(\nabla x_j,\nabla x_k))\\
                 &=g(\nabla^2 x_j,\nabla x_k)+g(\nabla x_j,\nabla^2 x_k)\\
                 &=0,
             \end{aligned}
@@ -694,8 +580,259 @@ Now the positive mass theorem follows as corollary:
 \section{Extending to asymptotically flat initial data half-sets}
 
 
+\section{An example calculation}\label{sec:example}
+In the following, we consider harmonic functions on some concrete example manifolds and also (numerically) compute the actual lower bound for the mass given by our result. 
 
 
+\subsection{Introducing some different Schwarzschild half-spaces}
+In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_{m,+} \) (which has mass \( m/2 \)). There are many other, less symmetric half-spaces resulting from the full Schwarzschild space. One possibility is
+\begin{equation*}
+    M_{m,\geq a}=\Set{x\in \reals^3\given x_3\geq a}
+\end{equation*}
+for some \( a>0 \), equipped with the same metric \( g=\omega^4\cdot \delta \) as the normal Schwarzschild space. We also identify \( M_{m,+} \) with \( M_{m,\geq 0} \). 
+
+
+Note that \( g_m=\omega^4 \delta \) is just the Euclidean metric multiplied by a strictly positive function. Metrics that are related in such a way are called \emph{conformal} (since there is a \emph{conformal transformation}, \ie an angle preserving map, between the manifolds \( (M_{m,+},g_m) \) and \( (M_{m,+},\delta) \)).
+
+It is then easy to see that for both \( M_{m,+} \) and \( M_{m,\geq a} \) the mass \cref{def:half_space_mass} gets no contribution from the integral over \( g_{\alpha 3}=0 \). The other part of the mass then is then the same for \( M_{m,+} \) and all the \( M_{m,\geq a} \) (\( g_{ij,k} \) is of order \( \bigo{r^{-\tau-1}} \) and thus the difference between the integrals, given by an integral over a piece approaching \( \sphere^1_r\times \interval{0}{a} \), is \( 0 \) in the limit \( r\to \infty \)). In particular, the mass of \( M_{m,\geq a} \) is the same as the mass of \( M_{m,+} \), \ie \( m/2 \).
+
+We will see in the Lemma below that the horizon boundary of \( M_{m,+} \) is given in our coordinates by \( \Sigma=\Set{x\in \reals^3_+\given \abs{x}=m/2} \). In fact, this space is just the exterior region of some bigger manifold, which includes some of the interior of the horizon and will then also have smooth boundary as required in \cref{def:asymptotically_flat_half_space} (which is not the case for \( M_{m,+} \)). Consequently, we should actually consider \( \Sigma \) to not be part of the non-compact boundary \( \boundary{M_{m,+}} \). 
+\newcommand{\schwarzschildboundary}{\widetilde{\boundary{M_{m,+}}}}
+\newcommand{\modifiedschwarzschildboundary}{\boundary{M_{m,\geq a}}}
+ To avoid confusion, we will denote this by \( \schwarzschildboundary\definedas \closure{\boundary{M_{m,+}}\setminus \Sigma} \).
+
+
+\begin{lemma}\label{lem:schwarzschild_spaces_are_asymptotically_flat}
+    The boundary \( \boundary{} \) has positive mean curvature for \( a>0\). Similarly, \( \schwarzschildboundary \) has zero mean curvature (in particular it is non-negative).
+
+    \( \Sigma \) is a free horizon boundary components of \( M_{m,+} \) (\ie has zero mean curvature and is orthogonal to \( \schwarzschildboundary \)). 
+\end{lemma}
+We already know the mean curvature of these different surfaces when considered as surfaces under the background metric \( \delta \). It will thus be helpful to find a formula for how the mean curvature changes under a conformal change of metric. We delegate the details of this to \cref{sec:conformal_changes_of_metric}.
+\begin{proof}
+    Let \( f=\Ln{\omega^2} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
+    \begin{equation*}
+        H_{g}=\frac{1}{\omega^2}(H_{\delta}+2 g(\grad f,n)),
+    \end{equation*}'
+    where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n \) is the normal vector to the surface used to compute the mean curvature.
+
+    We can compute
+    \begin{align*}
+        &\nabla_i f\begin{aligned}[t]
+            &=\partial_i f\\
+            &=\frac{1}{\omega^2}\cdot2 \omega\cdot \partial_i \omega\\
+            &=-\frac{2}{\omega}\cdot \frac{m x_i}{2\abs{x}^3}.
+        \end{aligned}\\
+        \implies &(\grad f)^i\begin{aligned}[t]
+            &=\nabla^i f\\
+            &=g^{ij}\nabla_j f\\
+            &=-\frac{1}{\omega^4}\cdot \frac{2}{\omega}\cdot \frac{m x_i}{2\abs{x}^3}\\
+            &=-\frac{m x_i}{\abs{x}^3 \omega^5}.
+        \end{aligned}
+    \end{align*}
+    
+    Note that the outward pointing normal vector \( \nu \) to \( \schwarzschildboundary \) is \( -\partial_3/\omega^2 \).  We can then calculate
+    \begin{equation*}
+        g(\grad f,\nu)=\omega^4\cdot \frac{m}{\abs{x}^3\cdot \omega^7}x_3=\frac{m}{\abs{x}^3\cdot \omega^3},
+    \end{equation*}
+    and thus (since the mean curvature under \( \delta \) of both \( \schwarzschildboundary \) and \( \modifiedschwarzschildboundary \) is clearly zero)
+    \begin{equation*}
+        H_g=\frac{2m}{\abs{x}^3\cdot \omega^3}x_3.
+    \end{equation*}
+    In particular, on \( \schwarzschildboundary \) we have \( H_g=0 \) (since there \( x_3=0 \)) and on \( \modifiedschwarzschildboundary \) (for \( a>0 \)) we have \( H_g>0 \) (since there \( x_3>0 \)).
+
+    Similarly, the normal vector \( n_\Sigma \) to \( \Sigma \) pointing out of our manifold is
+    \begin{equation*}
+        n_\Sigma =-\frac{1}{\omega^2\cdot \abs{x}} \begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix},
+    \end{equation*}
+    and thus
+    \begin{equation*}
+        g(\grad f,n_\Sigma)=\omega^4\cdot \frac{\abs{x}^2\cdot m}{\omega^5\abs{x}^4}=\frac{m}{\abs{x}^2\cdot \omega}\explain{\abs{x}=m/2}{=}2m.
+    \end{equation*}
+
+    On the other hand, the mean curvature of a sphere of radius \( r \) in \( \reals^3 \) is (under our definition and with respect to our normal vector) \( -\frac{2}{r} \). Thus for \( \Sigma \) we have
+    \begin{equation*}
+        H_g=\frac{1}{\omega^2}\cdot \p[\Bigg]{-\frac{2}{m/2}+4m}=0.
+    \end{equation*}
+
+    Lastly, since angles under \( g \) and \( \delta \) are the same, \( \Sigma \)and \( M_{m,+} \) are surely orthogonal. 
+\end{proof}
+
+\begin{remark}
+    We could also define \( M_{m,\geq a} \) for \( a<0 \), but then the mean curvature of the relevant portion of \( \modifiedschwarzschildboundary \) is negative and the positive mass theorem does not apply. Thus we are only interested in \( a\geq 0 \).
+\end{remark}
+\subsection{Finding the asymptotically linear harmonic coordinates}
+
+
+We can reduce the Laplacian \( \laplacian_g \) for a metric conformally euclidean metric \( g \) to \( \laplacian_{\delta} \):
+\begin{lemma}\label{lem:laplacian_on_schwarzschild}
+    In the above notation, we have on \( \reals^3\setminus \zeroset \)
+    \begin{equation*}
+        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u).
+    \end{equation*}
+\end{lemma}
+\begin{remark}
+    This formula is specific to our case, where in particular \( M_{m,\geq a} \) and \( M_{m,+} \) have zero scalar curvature. In general the above conformal invariance is fulfilled not by \( \laplacian_g \) but by the conformal Laplacian \( L_g=\laplacian_g-\frac{n-2}{4(n-1)} \) (see also \cite[Definition 3]{curryIntroductionConformalGeometry2015}).
+\end{remark}
+\begin{proof}[Proof of \Cref{lem:laplacian_on_schwarzschild}]
+    Note first that \( \laplacian_\delta \omega=0 \) on \( \reals^3\setminus \zeroset \). Using \cref{lem:laplacian_in_terms_of_metric_determinant}, we then obtain
+    \begin{equation*}
+        \begin{aligned}[t]
+            \laplacian_g(u)\begin{aligned}[t]
+                &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b u)\\
+                &=\frac{1}{\omega^6}\partial_a(\omega^{2}\cdot \delta^{ab} \partial_b u)\\
+                &=\frac{1}{\omega^6}\delta^{ab}\partial_a(\omega^2 \partial_b(\omega\cdot u))\\
+                &=\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega \partial_b u)+\partial_a \omega\cdot \partial_b u)\\
+                &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)
+                &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
+                &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
+                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u).
+            \end{aligned}
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+Thus, finding harmonic functions \( u_i \) under the metric \( g \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) under the euclidean metric. For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics,
+\begin{equation*}
+    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \tilde{u}^k_{i,\ell} \p*{r^\ell Y^k_{\ell}(\theta,\varphi)+\sum_{\ell=-\infty}^{\ell=-1}+ \tilde{u}^k_{i,-\ell-1}\cdot r^{-\ell-1}Y^k_{\ell}(\theta,\varphi)},
+\end{equation*}
+where \( \tilde{u}^k_{i,\ell} \) are real coefficients and \( Y^k_{\ell} \) the spherical harmonics.
+% \begin{equation*}
+%     Y^k_{\ell}(\theta,\varphi)=N^k_\ell P^k_{\ell}(\Cos{\theta})e^{im\varphi},
+% \end{equation*}
+% where \( P^k_{\ell} \) are the associated Legendre polynomials.
+
+We want our \( u_i \) to be asymptotic to the asymptotically flat coordinates \( x_i \). A necessary condition is in particular that (see beginning of \cref{sec:existence_and_uniqueness} and the definition of the weighted Hölder space in \cite[Section 3]{almarazPositiveMassTheorem2016})
+\begin{equation*}\label{eq:weakly_asymptotically_linear}
+    \sup_M \abs{\nabla_j u_i-x_i} \abs{x}^{1-\tau+\varepsilon}<\infty
+\end{equation*}
+for all \( i,j \) and any \( \varepsilon>0 \). Note that for \( M_g \) the strongest possible choice for the asymptotic falloff parameter \( \tau \) is \( \tau=1 \) (compare \cref{eq:def_asymptotically_flat}).Thus for \( j=0 \) in \cref{eq:weakly_asymptotically_linear} we have \( \sup_M \abs{u_i-x_i}\cdot \abs{x}^\varepsilon<\infty \), \ie \( u_i-x_i=\bigo{\abs{x}^0} \). Then for \( \tilde{u}_i \) this implies
+\begin{equation*}
+    \begin{aligned}[t]
+        (\tilde{u}_i-x_i)&=u_i\cdot (1+m/2\abs{x})-x_i\\
+        &=(u_i-x_i)-m\frac{m\cdot x_i}{2\abs{x}}\\
+        &=\bigo{\abs{x}^0}.
+    \end{aligned}
+\end{equation*}
+
+Hence we can conclude for the expansion in terms of solid harmonics, that \( \tilde{u}^k_{i,\ell}=0 \) for all \( \ell>1 \) and that
+\begin{equation}
+    \sum_{k=-1}^1 \tilde{u}^k_{i,1}\cdot r \cdot Y^k_l(\theta,\varphi)=x_i.\label{eq:schwarzschld_harmonic_linear_part}
+\end{equation}
+
+It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the boundary conditions on the \( u_i \) are satisfied. We will treat the cases \( a=0 \) and \( a>0 \) separately. Note that while we are interested in determining all the \( u_i \) for \( a=0 \) (so that we can look at the resulting coordinate system), for \( a>0 \) we will not go this extra effort and instead only determine \( u_3 \).
+\begin{description}
+    \item[\( a=0 \):] 
+    Recall from the proof of \cref{lem:schwarzschild_spaces_are_asymptotically_flat} that \( \partial_r \) is orthogonal to \( \Sigma \). The Neumann boundary condition on \( \Sigma \) then becomes
+    \begin{align*}
+        &0\begin{aligned}[t]
+            &=\evaluateat{\partial_{r} (\tilde{u}_i(r,\theta,\varphi)/\omega)}{r=m/2}\\
+            &=\evaluateat{\frac{2(r(m+2r)\partial_r \tilde{u}_i(r,\theta,\varphi)+m\cdot \tilde{u}_i(r,\theta,\varphi))}{(m+2r)^2}}{r=m/2}\\
+            &=\frac{m\partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)}{2m}
+        \end{aligned}\\
+        \implies &0\begin{aligned}[t]
+            &=m \partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)\\
+            &=\sum_{\ell=0}^\infty \sum_{m=-\ell}^\ell  Y_{\ell}^k(\theta,\varphi)\cdot  \begin{aligned}[t]
+                [&\tilde{u}_{i,\ell}^k\cdot ((m/2)^\ell+m\cdot \ell\cdot (m/2)^{\ell-1})\\
+                &+\tilde{u}^k_{i,-\ell-1}((m/2)^{-\ell-1}+m\cdot (-\ell-1)\cdot (m/2)^{-\ell-2})]
+            \end{aligned}
+        \end{aligned}\\
+        \explain{\text{\( Y_{\ell}^k \) are linearly independent}}{\implies} 0&=Y^m_{\ell}\quad \text{or}\quad \tilde{u}_{i,\ell}^k\cdot (m/2)^\ell\cdot (1+2\ell)-\tilde{u}^k_{i,-\ell-1}\cdot (m/2)^{-\ell-1}(1+2\ell).
+    \end{align*}
+    Since \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell>1 \) we see also that \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell< -2 \). We further have
+    \begin{align*}
+        \tilde{u}^0_{i,-1}&=\frac{m}{2}\tilde{u}_{i,0}^0,\\
+        \sum_{k=-1}^{1}\tilde{u}^k_{i,-2}Y^k_1(\theta,\varphi)&\begin{aligned}[t]
+            &=\frac{3m/2}{3\cdot 4/m^2}\sum_{k=-1}^{1}\tilde{u}^k_{i,1}Y^k_1(\theta,\varphi)\\
+            &\explain{\cref{eq:schwarzschld_harmonic_linear_part}}{=}\frac{m^3}{8}\cdot \frac{x_i}{r}.
+        \end{aligned}
+    \end{align*}
+    In particular our solution so far looks like
+    \begin{equation*}
+        \tilde{u}_i=x_i-\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i+\frac{C_i\cdot m}{2\cdot r}=x_i-\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i\cdot \omega.
+    \end{equation*}
+    
+    For \( i=3 \) the Dirichlet boundary condition \( u_3=0 \) (and thus also \( \tilde{u}_3=\omega\cdot u_3=0 \)) on \( \schwarzschildboundary \) (where \( x_3=0 \)) then gives \( C_3=0 \). For \( i=1,2 \) the choice of \( C_i \) is free and we choose \( C_1=C_2=0 \). We can check that the Neumann boundary condition on \( \schwarzschildboundary \) for these coordinates (we use \( \alpha=1,2 \) instead of \( i \) to make clear that we do not consider \( i=3 \)) is fulfilled:
+    \begin{equation*}
+        \partial_\nu (\tilde{u}_{\alpha}/\omega)\begin{aligned}[t]
+            &=x_\alpha\cdot \partial_\nu (1/\omega)-\frac{m^3}{8}\cdot x_\alpha \cdot \partial_\nu(1/(r^3\cdot \omega))\\
+            &=0
+        \end{aligned}
+    \end{equation*}
+    Here we have for the first equality used that \( \partial_\nu x_\alpha=0 \). For the second equality note that both expressions in the derivatives with respect to \( \nu \) only depended on \( r \), but 
+    \begin{equation*}
+        \partial_\nu r=\evaluateat{\partial_{x_3} \sqrt{x_1^2+x_2^2+x_3^2}}{x_3=0}=0.
+    \end{equation*}
+
+    We thus have for all \( i=1,2,3 \)
+    \begin{equation*}
+        \tilde{u}_i=x_i\cdot \p[\Big]{1-\frac{m^3}{8r^3}}.
+    \end{equation*}
+    \item[\( a>0 \):] Here we only have to consider the boundary conditions on \( \modifiedschwarzschildboundary \). To make this easier to work with we shift \( u_3 \) such that \( u_3=a \) on \( \modifiedschwarzschildboundary \) (no arguments in this thesis require the boundary to be anything more than a level set, we just normally use \( u_3=0 \) on the boundary for convenience).
+    
+    For \( \tilde{u}_3 \) this then yields (where \( C \) is some constant)
+    \begin{align*}
+        &\begin{aligned}[t]
+            a\cdot \omega&=\tilde{u}_3(a/\Cos{\theta},\theta,\varphi)\\
+            &=\evaluateat{x_3}{x_3=a}+C+\sum_{\ell=0}^{\infty}\tilde{u}_{3,\ell}^m a^{-\ell-1}\cdot (\Cos{\theta})^{\ell+1}\cdot Y^m_{\ell}(\theta,\varphi)
+        \end{aligned}\\
+        \implies &\frac{m}{2}\cdot \Cos{\theta}=C+\sum_{\ell=0}^{\infty}\tilde{u}_{3,\ell}^m a^{-\ell-1}\cdot (\Cos{\theta})^{\ell+1}\cdot Y^m_{\ell}(\theta,\varphi).
+    \end{align*}
+    It is then easy to guess the solution \( C=0 \) and \( \tilde{u}_{3,-1}^0\cdot Y_0^0(\theta,\varphi)=\frac{m}{2}\cdot a \), \( \tilde{u}_{3,\ell}^m=0 \) for \( \ell< -1 \), which gives
+    \begin{equation*}
+        \tilde{u}_3=x_3+\frac{m\cdot a}{2 r}.
+    \end{equation*}
+
+    For \( u_1 \) and \( u_2 \), finding a solution for the Neumann boundary condition on \( \modifiedschwarzschildboundary \) gets a lot more involved. \( u_3 \) suffices for calculating the lower bound in \cref{thm:main_result}, and thus we do not deal with \( u_1 \) and \( u_2 \) here.
+\end{description}
+\subsection{Computing the lower bound}
+We can now compute the lower bound for \( \mass{M_{m,\geq a}}{g_m} \) given in \cref{thm:main_result}. For this we use the Python library \textsc{Gravipy}. All the calculations are contained in a Jupyter notebook \cite{fischerhenryrubenHarmonicFunctionMethod2023}. There is both \href{https://gitlab.gwdg.de/henryruben.fischer/bachelor-thesis-harmonic-functions-and-mass-of-asymptotically-flat-half-spaces/-/blob/master/computations_and_graphs/computations_and_graphs.ipynb{a repository on the GWDG GitLab}}, as well as a possibility to run the notebook online at the \href{https://jupyter-cloud.gwdg.de/jhub/hub/user-redirect/lab/tree/bachelors-thesis-harmonic-functions-mass-asymptotically-flat-half-spaces/computations_and_graphs.ipynb}{GWDG Jupyter Cloud}. In the GitLab repository one can also find a simple Python script that will run the same computations and output the same values and graphs.
+
+For \( m=1 \) and our example \( M_{m,+}=M_{m,\geq 0} \) we get a lower bound of \( 0.33 \) with an estimated absolute error of \( 0.14 \). The actual mass of \( M_{m,+} \) is \( m/2=1/2 \). The error term here is large, since the integrand of the integral over \( M \) has a singularity near the intersection of the \( x_3 \)-axis with the horizon. We thus cannot make strong statements here about how good the lower bound is.
+
+For the modified example \( M_{m,\geq a} \) for \( a>0 \) and \( m=1 \), the actual mass is also \( m/2 \) as noted at the beginning of this section. We can compute the lower bound for different values of \( a \), for the results see \cref{fig:lower_bounds_for_different_values_of_a}. In particular note that the lower bound is consistently very near the actual mass of \( 1/2 \), where the contribution to the lower bound from the integral over the boundary increases as the contribution from the integral over \( M_{m,\geq a} \) decreases for higher \( a \). 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figures/lower_bounds_for_different_values_of_a.png}
+    \caption{}
+    \label{fig:lower_bounds_for_different_values_of_a}
+\end{figure}
+
+Thus at least in this very special case (conformally euclidean, no horizon boundary), the lower bound from our main result \cref{thm:main_result} seems to be quite strong. We might even have equality in \cref{eq:main_result} for this case, but our purely numerical calculations do not allow us to make a judgement on this one way or another.
+
+\subsection{Plotting the harmonic level sets}
+Using the same Jupyter notebook \parencite{fischerhenryrubenHarmonicFunctionMethod2023} as before, we also generate some plots of the level sets of \( u_2 \) (which look the same as those for \( u_1 \), just rotated) and of \( u_3 \) for \( M_{m,+} \) (see \cref{fig:level_sets_unmodified}) and of just \( x_3 \) for \( M_{m,\geq a} \) (but here for different \( a \)) (see \cref{fig:level_sets_modified})
+
+Note that the method of plotting implicit surfaces we use here is susceptible to rounding errors and thus sometimes the level set if \( u_3 \) on \( M_{m,\geq a} \) corresponding to the boundary of the manifold is rendered with some slight imperfections (the level set should look flat in our coordinates). We can however symbolically verify even within the Jupyter notebook that in fact the boundary of the half-space is a level set.
+
+These plots do not seem to provide much more insight into the harmonic function method, though they do help in visualizing in particular how the boundary conditions (both asymptotic and on horizon and noncompact boundary) get fulfilled.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/level_sets_u2_unmodified.png}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/level_sets_u3_unmodified.png}
+    \end{subfigure}
+    \label{fig:level_sets_unmodified}
+    \caption{Level sets of harmonic coordinates \( u_i \) on \( M_{m,+} \). Note that for better visibility of any curvature, the height of points on the surfaces is also visualized using color.}
+\end{figure}
+\begin{figure}
+
+
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/level_sets_u3_modified_with_a_0.2.png}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/level_sets_u3_modified_with_a_0.6.png}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/level_sets_u3_modified_with_a_1.png}
+    \end{subfigure}
+    \label{fig:level_sets_modified}
+    \caption{Level sets of \( u_3 \) on \( M_{m,\geq a} \) for different values of \( a \). Note that for better visibility of any curvature, the height of points on the surfaces is also visualized using color.}
+\end{figure}
 
 \newpage
 \appendix
@@ -774,9 +911,9 @@ Now the positive mass theorem follows as corollary:
 \begin{remark}
     Recall that on any manifold, we can always contract one covariant and one contravariant index of a tensor. This is equivalent to taking the trace of the endomorphism \( \tangentspace{p}{M}\to \tangentspace{p}{M} \) given by this \( \sheafsections{\tangentbundle{M}\tensorproduct \cotangentbundle{M}} \) part of the tensor.
     
-    In the presence of a metric, the \emph{musical isomorphism} allows us to raise and lower arbitrary indices and thus contract (originally) covariant with covariant indices and contravariant with contravariant tensors, \ie if we have a tensor \( T_{ij\dotsc} \) we can compute the contraction \( \gtrace{g}+{T}_{\dotsc}=g^{ij}T_{ij\dotsc} \). This is equivalent to choosing an orthonormal basis \( X_i \) and dual basis \( X^i \) and evaluating
+    In the presence of a metric, the \emph{musical isomorphism} allows us to raise and lower arbitrary indices and thus contract (originally) covariant with covariant indices and contravariant with contravariant tensors, \ie if we have a tensor \( T_{ij\dotsc} \) we can compute the contraction \( \gtrace+{g}{T}_{\dotsc}=g^{ij}T_{ij\dotsc} \). This is equivalent to choosing an orthonormal basis \( X_i \) and dual basis \( X^i \) and evaluating
     \begin{equation*}
-        \gtrace{g}+{T}(\cdots)=\sum_{i}T(X_i,X_i,\cdots).
+        \gtrace+{g}{T}(\cdots)=\sum_{i}T(X_i,X_i,\cdots).
     \end{equation*}
 \end{remark}
 
@@ -857,10 +994,10 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
             \Gamma^{a}_{bc} = \Gamma^a_{cb}.
         \end{equation*}
     \end{enumerate}
-    There always exists a unique Levi-Civita connection on \( (M,g) \). Its coefficients in coordinates are
-    \begin{equation*}
-        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).
-    \end{equation*}
+    There always exists a unique Levi-Civita connection on \( (M,g) \). Its coefficients in coordinates are (this is also called the Koszul formula)
+    \begin{equation}
+        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).\label{eq:koszul_formula}
+    \end{equation}
 \end{theorem}
 
 \begin{definition}
@@ -1006,21 +1143,28 @@ Note that although \( \Mconnection \) is not a tensor (\ie it depends on the beh
 \end{definition}
 If \( \Sigma \) is an orientable hypersurface of \( M \), we can choose a normal direction \( \nu \) (if \( \Sigma \) has an interior and exterior, we typically implicitly choose \( \nu \) to be the outward normal). Then we define
 \begin{equation*}
-    A(X,Y)\definedas g(\mathbf{A(X,Y)},-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace{\gamma}+{A}.
+    A(X,Y)\definedas g(\mathbf{A}(X,Y),-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace{\gamma}+{A}.\label{eq:def_mean_curvature}
 \end{equation*}
 We also call \( A \) the second fundamental form and \( H \) the mean curvature. Note that we have
 \begin{equation*}
     A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu).
 \end{equation*}
-\begin{remark}
-    With this definition, the mean curvature of a twodimensional surface is the sum of the mean curvatures, not the mean. The definition of the mean curvature as
+This in particular implies that
+\begin{equation*}
+    H=\div_g \nu,
+\end{equation*}
+if we extend \( \nu \) to a normal vector field in a neighborhood of \( \Sigma \). To see this, note that \( 0=\nabla_\nu(1)=\nabla_{\nu}(g(\nu,\nu)) \) implies \( g(\nu,\nabla_\nu \nu)=0 \).
+\begin{remark}\label{rem:mean_curvature_peculiarities}
+    With this definition, the mean curvature of a twodimensional surface is the sum of the principal curvatures, not the mean. Another common definition of the mean curvature is
     \begin{equation*}
-        H=\frac{1}{n}\gtrace{\gamma}+{A},
+        H=\frac{1}{n-1}\gtrace+{\gamma}{A},
     \end{equation*}
-    where \( n \) is the dimension of the manifold, is also common, but most of our references use the same definition as we do.
+    where \( n \) is the dimension of the manifold \( M \), but most of our references use the same definition as we do.
+
+    Note also that we follow in particular \cite{almarazPositiveMassTheorem2016} in choosing a sign convention for \( A \) and \( H \) opposite to that of their classical definition (given some normal \( \nu \)). See also \cite[Remark 2.1]{leeGeometricRelativity2019} for why this choice is usually made.
 \end{remark}
 
-The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is the main fact we will require to deal with calculations on the noncompact boundary of our objects of interest (asymptotically flat half-spaces):
+The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is the main fact we will require to deal with calculations on the non-compact boundary of our objects of interest (asymptotically flat half-spaces):
 \begin{fact}\label{fact:laplacian_and_hypersurface_laplacian}
     Given a hypersurface \( \Sigma \) in \( (M,g) \) and a smooth function \( f \) on \( M \),
     \begin{equation*}
@@ -1043,5 +1187,67 @@ The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is
     \end{align*}
 \end{proof}
 }
+\section{The mean curvature under conformal changes of metric}\label{sec:conformal_changes_of_metric}
+In \cref{sec:example} we consider the Schwarzschild half-space as an example. In that context also have to compute the mean curvature of some surfaces. But, since the Schwarzschild metric is conformal to the euclidean metric, we are able to simplify our calculations in \cref{sec:example} using a formula derived below. For a more in depth treatment of conformal transformations, see \cite{curryIntroductionConformalGeometry2015}.
+
+
+In the following, let \( (M,\bar{g}) \) always be conformal to \( (M,g) \), \ie let \( \bar{g}=\Omega^2 g \) for some real function \( \Omega \). Denote all quantities with a bar (\eg \( \bar{\nabla},\bar{R},\bar{H} \)) when they are computed with respect to \( \bar{g} \) and without a bar when they are computed with respect to \( g \). Let \( \Sigma \) be some hypersurface of \( M \) with normal vectors \( \nu,\bar{\nu} \). Second fundamental forms \( A,\bar{A} \) and mean curvatures \( H,\bar{H} \) will follow the definitions from \cref{eq:def_mean_curvature}.
+
+\begin{lemma}\label{lem:conformal_change_connection}
+    \begin{equation*}
+        \bar{\nabla}_X Y =\nabla_X Y+X(f)\cdot Y+Y(f)\cdot X-g(X,Y)\grad{f}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    We will be using the Koszul formula \cref{eq:koszul_formula},
+    \begin{equation*}
+        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).
+    \end{equation*}
+    In particular we note that (since \( \bar{g}^{ad}=e^{-2f}g^{ad} \))
+    \begin{equation*}
+        \bar{\Gamma}^c_{ab}\begin{aligned}[t]
+            &=\frac{1}{2}e^{-2f}g^{cd}(\partial_a(e^{2f}g_{bd})+\partial_b(e^{2f}g_{ad})-\partial_d(e^{2f}g_{ab}))\\
+            &=\Gamma^c_{ab}+\delta^c_a\partial_b f +\delta^c_b\partial_a f-g_{ab}\nabla^c f.
+        \end{aligned}
+    \end{equation*}
+    Then
+    \begin{equation*}
+        \begin{aligned}[t]
+            (\bar{\nabla}_X Y)^c&=X^a \bar{\nabla}_a Y^c\\
+            &=X^a \partial_a Y^c + X^a\bar{\Gamma}_{ab}^c  Y^b\\
+            &=X^a \partial_a Y^c +X^a \Gamma_{ab}^c Y^b+X^c Y^b \partial_b f+ Y^c X^a \partial_a f-\nabla^c f g_{ab}X^a Y^b\\
+            &=(\nabla_X Y)^c+X^c\cdot Y(f)+Y^c\cdot X(f)-\nabla^c f \cdot g(X,Y),
+        \end{aligned}
+    \end{equation*}
+    as required.
+\end{proof}
+\begin{lemma}\label{lem:mean_curvature_under_conformal_transform}
+    \begin{equation*}
+        \bar{H}=e^{-f}(H+(n-1) g(\grad f,\nu)).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let \( e_1,\dotsc,e_n \) be an orthonormal basis at some tangent space under \( g \) such that \( e_1,\dotsc,e_{n-1}\in \tangentspace{\Sigma} \), then \( \bar{e}_a=e^{-f}e_a \) is such an orthonormal basis under \( \bar{g} \). Similarly we have \( \bar{\nu}=e^{-f}\nu \). 
+
+    We can then compute     
+    \begin{equation*}
+        \bar{A}(X,Y)\begin{aligned}[t]
+            &=\bar{A}(X,Y)\\
+            &=\bar{g}(\bar{\nabla}_X Y,-e^{-f}\nu)\\
+            &=e^{f}[A(X,Y)+X(f) g(Y,-\nu)+Y(f) g(X,-\nu)-g(\nabla f,-\nu)\cdot g(X,Y)]
+        \end{aligned}
+    \end{equation*}
+    This then leads directly to
+    \begin{equation*}
+        \bar{H}\begin{aligned}[t]
+            &=\sum_{\alpha=1}^{n-1}\bar{A}(\bar{e}_\alpha,\bar{e_\alpha})\\
+            &=\sum_{\alpha=1}^{n-1}e^{-2f}\bar{A}(e_\alpha,e_\alpha)\\
+            &\explain[big]{g(e_{\alpha},\nu)=0}{=}\sum_{\alpha=1}^{n-1}e^{-f}(A(e_i,e_i)+0+0-g(\grad f,-\nu)\cdot 1)\\
+            &=e^{-f}(H+(n-1)\cdot g(\grad f,\nu)).
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+% \section{Python code for computations and graphs}
+% \lstinputlisting[language=Python,frame=lines,caption={Numerical computation of the mass lower bound for the Schwarzschild examples},label={lst:computations_and_graph_for_example},basicstyle=\footnotesize]{computations_and_graphs/computations_and_graphs.py}
 \printbibliography
 \end{document}
