@@ -2,7 +2,7 @@
 # # The harmonic function method and the mass of some Schwarzschild half-spaces - Computations and Graphs
 
 # %% [markdown]
-# In this Jupyter Notebook, we will do two main things for our examples from Section 9:
+# In this Jupyter Notebook, we will do two main things for our examples from Section 8:
 # - Compute the lower bound given by Theorem 3.9
 # - Plot the level sets and function values of the harmonic coordinates
 
@@ -158,7 +158,7 @@ lower_bound_integrand_over_M=1/(16*sympy.pi)*(abs_hessian_u3**2/abs_nabla_u3)*om
 lower_bound_modified_integrand_over_M=1/(16*sympy.pi)*(abs_hessian_u3_modified**2/abs_nabla_u3_modified)*omega**6
 
 # %% [markdown]
-# For the boundary term we first compute the mean curvature (observe that the result agrees with our computation in Section 9)
+# For the boundary term we first compute the mean curvature (observe that the result agrees with our computation in Section 8)
 
 # %%
 normal_vector_to_noncompact_boundary = Tensor(r"\nu",1,g)
