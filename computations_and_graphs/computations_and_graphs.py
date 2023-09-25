@@ -319,7 +319,7 @@ def calculate_lower_bound_modified(a_value,m_value):
 # Computing the values for the plot might take a while
 
 # %%
-a_values = np.array([0.5,1,2,5,10])
+a_values = np.array([0.5,1,2,5,10,100])
 m_value = 1
 total_lower_bounds,total_errors,lower_bounds_M, errors_M, lower_bounds_boundary, errors_boundary = np.fromiter(
   (calculate_lower_bound_modified(a_value,m_value) for a_value in a_values),
