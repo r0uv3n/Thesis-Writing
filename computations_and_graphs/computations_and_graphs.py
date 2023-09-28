@@ -12,24 +12,23 @@
 # %%
 # This file is present both as .ipynb as well as .py. For the latter, the `# %%` comment denote borders between cells so the Python file can be treated like an Jupyter notebook as well. The function below checks if the Python file is running inside a Jupyter Notebook
 def is_notebook() -> bool:
-    try:
-        shell = get_ipython().__class__.__name__
-        if shell in ('ZMQInteractiveShell','XPythonShell'):
-            return True   # Jupyter notebook or qtconsole
-        elif shell == 'TerminalInteractiveShell':
-            return False  # Terminal running IPython
-        else:
-            return False  # Other type (?)
-    except NameError:
-        return False      # Probably standard Python interpreter
+  try:
+    shell = get_ipython().__class__.__name__ # type: ignore[reportUndefinedVariable]
+    if shell in ('ZMQInteractiveShell','XPythonShell'):
+        return True   # Jupyter notebook or qtconsole
+    elif shell == 'TerminalInteractiveShell':
+        return False  # Terminal running IPython
+    else:
+        return False  # Other type (?)
+  except NameError:
+    return False      # Probably standard Python interpreter
 
 # %%
 if is_notebook():
-  get_ipython().run_line_magic("pip", "install gravipy matplotlib scikit-image") # this helps if this Notebook is executed from within e.g. jupyter-cloud.gwdg.de
+  get_ipython().run_line_magic("pip", "install gravipy matplotlib scikit-image") # this helps if this Notebook is executed from within e.g. jupyter-cloud.gwdg.de  # type: ignore[reportUndefinedVariable]
 
 # %%
 from gravipy.tensorial import * # import GraviPy package
-import inspect
 import sympy
 import numpy as np
 import scipy
@@ -55,15 +54,18 @@ else:
 # ### Setting up the manifold, metric, etc.
 
 # %%
-x1,x2,x3,m = symbols("x_1 x_2 x_3 m")
+x1,x2 = symbols("x_1 x_2", real=True)
+x3 = symbols("x_3", nonnegative=True)
+m = symbols("m",positive=True)
+
 coords=[x1,x2,x3]
-pos = Coordinates('\chi',[x1,x2,x3])
+pos = Coordinates(r'\chi',[x1,x2,x3])
 R=sympy.sqrt(x1**2+x2**2+x3**2)
 omega=(1+m/(2*R))
 # metric = sympy.MatrixSymbol("g",3,3)
 metric = omega**4*sympy.eye(3)
 g = MetricTensor('g', pos, metric)
-Ga = Christoffel('\Gamma', g)
+Ga = Christoffel(r'\Gamma', g)
 
 # %%
 # metric of hypersurface
@@ -113,7 +115,7 @@ for x, u in zip(coords,harmonic_coords):
 
 # %%
 a = symbols("a")
-u3_modified = Tensor(f"u_3",0,g)
+u3_modified = Tensor("u_3",0,g)
 
 def u3_modified_method(idxs):
     component = (x3+m*a/(2*R))/omega
@@ -131,6 +133,32 @@ for i,u in enumerate(harmonic_coords):
 
 # %%
 display(Markdown(f"For $M_{{m,\geq a}}$: $\Delta u_3={laplacian(u3_modified).simplify()}$"))
+
+# %% [markdown]
+# ### Are there any critical points?
+
+# %% [markdown]
+# It is interesting to consider whether there are any critical points of $u_3$ to be able to discuss how strong the lower bound given by our technique is (see Remark 4.3).
+
+# %% [markdown]
+# ##### For $M_{m,+}$ there is at least one (at (0,0,m/2)):
+
+# %%
+display(Markdown(f"On $M_{{m,+}}$, there is at least one critical point: At $(0,0,m/2)$ we have $\operatorname{{grad}} u={sympy.latex(sympy.Array([u3.covariantD(i) for i in range(1,4)]).subs(((x1,0),(x2,0),(x3,m/2))))}$"))
+
+# %% [markdown]
+# ##### For $M_{m,\geq a}$:
+
+# %%
+relevant_derivative = u3_modified.covariantD(3).simplify()
+only_numerator = sympy.fraction(relevant_derivative)[0].expand()
+display(Markdown(f"""On $M_{{m,\geq a}} (for $a>0$), $u_3$ has no critical points! 
+                 
+It suffices to look at the derivative in $x_3$-direction, which is always positive: We have $\partial_3 u_3={sympy.latex(relevant_derivative)}$.
+
+We can ignore the denominator (which is clearly always positive, since $|x|>0$) and just consider the numerator ${sympy.latex(only_numerator)}$.
+
+But $x_3\geq a > 0$ and thus $-2amx_3|x|+4m x_3^2|x| > 0$, and thus we have $\partial_3 u_3>0$."""))
 
 # %% [markdown]
 # ## Computation of the lower bound
@@ -241,7 +269,7 @@ modified_x1range=lambda x3_num,x2_num,m_num,a_num: [0,np.inf]
 modified_x2_boundary_range = [0,np.inf]
 modified_x1_boundary_range = [0,np.inf]
 
-a_value = 1000
+a_value = 10
 
 
 # %% [markdown]
@@ -427,15 +455,15 @@ def plot_implicit_using_marching_cubes(ax,fn,level_set_value=0,bbox=((-2.5,2.5),
     return verts, faces
 
 # %%
-def plot_coordinate_level_sets(coordinate,level_set_values=[0],m_value=1,a_value=0,bbox=((-2.5,2.5),(-2.5,2.5),(-2.5,2.5)),resolution=50):
+def plot_coordinate_level_sets(coordinate,level_set_values=(0),m_value=1,a_value=0,bbox=((-2.5,2.5),(-2.5,2.5),(-2.5,2.5)),resolution=50):
   fn = sympy.lambdify([x1,x2,x3],(coordinate()).subs(((m,m_value),(a,a_value))))
 
   n_plots = len(level_set_values)
   n_cols = min(2,n_plots)
   n_rows = (n_plots+1)//2
 
-  fig = plt.figure(figsize=(10,n_rows*5))
-  fig.suptitle(f"Level sets of ${sympy.latex(coordinate.symbol)}$ on $M_{{{m_value},\!\!\geq {a_value}}}$",fontsize=20)
+  fig = plt.figure(figsize=(10,n_rows*4+1))
+  fig.suptitle(f"Level sets of ${sympy.latex(coordinate.symbol)}$ on $M_{{{m_value},\!\!\geq {a_value}}}$",fontsize=20,y=0,va="top")
 
   axes = fig.subplots(ncols=n_cols,nrows=n_rows,subplot_kw=dict(projection='3d'),squeeze=False)
 
@@ -444,21 +472,22 @@ def plot_coordinate_level_sets(coordinate,level_set_values=[0],m_value=1,a_value
 
   for index, level_set_value in enumerate(level_set_values):
     ax = axes.flatten()[index]
-    ax.set_title(f"${sympy.latex(coordinate.symbol)}={level_set_value:.1f}$",fontsize=16)
+    ax.set_title(f"${sympy.latex(coordinate.symbol)}={level_set_value:.1f}$",fontsize=16,pad=0)
     ax.locator_params(nbins=4)
     
     plot_implicit_using_marching_cubes(ax,fn,level_set_value,bbox=bbox,resolution=resolution)
+  fig.tight_layout(h_pad=5)
   return fig
 
 # %% [markdown]
 # ### Plots for $M_{m,+}=M_{m,\geq 0}$
 
 # %%
-fig=plot_coordinate_level_sets(u3,[0,0.2,0.4,0.6,0.8,1])
+fig=plot_coordinate_level_sets(u3,[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7],bbox=[(-1.5,1.5),(-1.5,1.5),(0,1.5)])
 fig.savefig("../figures/level_sets_u3_unmodified",bbox_inches='tight')
 
 # %%
-plot_coordinate_level_sets(u2,[-0.6,-0.4,-0.2,0,0.2,0.4,0.6],bbox=[(-1,1),(-1,1),(0,1)])
+plot_coordinate_level_sets(u2,[-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1.0],bbox=[(-1.5,1.5),(-1.5,1.5),(0,1.5)])
 plt.savefig("../figures/level_sets_u2_unmodified",bbox_inches="tight")
 
 # %% [markdown]
@@ -466,7 +495,7 @@ plt.savefig("../figures/level_sets_u2_unmodified",bbox_inches="tight")
 
 # %%
 for a_value in [0.2,0.6,1]:
-  fig=plot_coordinate_level_sets(u3_modified,np.array([0,0.2,0.6])+a_value,a_value=a_value,bbox=[(-2.5,2.5),(-2.5,2.5),(0,a_value+2)],resolution=100)
+  fig=plot_coordinate_level_sets(u3_modified,np.array([0,0.2,0.4,0.6])+a_value,a_value=a_value,bbox=[(-2.5,2.5),(-2.5,2.5),(0,a_value+2)],resolution=100)
   fig.savefig(f'../figures/level_sets_u3_modified_with_a_{a_value}.png',bbox_inches='tight')
 
 
