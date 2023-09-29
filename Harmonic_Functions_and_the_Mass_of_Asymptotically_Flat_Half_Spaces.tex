@@ -16,6 +16,11 @@ english,%lockflag%
 \usepackage{listings}
 % \usepackage[toc]{appendix}
 
+% \usepackage[euler-digits,euler-hat-accent]{eulervm}
+% \usepackage{newpxtext}.
+
+
+
 \let\sphere\relax
 \newcommand{\sphere}{\mathbb{S}}
 
@@ -116,7 +121,7 @@ Recently, a new proof involving harmonic functions of the positive mass theorem 
     On \formatdate{15}{6}{2023}, a preprint \cite{batistaHarmonicLevelSet2023} was published on the arXiv, titled \enquote{A harmonic level set proof of a positive mass theorem} by Rondinelle Batista and Levi Lopes de Lima. Batista and de Lima prove the same result while using primarily the same methods as this thesis (the proof of rigidity in this thesis is different and more elementary). I only noticed the arXiv preprint on \formatdate{13}{9}{2023}, after my own proof of \cref{thm:main_result} was already completed and written up. The contents of this thesis were thus developed independently of the work of Batista and de Lima.
 \end{remark}
 
-\subsection{Physical Motivation}
+\subsection{Physical motivation}
 The positive mass theorem was originally motivated by the study of general relativity, but is also (particularly in the so-called time-symmetric or Riemannian case) of independent importance to differential geometry. We will do a quick exposition of both of these perspectives. Physically, a less general version of the positive mass theorem can informally be expressed as the following: 
 
 Consider a static (\ie time-independent) mass distribution \( \rho \) in \( \reals^3 \) that is compactly supported in some finite volume \( V \) (it would suffice if the mass distribution fell off sufficiently quickly towards infinity, but this case is easier to reason about).
@@ -224,7 +229,7 @@ The main result of this thesis is then the following, which will prove \cref{thm
 
 \section{Main basic integral inequality}
 
-The main tool which also motivates our use of harmonic functions is the following integral inequality relating scalar curvature to derivatives of harmonic. The following is adopted from  \cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}, which we change only very slightly (we allow \( \abs{\nabla u}=0 \) on \( P_2 \) as in \cite[Proposition 3.2]{hirschSpacetimeHarmonicFunctions2021}).
+The main tool which also motivates our use of harmonic functions is the following integral inequality relating scalar curvature to derivatives of harmonic functions. The following is adopted from  \cite[Proposition 4.2]{brayHarmonicFunctionsMass2019}, which we change only very slightly (we allow \( \abs{\nabla u}=0 \) on \( P_2 \) as in \cite[Proposition 3.2]{hirschSpacetimeHarmonicFunctions2021}).
 {\newcommand{\maxu}{\bar{u}}
 \newcommand{\minu}{\underline{u}}
 \newcommand{\nonzeroboundary}{\partial_{\neq 0}\Omega}
@@ -508,7 +513,7 @@ Even though we normally only work with a single end, our proof of the existence 
         The argument from \cite[Proposition 3.9]{eichmairDoublingAsymptoticallyFlat2023} extends straightforwardly to also show uniqueness (up to adding constants) for the \( \tilde{x}_i \) on \( M(\Sigma) \).  
     \end{proofenumerate}
 \end{proof}
-\section{Proof of the Mass Lower Bound}
+\section{Proof of the mass lower bound}\label{sec:proof_of_lower_bound}
 We proceed by constructing a proof parallel to \cite[Section 6]{brayHarmonicFunctionsMass2019}.% and \cite[Section 6]{hirschSpacetimeHarmonicFunctions2021}. 
 
 To this end, let \( (M,g) \) be an asymptotically flat half-space and horizon boundary \( \Sigma \) with asymptotically flat harmonic coordinates \( x_1,x_2,x_3 \) as in \cref{prop:existence_and_uniqueness}. Note that from now on we will again consider \( M \) to only have a single end \( \Mend \) and that although \( x_1,x_2,x_3 \) are defined on all of \( M(\Sigma) \) and we call them harmonic coordinates, they are only guaranteed to form a coordinate system in \( \Mend \), \ie for \( \abs{x}>r_0 \) for some \( r_0>0 \).
@@ -790,7 +795,7 @@ Now the positive mass theorem follows as corollary:
 
         Notice that \cref{eq:main_result} (together with \( H\geq 0 \)) directly implies that \( H=0 \). This then allows us to apply \cref{prop:main_inequality} to \( u=x_{\alpha} \) for \( \alpha=1,2 \). We do this by using horizontal half-cylinders (let \( \beta=3-\alpha \) be the other direction with Neumann boundary condition on \( \boundary{M} \)), defining
         \begin{align*}
-            D_L^{\pm}&\definedas\Set{x\in \Mend\given (x_\beta)^2+(x_3)^2\leq L^2,\logicspace x_3\geq 0,\logicspace x_\alpha=\pm L},\\
+            D_L&\definedas\Set{x\in \Mend\given (x_\beta)^2+(x_3)^2\leq L^2,\logicspace x_3\geq 0,\logicspace x_\alpha= L},\\
             T_L&\definedas\Set{x\in \Mend\given (x_\beta)^2+(x_3)^2=L^2,\tau 0\leq x_3,\logicspace -L\leq x_\alpha\leq L},\\
             C_L&\definedas D_L^+\cup T_L \cup D_L^-,\\
             \Omega_L&\definedas \text{ closure of bounded component of } M(\Sigma)\setminus C_L,\\
@@ -838,17 +843,24 @@ Now the positive mass theorem follows as corollary:
 \end{remark}
 
 
-But in fact the absence of critical values of \( u \) already implies that (for large enough \( L \)) all \( S_t^L \) have Euler characteristic \( 1 \). This requires a result from Morse theory which is a direct consequence of \cite[Theorem 3.1]{milnorMorseTheory1973} (which extends without problems to manifolds with boundary, see \eg \cite{borodzikMorseTheoryManifolds2016}):
+But in fact the absence of critical values of \( u \) already implies that (for large enough \( L \)) all \( S_t^L \) have Euler characteristic \( 1 \). To prove this, we will need a result from Morse Theory, namely \cite[Lemma 2-10]{borodzikMorseTheoryManifolds2016} (which is just a generalization of \cite[Theorem 3.1]{milnorMorseTheory1973}). For the convenience of the reader we restate this Lemma (along with requisite definitions) in \cref{sec:morse_theory}. For us this result yields the following:
 \begin{lemma}\label{lem:morse_lemma}
-    Let \( f\maps M\to \reals \) be a smooth function on a manifold \( M \). Let \( a<b \) and suppose that \( \inverse{f}(\interval{a}{b}) \) is compact and contains no critical points. Then \( \inverse{f}(a) \) is diffeomorphic to \( \inverse{f}(b) \). 
+    If, in the notation of \cref{thm:main_result}, the harmonic function \( u \) has no critical points in \( M(\Sigma) \), then all the level sets of \( u \) are diffeomorphic.
 \end{lemma}
-\( x_3 \) is smooth and has no critical points at all, and thus all the \( S_t^L \) for a given \( L \) are diffeomorphic. But for large enough \( L \) we can be sure that \( D_L=S_{t=L}^L \) is just a disk, and thus for these \( L \) all \( S_t^L \) must be diffeomorphic to a disk. The Euler characteristic is invariant under diffeomorphisms and we get \( \chi(S_t^L)=1 \) for large enough \( L \). Thus we have established
+\begin{proof}
+    Note first that \( \Omega_L \) is a cobordism between \( (\boundary{M})_L \) and \( D_L \) in the sense of \cref{def:cobordism} \parencite[Definition 1-1]{borodzikMorseTheoryManifolds2016}, \ie in particular we can write \( \boundary{\Omega_L}=(\boundary{M}_L)\cup D_L\cup Y \) with \( Y\cap (\boundary{M}_L)=\boundary{(\boundary{M})_L} \) and \( Y\cap D_L=\boundary{D_L} \) by setting \( Y=T_L\cup \Sigma \). 
+
+    Now set \( f=u/L \), then \( (\boundary{M})_L=\inverse{f}(0) \) and \( D_L=\inverse{f}(1) \). We further know that \( \grad f \) is tangent to \( \Sigma\subset Y \) and that due to the asymptotic behaviour of \( u \), we surely have \( \tangentspace{y}{Y}\not\subset \ker{\odif{f}} \) for large enough \( L \). Since \( \Sigma \) is open in \( Y \), \cref{lem:realize_harmonic_function_as_morse_function} \parencite[Lemma 1-7]{borodzikMorseTheoryManifolds2016} then implies that there must exist some metric \( h \) on \( \Omega_L \) under which \( \grad f \) is everywhere tangent to \( Y \). Since \( f \) has no critical points at all (and thus all critical points are Morse), \( f \) is in fact a Morse function (as in \cref{def:morse_function}) under this metric \( h \).
+
+    Then applying \cref{lem:morse_function_without_critical_points_level_sets_diffeo} \parencite[Lemma 2-10]{borodzikMorseTheoryManifolds2016} and noting that the level sets of \( f \) and \( u \) are the same immediately yields the claim.
+\end{proof}
+For large enough \( L \) we can be sure that \( D_L=S_{t=L}^L \) is just a disk, and thus for these \( L \) all \( S_t^L \) must be diffeomorphic to a disk. The Euler characteristic is invariant under diffeomorphisms and we get \( \chi(S_t^L)=1 \) for large enough \( L \). Thus we have established
 \begin{theorem}\label{thm:equality_condition}
     If in the notation of \cref{thm:main_result} the harmonic function \( u \) has no critical points in \( M(\Sigma) \), then \cref{eq:main_result} is an equality.
 \end{theorem}
 
 
-Note that \cref{lem:morse_lemma} also implies that for every free and closed horizon boundary component of \( M \), our harmonic function \( u_3 \) must have at least have one (respectively two) critical points (these critical points will be where a level set only touches the horizon boundary at a single point). In particular \cref{thm:equality_condition} cannot apply if \( M \) has any horizon boundary.
+Note that \cref{lem:morse_lemma} also implies that for every free and closed horizon boundary component of \( M \), our harmonic function \( x_3 \) must have at least have one (respectively two) critical points (these critical points will be where a level set of \( u \) only touches the horizon boundary at a single point). In particular \cref{thm:equality_condition} cannot apply if \( M \) has any horizon boundary.
 % \section{Extending to asymptotically flat initial half-data}
 % On asymptotically flat half-data we look at
 % \begin{equation*}
@@ -1009,6 +1021,9 @@ We can reduce the Laplacian \( \laplacian_g \) for a metric conformally euclidea
         \end{aligned}
     \end{equation*}
 \end{proof}
+\begin{remark}
+    In the following we will be denoting our harmonic coordinates by \( u_i \) and will reserve \( x_i \) for the original coordinates. In contrast to \cref{thm:main_result} and \cref{sec:proof_of_lower_bound}, were we used \( u \) to denote the harmonic coordinate asymptotic to \( x_3 \), we will always explicitly refer to this function as \( u_3 \) to avoid confusion.
+\end{remark}
 Thus, finding harmonic functions \( u_i \) under the metric \( g \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) under the euclidean metric. For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics,
 \begin{equation*}
     \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \tilde{u}^k_{i,\ell} \p*{r^\ell Y^k_{\ell}(\theta,\varphi)+\sum_{\ell=-\infty}^{\ell=-1}+ \tilde{u}^k_{i,-\ell-1}\cdot r^{-\ell-1}Y^k_{\ell}(\theta,\varphi)},
@@ -1183,7 +1198,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
 % I want to thank in particular Prof.~Dr.~Thomas~Schick for supervising my thesis, suggesting the very interesting topic and for advising and helping me during the process. Thanks also to Professor Max Wardetzki for agreeing to be my second supervisor.
 \newpage
 \appendix
-\section{Different Exhausting Sequences for Computation of the Mass}
+\section{Different exhausting sequences for computation of the mass}
 \begin{proposition}\label{prop:mass_independent_of_exhausting_sequence}
     Suppose that \( (M,g) \) is an asymptotically flat half space with asymptotically flat coordinates \( x_1,x_2,x_3 \) on \( \Mend \) (fulfilling the conditions of \cref{def:half_space_mass}). Let \( \Set{D_k^3}_{k=1}^{\infty} \) be an exhaustion of \( M \) by closed sets with \( \boundary{D_k}=S_k\cup (D_k\cap \boundary{M}) \), where \( S_k \) is a connected \( 2 \)-dimensional piecewise smooth submanifold of the end \( \Mend \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
     \begin{gather*}
@@ -1224,7 +1239,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
      
     We learn that using the \( S_k \) to compute the mass yields the same result as using coordinate spheres (as we used in our original \cref{def:half_space_mass}).
 \end{proof}
-\section{Basic Riemannian Geometry}\label{sec:basic_riemannian_geometry}
+\section{Basic Riemannian geometry}\label{sec:basic_riemannian_geometry}
 \begin{remark}\label{rem:manifolds_physicists_intuition}
     The following section will require some basic knowledge about manifolds, as \eg taught in \cite{leeIntroductionSmoothManifolds2012}. But in many physics courses a basic understanding / intuition for this topic is developed as well, via talking about different coordinate systems (called \emph{charts} in the language of differential geometry) and how objects transform between them. It should hopefully be possible to follow this introduction, and via that knowledge also the rest of this thesis, with only this \enquote{physicist's understanding of manifolds} and by ignoring any unfamiliar notation.
 
@@ -1694,6 +1709,34 @@ In the following, let \( (M,\bar{g}) \) always be conformal to \( (M,g) \), \ie 
             &=e^{-f}(H+(n-1)\cdot g(\grad f,\nu)).
         \end{aligned}
     \end{equation*}
+\end{proof}
+\subsection{Some facts from morse theory for manifolds with boundary}\label{sec:morse_theory}
+In \cref{sec:condition_for_mass_equality} we consider the half-cylinders \( \Omega_L \) as cobordisms between \( (\boundary{M})_L \) and \( D_L \) and our harmonic coordinate \( u \) (asymptotic to \( x_3 \)) as a Morse function on these cobordisms. For this we require some basic definitions and lemmas from \cite{borodzikMorseTheoryManifolds2016}:
+\begin{definition}[{{\cite[Definition 1.1]{borodzikMorseTheoryManifolds2016}}}]\label{def:cobordism}
+    Let \( \Sigma_0 \) and \( \Sigma_1 \) be compact oriented, \( n \)-dimensional manifolds with nonempty boundaries \( M_0 \) and \( M_1 \). We call \( (\Omega,Y) \) a \emph{cobordism} between \( (\Sigma_0,M_0) \) and \( (\Sigma_1,M_1) \) if \( \Omega \) is a compact oriented \( (n+1) \)-dimensional manifold with boundary \( \boundary{\Omega}=Y\cup \Sigma_0\cup \Sigma_1 \), where \( Y \) is nonempty, \( \Sigma_0\cap \Sigma_1=\emptyset \), and \( Y\cap \Sigma_0=M_0 \), \( Y\cap \Sigma_1=M_1 \).
+\end{definition}
+\begin{definition}[{{\cite[Definition 1.4]{borodzikMorseTheoryManifolds2016}}}]\label{def:morse_function}
+    Let \( f\maps \Omega\to \interval{0}{1}   \) be a smooth function. A critical points \( z \) of \( f \) is called \emph{Morse} if the Hessian of \( f \) at \( z \) is nondegenerate (\ie if there exist \( v,w\in \tangentspace{z}{\Omega} \) such that \( \nabla^2 f(v,w)\neq 0 \)). The function \( f\maps \Omega\to \interval{0}{1} \) is called a \emph{Morse function} if 
+    \begin{itemize}
+        \item \( \inverse{f}(0)=\Sigma_0 \) and \( \inverse{f}(1)=\Sigma_1 \),
+        \item \( f \) has only Morse critical points, and no critical points at all on \( \Sigma_0\cup \Sigma_1 \), and
+        \item \( \grad f \) is everwhere tangent to \( Y \).
+    \end{itemize}
+\end{definition}
+To actually realize \( u \) as a Morse function on \( \Omega_L \) we will then need the following Lemma:
+\begin{lemma}[{{\cite[Lemma 1-7]{borodzikMorseTheoryManifolds2016}}}]\label{lem:realize_harmonic_function_as_morse_function}
+    Let \( \Omega \) be compact and let \( Y\subset \Omega \) be compact as well. Let further \( f\maps \Omega\to \reals \) be a smooth function. Assume that under some metric \( g \) on \( \Omega \) there exists some open set \( U\subset Y \) such that \( \grad_g f \) is tangent to \( U \) at each point in \( U \) and such that for \( y\in Y\setminus U \) we have 
+    \begin{equation*}
+        \tangentspace{y}{Y}\not\subset \ker\odif{f}.
+    \end{equation*}
+    Then, for any open neighborhood \( W\subset \Omega \) of \( Y\setminus U \), there exists a metric \( h \) on \( \Omega \), agreeing with \( g \) on \( \Omega\setminus W \), such that \( \grad_h f \) is everywhere tangent to \( Y \).
+\end{lemma}
+We then can prove in particular that the level sets of our harmonic coordinate \( u \) are homeomorphic if \( u \) has no critical points: 
+\begin{lemma}[{{\cite[Lemma 2-10]{borodzikMorseTheoryManifolds2016}}}]\label{lem:morse_function_without_critical_points_level_sets_diffeo}
+    If \( f \) is a Morse function on a cobordism \( (\Omega,Y) \) between \( (\Sigma_0,M_0) \) and \( (\Sigma_1,M_1) \), then \( (\Omega,Y)\isomorphic (\Sigma_0,M_0)\times \interval{0}{1} \). We can choose the diffeomorphism such that \( \inverse{f}(t) \) is mapped to \( \Sigma_0\times \Set{t} \).
+\end{lemma}
+\begin{proof}[Proof idea]
+    Since \( \grad u \) is nowhere zero and tangent to \( Y \), flowing a level set along the vector field \( -\frac{\grad u}{\abs{\grad u}^2} \) yields a diffeomorphism from the level set to \( (\Sigma_0,M_0) \). These diffeomorphisms of level sets can then be assembled into a diffeomorphism \( (\Omega,Y)\isomorphic (\Sigma_0,M_0)\times \interval{0}{1}  \).
 \end{proof}
 % \section{Python code for computations and graphs}
 % \lstinputlisting[language=Python,frame=lines,caption={Numerical computation of the mass lower bound for the Schwarzschild examples},label={lst:computations_and_graph_for_example},basicstyle=\footnotesize]{computations_and_graphs/computations_and_graphs.py}
