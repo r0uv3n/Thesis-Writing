@@ -25,10 +25,11 @@ Within the Folder `Computations and Graphs`, there is both a Jupyter Notebook `c
   python -m pip install -r computations_and_graphs/requirements.txt
   ```
 
-  3. Run
+  3. Be sure to execute the Python file from witin the `computations_and_graps` directory:
 
   ```bash
-  python computations_and_graphs/computations_and_graphs.py
+  cd ./computations_and_graphs/
+  python computations_and_graphs.py
   ```
 
   4. Output should appear in the terminal and in the `figures` folder.
