@@ -447,7 +447,7 @@ def plot_implicit_using_marching_cubes(ax,fn,level_set_value=0,bbox=((-2.5,2.5),
     
     ax.plot_trisurf(verts[:, 0], verts[:, 1], faces, 
                     verts[:, 2], # color
-                    cmap='jet')
+                    cmap='magma',vmin=zmin,vmax=zmax)
     
     ax.set_zlim3d(zmin,zmax)
     ax.set_xlim3d(xmin,xmax)
@@ -472,10 +472,11 @@ def plot_coordinate_level_sets(coordinate,level_set_values=(0),m_value=1,a_value
 
   for index, level_set_value in enumerate(level_set_values):
     ax = axes.flatten()[index]
-    ax.set_title(f"${sympy.latex(coordinate.symbol)}={level_set_value:.1f}$",fontsize=16,pad=0)
+    ax.set_title(f"${sympy.latex(coordinate.symbol)}={level_set_value:.2f}$",fontsize=16,pad=0)
     ax.locator_params(nbins=4)
     
     plot_implicit_using_marching_cubes(ax,fn,level_set_value,bbox=bbox,resolution=resolution)
+    ax.set_aspect('equal')
   fig.tight_layout(h_pad=5)
   return fig
 
@@ -483,19 +484,19 @@ def plot_coordinate_level_sets(coordinate,level_set_values=(0),m_value=1,a_value
 # ### Plots for $M_{m,+}=M_{m,\geq 0}$
 
 # %%
-fig=plot_coordinate_level_sets(u3,[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7],bbox=[(-1.5,1.5),(-1.5,1.5),(0,1.5)])
+fig=plot_coordinate_level_sets(u3,[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7],bbox=[(-1.5,1.5),(-1.5,1.5),(0,1.1)])
 fig.savefig("../figures/level_sets_u3_unmodified",bbox_inches='tight')
 
 # %%
-plot_coordinate_level_sets(u2,[-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1.0],bbox=[(-1.5,1.5),(-1.5,1.5),(0,1.5)])
+plot_coordinate_level_sets(u2,[-0.75,-0.5,-0.25,0,0.25,0.5,0.75],bbox=[(-1.1,1.1),(-1.1,1.1),(0,1.1)])
 plt.savefig("../figures/level_sets_u2_unmodified",bbox_inches="tight")
 
 # %% [markdown]
 # ### Plots for $M_{m,\!\!\geq a}$. We can symbolically check that the boundary $x_3=a$ is actually a level set. Numerically this level set is not quite correctly computed due to rounding errors. 
 
 # %%
-for a_value in [0.2,0.6,1]:
-  fig=plot_coordinate_level_sets(u3_modified,np.array([0,0.2,0.4,0.6])+a_value,a_value=a_value,bbox=[(-2.5,2.5),(-2.5,2.5),(0,a_value+2)],resolution=100)
+for a_value in [0.1,0.3]:
+  fig=plot_coordinate_level_sets(u3_modified,np.array([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7])+a_value,a_value=a_value,bbox=[(-1.1,1.1),(-1.1,1.1),(0,1.5)],resolution=100)
   fig.savefig(f'../figures/level_sets_u3_modified_with_a_{a_value}.png',bbox_inches='tight')
 
 
