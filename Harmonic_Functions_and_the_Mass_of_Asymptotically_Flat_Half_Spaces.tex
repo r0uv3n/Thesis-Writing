@@ -77,7 +77,7 @@ english,%lockflag%
 
 \vspace{2cm}
 
-\includegraphics[width=0.3\textwidth]{Logo.pdf}
+\includegraphics[width=0.5\textwidth]{Logo.pdf}
 
 \vspace{1.5cm}
 
@@ -129,11 +129,11 @@ Then in the Newtonian theory of gravity, this mass distribution would at large d
 
 When we consider Einstein's theory of gravity (\ie general relativity) we can still assign a total mass, now called the \emph{ADM mass} \( M \) (in practice this takes the form of an integral expression over large coordinate spheres, where we take the limit as the radius goes to infinity). Here the \emph{ADM mass} is motivated by the fact that even though our mass distribution may bend spacetime in some (possibly very complicated) way, this spacetime geometry looks at least asymptotically like the geometry around a Schwarzschild black hole of mass \( M \).
 
-But this ADM mass does not fulfill the same simple relation \( M=\int \rho\odif{V} \) anymore, since in general relativity we lose the linearity of Newtonian Gravity! The positive mass theorem now states that even though we lose the relation to the integral of the mass distribution, we retain at least some good behaviour of the mass: If the mass distribution is non-negative everywhere, then we also have \( M\geq 0 \), \ie there exists no configuration of positive masses (however complicated) that acts like a black hole of negative mass (a white hole) at large distances. Compare \cite[Chapter 7]{leeGeometricRelativity2019} for more details.
+But this ADM mass does not fulfill the same simple relation \( M=\int \rho\odif{V} \) anymore, since in general relativity we lose the linearity of Newtonian Gravity! The positive mass theorem now states that even though we lose the relation to the integral of the mass distribution, we retain at least some good behaviour of the mass: If the mass distribution is non-negative everywhere, then we also have \( M\geq 0 \), \ie there exists no configuration of positive masses (however complicated) that acts like a black hole of negative mass (a white hole) at large distances. See \cite[Chapter 7]{leeGeometricRelativity2019} for more details.
 
 When expressing this theorem mathematically, we leave behind a lot of the physical details. In particular, we directly consider the scalar curvature \( R \) instead of the mass distribution (as the scalar curvature is proportional to mass density in static spacetimes). Since we already define the ADM mass in terms of the asymptotic geometric behaviour, we can reduce the physical statement of the positive mass theorem to a purely geometric one. This leads us to another approach to motivate the theorem, at least for the time-symmetric case (the following formulation is from \cite[1]{braySpacetimeHarmonicFunctions2021}):
 
-Every compactly supported perturbation of the Euclidean metric on \( \reals^n \) must somewhere decrease its scalar curvature. This is a kind of extremality property of the Euclidean metric. It follows directly from the Geroch conjecture -- the fact that the torus \( \mathbb{T}^n \) does not admit a metric of positive scalar curvature -- by identifying the ends of a large coordinate cube (containing the compact set on which the perturbation takes place). The Riemannian positive mass theorem then is an extension of this extremality property to the nonnegativity of the ADM-mass on manifolds that are \emph{asymptotically euclidean} instead of straight up equal to the euclidean geometry outside a compact set. We'll call these manifolds \emph{asymptotically flat}.
+Every compactly supported perturbation of the Euclidean metric on \( \reals^n \) must somewhere decrease its scalar curvature. This is a kind of extremality property of the Euclidean metric. It follows directly from the Geroch conjecture -- the fact that the torus \( \mathbb{T}^n \) does not admit a metric of positive scalar curvature -- by identifying the ends of a large coordinate cube (containing the compact set on which the perturbation takes place). The Riemannian positive mass theorem then is an extension of this extremality property to the nonnegativity of the ADM-mass on manifolds that are \emph{asymptotically euclidean} instead of straight up equal to the euclidean geometry outside a compact set. We will call these manifolds \emph{asymptotically flat}.
 
 These ideas extend naturally to \emph{asymptotically flat half-spaces} (which asymptotically look like \( \reals^n_+ \) instead of \( \reals_+ \)), for which we prove a version of the positive mass theorem in \cref{thm:positive_mass_theorem_for_half_spaces}. One application of the positive mass theorem for these asymptotically flat half-spaces is during the proof (\cite{almarazConvergenceScalarflatMetrics2015}) of the convergence of a  certain Yamabe-type flow on compact manifolds \( N \) with boundary \( \boundary{N} \). The asymptotically flat half-spaces appear during a step where it is necessary to look at \( N\setminus \Set{x} \) for \( x\in \boundary{N} \). 
 
@@ -143,11 +143,11 @@ To read this thesis, a basic understanding of Riemannian manifolds as well as in
 Further miscellaneous definitions and results that are generally common knowledge and in particular not specific to asymptotically flat half-spaces can be found in \cref{sec:miscellaneous}.
 
 \begin{notation}
-    We will in this thesis always let \( M \) denote a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection. Note that by \( \nabla \) we will always denote this covariant derivative / the Levi-Civita connection. In particular we will have \( \nabla f=\odif{f} \), and \( \grad f=(\odif{f})^\sharp \), such that in coordinates \( \odif{f} \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i f=g^{ij}\partial_j f \).
+    We will in this thesis always let \( M \) denote a 3-dimensional Riemannian manifold, equipped with the unique Levi-Civita-Connection. Note that by \( \nabla \) we will always denote this covariant derivative. In particular we will have \( \nabla f=\odif{f} \), and \( \grad f=(\odif{f})^\sharp \), such that in coordinates \( \odif{f} \) will be given by \( \nabla_i f=\partial_i f \) and \( \grad f \) will be given by \( \nabla^i f=g^{ij}\partial_j f \).
 \end{notation}
 \section{The mass of an asymptotically flat half-space}
 We will now establish the necessary definitions (mostly adapted from \cite{almarazPositiveMassTheorem2016}, \cite{eichmairDoublingAsymptoticallyFlat2023} and \cite{brayHarmonicFunctionsMass2019}) to state the main result of this thesis.
-\begin{definition}[Asymptotically flat half-space]\label{def:asymptotically_flat_half_space}
+\begin{definition}\label{def:asymptotically_flat_half_space}
     Let \( (M,g) \) be a connected, complete Riemannian manifold of dimension 3, with scalar curvature \( R \) and a smooth noncompact boundary \( \boundary{M} \) with mean curvature \( H \) (computed as the divergence along \( \boundary{M} \) of an outward pointing unit normal \( \nu \), see \cref{eq:def_mean_curvature,rem:mean_curvature_peculiarities} for more details on our definition and in particular the choice of sign).
 
     We call \((M,g) \) an \emph{asymptotically flat half-space} with decay rate \( \tau>0 \) if there exists a compact subset \( K \) such that \( M\setminus K \) consists of a finite number of connected components \(M_{\mathrm{end}}^i \) called \emph{ends}, such that for each of these ends there exists a diffeomorphism \( \Phi^i\maps M_{\mathrm{end}}^i \to \Set{x\in \reals^3_+\given \abs{x}>r_0} \) (for some \( r_0\geq 0 \)) and such that in the coordinate system given by this diffeomorphism we have the following asymptotic as \( r\goesto \infty \):
@@ -164,7 +164,7 @@ We will now establish the necessary definitions (mostly adapted from \cite{almar
 \end{notation}
 Note that, along \( \boundary{M}\cap \Mend^i \), the set \( \Set{\partial_\alpha}_\alpha \) spans \( \tangentbundle{\boundary{M}} \), while \( \partial_n \) points inwards.
 \begin{definition}\label{def:half_space_mass}
-    If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and (introducing the notation \( G_i \) for the coordinate dependent quantity \( \sum_j (g_{ij,j}-g_{jj,i}) \), compare \cite[Definition 1.1]{almarazPositiveMassTheorem2016} where instead the notation \( C_i \) is used) given by
+    If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and (introducing the notation \( G_i \) for the coordinate dependent quantity \( \sum_j (g_{ij,j}-g_{jj,i}) \), see also \cite[Definition 1.1]{almarazPositiveMassTheorem2016} where instead the notation \( C_i \) is used) given by
     \begin{equation*}
         \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\Biggl(\int_{\sphere_{r,+}^{2}}G_i\mu^i\odif{A}+\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}\Biggr),
     \end{equation*}
@@ -185,7 +185,7 @@ Note that, along \( \boundary{M}\cap \Mend^i \), the set \( \Set{\partial_\alpha
 \begin{remark}\label{rem:mass_normalization}
     In the definition above, the factor \( 1/(16\pi) \)  is a normalization factor used also for the ADM mass of asymptotically flat manifolds with the full \( \reals^n \) as a model space, where it ensures that we recover the mass of the Schwarzschild solution. 
     
-    Note that thus in our case of an asymptotically flat half-space, the mass of a \emph{Schwarzschild half-space} \( M_{m,+}=\Set{x\in \reals^n_+\given \abs{x}\geq(m/2)^{1/(n-2)}} \) with the conformal metric
+    Note that thus in our case of an asymptotically flat half-space, the mass of a \linebreak \emph{Schwarzschild half-space} \( M_{m,+}=\Set{x\in \reals^n_+\given \abs{x}\geq(m/2)^{1/(n-2)}} \) with the conformal metric
     \begin{equation*}
         g_m=\omega^4 \cdot \delta,\qquad \text{where } \omega=1+\frac{m}{2\abs{x}},\quad m>0
     \end{equation*}
@@ -244,7 +244,7 @@ Our main tool motivating our use of harmonic functions is the following integral
     where \( \chi(S_t) \) denotes the Euler characteristic of the level sets, \( \kappa_{\boundary{S_t}} \) denotes the geodesic curvature of \( \boundary{S_t} \) in \( S_t \) (see \cref{def:geodesic_curvature}) and \( H_{P_1} \) denotes the mean curvature of \( P_1 \).
 \end{proposition}
 
-For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFunctionsMass2019} and first stablish the following:
+For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFunctionsMass2019} and first establish the following:
 \begin{lemma}\label{lem:main_identity}
     For \( u \) harmonic with level set \( S \) we have
     \begin{equation*}
@@ -291,7 +291,11 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     then yields the result.
 \end{proof}
 \begin{proof}[Proof of \cref{prop:main_inequality}]
-    During the following proof, we will be considering \( \phi\definedas \sqrt{\abs{\nabla u}^2+\varepsilon} \) for \( \varepsilon>0 \) instead of \( \abs{\nabla u} \), since we cannot control the behaviour of integrands like \( \laplacian \abs{\nabla u} \) and \( \partial_\nu \abs{\nabla u} \) near critical points of \( u \) (where \( \abs{\nabla u}=0 \)).
+    During the following proof, we will be considering 
+    \begin{equation*}
+        \phi\definedas \sqrt{\abs{\nabla u}^2+\varepsilon} 
+    \end{equation*}
+    for \( \varepsilon>0 \) instead of \( \abs{\nabla u} \), since we cannot control the behaviour of integrands like \( \laplacian \abs{\nabla u} \) and \( \partial_\nu \abs{\nabla u} \) near critical points of \( u \) (where \( \abs{\nabla u}=0 \)).
 
     We find
     \begin{equation}\label{eq:main_inequality_applied_bochner}
@@ -318,9 +322,9 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     \end{multline}
     We first deal with the integrals over \( P_1\cap \inverse{u}(\mathcal{A}) \) and \( \inverse{u}(\mathcal{A}) \). Since
     \begin{equation*}
-        \frac{\abs{\nabla u}}{\phi}\abs{\nabla \abs{\nabla u}}=\frac{1}{2\phi}\nabla(g(\nabla u,\nabla u))=\frac{g(\nabla^2 u,\nabla u)}{\phi}\explain{\text{Cauchy-Schwarz}}{\leq}\frac{\abs{\nabla^2 u}\abs{\nabla u}}{\phi}\explain{\abs{\nabla u}\leq \phi}{\leq} \abs{\nabla^2 u},
+        \frac{\abs{\nabla u}}{\phi}\abs{\nabla \abs{\nabla u}}=\frac{1}{2\phi}\nabla(g(\nabla u,\nabla u))=\frac{g(\nabla^2 u,\nabla u)}{\phi}\explain{\text{Cauchy--Schwarz}}{\leq}\frac{\abs{\nabla^2 u}\abs{\nabla u}}{\phi}\explain{\abs{\nabla u}\leq \phi}{\leq} \abs{\nabla^2 u},
     \end{equation*}
-    \cref{eq:main_inequality_applied_bochner} and another application of Cauchy-Schwarz give on \( \inverse{u}(\mathcal{A}) \)
+    \cref{eq:main_inequality_applied_bochner} and another application of Cauchy--Schwarz give on \( \inverse{u}(\mathcal{A}) \)
     \begin{equation*}
         \laplacian\phi\geq \inverse{\Phi}\Ricci(\nabla u, \nabla u)\geq -\abs{\Ricci}\abs{\nabla u}.
     \end{equation*}
@@ -399,7 +403,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
         \end{aligned}
         \end{aligned} \label{eq:inequality_with_critical_values_removed}
     \end{multline}
-    where in the second step we have applied the Gauss-Bonnet theorem (\cref{thm:gauss_bonnet}) to \( S_t \).
+    where in the second step we have applied the Gauss--Bonnet theorem (\cref{thm:gauss_bonnet}) to \( S_t \).
     
 
     By Sard's theorem (\cite{sardMeasureCriticalValues1942}), the set of critical values has measure \( 0 \) and we thus may take the measure of \( \mathcal{A} \) to be arbitrarily small. Since
@@ -413,7 +417,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     \end{multline*} 
 \end{proof}}
 \begin{remark}\label{rem:no_critical_points_then_main_inequality_is_equality}
-    Note that if \( u \) had no critical points (\ie if \( \abs{\nabla u}>0 \) everywhere), then we could have always worked with \( \abs{\nabla u} \) instead of \( \phi \) and it is easy to check that under these conditions, \cref{prop:main_inequality} in fact becomes an equality!
+    Note that if \( u \) had no critical points (\ie if \( \abs{\nabla u}>0 \) everywhere), then we could have always worked with \( \abs{\nabla u} \) instead of \( \phi \) and it is easy to check that under these conditions, \cref{prop:main_inequality} in fact becomes an equality.
 \end{remark}
 \section{Existence and uniqueness of asymptotically linear harmonic functions}\label{sec:existence_and_uniqueness}
 To use \cref{prop:main_inequality}, we will require harmonic functions with properties as in \cref{thm:main_result}. More specifically we will require asymptotically linear harmonic coordinates on \( M(\Sigma) \) (for \( \Sigma \) the horizon boundary of \( M \)) with certain boundary conditions.
@@ -481,7 +485,7 @@ Even though we normally only work with a single end, our proof of the existence 
 
 
         
-        We want to show uniqueness for the case \( \Sigma=\emptyset \). Let \( \Set{\tilde{x}_i} \) and \( \tilde{x}_i' \) be two harmonic coordinates fulfilling all the properties. By \cite[Proposition 3.9]{almarazPositiveMassTheorem2016} (the proof of which extends without changes to the case with multiple ends), there exist an orthogonal matrix \( (Q_{i}^j)_{i,j=1}^3 \) and constants \( \Set{a_i}_{i=1}^3 \), such that
+        We want to show uniqueness for the case \( \Sigma=\emptyset \). Let \( \Set{\tilde{x}_i} \) and \( \tilde{x}_i' \) be two harmonic coordinates satisfying all the properties. By \cite[Proposition 3.9]{almarazPositiveMassTheorem2016} (the proof of which extends without changes to the case with multiple ends), there exist an orthogonal matrix \( (Q_{i}^j)_{i,j=1}^3 \) and constants \( \Set{a_i}_{i=1}^3 \), such that
         \begin{equation*}
             \tilde{x}_i'=Q_i^k\tilde{x}_k+a_i.
         \end{equation*}
@@ -508,7 +512,7 @@ Even though we normally only work with a single end, our proof of the existence 
 
         Note that \( \hat{M} \) has twice as many ends as \( M \), where we set \( \hat{x}_{i}^{j,\pm}(\hat{x})=x_i^j(\pi(x)) \) to be the asymptotic coordinates in these ends.
 
-        We can thus (as in the proof of \cite[Proposition 46]{eichmairDoublingAsymptoticallyFlat2023}) apply the result from Step 1 to \( \hat{M} \) (for which we don't consider any boundary conditions on horizon boundaries) to obtain asymptotically linear harmonic coordinates \( \tilde{\hat{x}}_i \) on \( \hat{M} \) with Dirichlet boundary condition on \( \boundary{\hat{M}} \). But note that \( \tilde{\hat{x}}_i\circ \tau \) is another solution, where we let \( \tau\maps \hat{M}\to \hat{M} \) be given by \( \tau([(x,\pm 1)])=[(x,\mp 1)] \). Then by the already established uniqueness for the case without horizon boundary, \( \tilde{\hat{x}}_i\circ \tau=\tilde{\hat{x}}_i+a_i \) for some constants \( a_i \). But since \( \tilde{\hat{x}}_i \) and \( \tilde{\hat{x}}_i\circ \tau \) must agree on \( \inverse{\pi}(\Sigma) \) (\( \tau \) is the identity there), we have \( a_i=0 \).
+        We can thus (as in the proof of \cite[Proposition 46]{eichmairDoublingAsymptoticallyFlat2023}) apply the result from Step 1 to \( \hat{M} \) (for which we do not consider any boundary conditions on horizon boundaries) to obtain asymptotically linear harmonic coordinates \( \tilde{\hat{x}}_i \) on \( \hat{M} \) with Dirichlet boundary condition on \( \boundary{\hat{M}} \). But note that \( \tilde{\hat{x}}_i\circ \tau \) is another solution, where we let \( \tau\maps \hat{M}\to \hat{M} \) be given by \( \tau([(x,\pm 1)])=[(x,\mp 1)] \). Then by the already established uniqueness for the case without horizon boundary, \( \tilde{\hat{x}}_i\circ \tau=\tilde{\hat{x}}_i+a_i \) for some constants \( a_i \). But since \( \tilde{\hat{x}}_i \) and \( \tilde{\hat{x}}_i\circ \tau \) must agree on \( \inverse{\pi}(\Sigma) \) (\( \tau \) is the identity there), we have \( a_i=0 \).
         
         In particular we get on \( \inverse{\pi}(\Sigma) \) (here we need to fix \( n_{\Sigma} \), by \eg choosing it to point towards \( M\times \Set{+1} \))
         \begin{equation*}
@@ -550,13 +554,13 @@ where now \( \mu \) is the unit normal to \( C_L \) pointing out of \( \Omega_L 
 To prove our main result \cref{eq:main_result}, we will recover the mass as the boundary term at infinity of \cref{prop:main_inequality} applied to \( u=x_3 \) and \( \Omega=\Omega_L \).
 
 
-Write \( S_t^L\definedas \inverse{u}(t)\cap \Omega_L \). Setting \( P_1=\Sigma\) and \( P_2=C_L\cup (\boundary{M})_L \) (and \( \tilde{P}_2=P_2\cap \Set{\nabla u\neq 0} \)) yields (since \( \Sigma \) is a minimal surface, \ie \( H_{P_1}=H_\Sigma=0 \))
+Write \( S_t^L\definedas \inverse{u}(t)\cap \Omega_L \). Setting \( P_1=\Sigma\) and \( P_2=C_L\cup (\boundary{M})_L \) yields (since \( \Sigma \) is a minimal surface, \ie \( H_{P_1}=H_\Sigma=0 \))
 \begin{equation}
     \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R\abs{\nabla u} }\odif{V} \leq\int_{0}^{L}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}}\odif{t}+ \int_{\tilde{P_2}}\partial_{n} \abs{\nabla u}\odif{A},\label{eq:just_insert_cylinder_into_main_inequality}
 \end{equation}
-where \( \kappa_{t,L} \) is the geodesic curvature of \( S_{t}^L \cap T_L\) viewed as the boundary of \( S_t^L \) and \( n \) is the outward unit normal to \( P_2 \). We have used the coarea formula to express the integral on the left as being over \( \Omega_L \).
+where \( \kappa_{t,L} \) is the geodesic curvature of \( S_{t}^L \cap T_L\) viewed as the boundary of \( S_t^L \), \( n \) is the outward unit normal to \( P_2 \) and \( \tilde{P}_2=P_2\cap \Set{\nabla u\neq 0} \). We have used the coarea formula to express the integral on the left as being over \( \Omega_L \).
 
-We claim that if \( t\in \ointerval{0}{L} \) is a regular value of \( u \) (\ie \( \abs{\nabla u}\neq 0 \) on \( S_t \)), then \( S_t^L \) consists of a single component, which intersects \( T_L \) along a circle. Assume otherwise, \ie that there is a regular value \( t\in \ointerval{0}{L} \) such that \( S'\subset S_t^L \) is a connected component disjoint from \( T_L \). Then, since \( M(\Sigma) \) is diffeomorphic to the compliment of a finite number of balls in \( \reals^3_+ \), there exists a compact domain \( E\subset \Omega_L \) with \( \closure{\boundary{E}\setminus \Sigma}=S' \) (since surely \( \Sigma\not\subset S_t^L \), since otherwise \( \abs{\nabla u} \) would vanish on \( \Sigma \) and \( t \) would not be a regular value).
+We claim that if \( t\in \ointerval{0}{L} \) is a regular value of \( u \) (\ie \( \abs{\nabla u}\neq 0 \) on \( S_t \)), then \( S_t^L \) consists of a single component, which intersects \( T_L \) along a circle. Assume otherwise, \ie that there is a regular value \( t\in \ointerval{0}{L} \) such that \( S'\subset S_t^L \) is a connected component disjoint from \( T_L \). Then, since \( M(\Sigma) \) is diffeomorphic to the complement of a finite number of balls in \( \reals^3_+ \), there exists a compact domain \( E\subset \Omega_L \) with \( \closure{\boundary{E}\setminus \Sigma}=S' \) (since surely \( \Sigma\not\subset S_t^L \), since otherwise \( \abs{\nabla u} \) would vanish on \( \Sigma \) and \( t \) would not be a regular value).
 
 Note now \( u-t \) is still harmonic, has Dirichlet boundary condition \( u-t=0 \) on \( S' \), and Neumann boundary condition \( \partial_n (u-t)=0 \) on \( \Sigma \). Hence we can apply \cref{thm:maximum_principle} and get that \( u \) must be constant on \( E \), which contradicts the assumption that \( t \) is a regular value.
 
@@ -741,7 +745,7 @@ Meanwhile we can use \cite[Lemma 6.2]{brayHarmonicFunctionsMass2019} without sub
 
 It remains to consider the boundary term on \( \widetilde{(\boundary{M})_L} \):
 \begin{lemma}\label{lem:half_space_boundary_boundary_term}
-    Using the notation from aboe, we have
+    Using the notation from above, we have
     \begin{equation*}
         \int_{\widetilde{(\boundary{M})_L}} \partial_\nu \abs{\nabla u}=-\int_{ (\boundary{M})_L}H\abs{\nabla u}\odif{A}.
     \end{equation*}
@@ -786,12 +790,12 @@ It remains to consider the boundary term on \( \widetilde{(\boundary{M})_L} \):
         \int_{\Omega_L} \frac{1}{16\pi}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R \abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}_L}H\abs{\nabla u}\odif{A}\\
         \leq \frac{1}{16\pi}\int_{C_L}G_i\mu^i\odif{A}+\frac{1}{16\pi}\int_{\sphere^1_L}g_{\alpha3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}}.
     \end{multline*}
-    Since \( \tau>\frac{1}{2} \), we can take the limit \( L\goesto \infty \) and finally arrive at \cref{eq:main_result}:
+    Since \( \tau>\frac{1}{2} \), we can take the limit \( L\goesto \infty \) and finally arrive at \cref{eq:main_result},
     \begin{equation}
         \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}\cap M(\Sigma)}H \abs{\nabla u}\odif{A}\leq \mass{M}{g}.\label{eq:final_statement_main_result}
     \end{equation}
 \end{proof}
-Now the positive mass theorem follows as corollary:
+Now the positive mass theorem follows as a corollary:
 \begin{proof}[Proof of \cref{thm:positive_mass_theorem_for_half_spaces}]
     Since \( H \) is nonnegative, the horizon boundary required by \cref{thm:main_result} is guaranteed to exist by \cref{rem:exterior_region_existence}. Then \cref{eq:main_result} together with \( R\geq 0 \) and \( H\geq 0 \) directly implies
     \begin{equation*}
@@ -802,14 +806,14 @@ Now the positive mass theorem follows as corollary:
     \begin{proofdescription}
         \item{\( (M,g)\isomorphic(\reals^3_{+},\delta) \implies \mass{M}{g}=0   \):} In standard coordinates, \( g \) is constant and thus \( G_i \) is surely \( 0 \). Since also \( g_{13}=g_{23}=0 \) everywhere, we have \( \mass{M}{g}=0 \) directly from \cref{def:half_space_mass}. 
         \item{\(  \mass{M}{g}=0 \implies (M,g)\isomorphic(\reals^3_{+},\delta) \):} 
-        Note first, that the set of critical points of our harmonic function \( u \) on \( \boundary{M} \) cannot have any component with dimension more than \( 1  \). To see this, we follow \cite[Section 4 Lemma 1]{goldsteinGradientFlowHarmonic2009}: If \( E \) is a twodimensional component with \( \nabla u=0 \) and \( u=0 \) on \( E \), we can locally write \( u=f\cdot g^N \) for some \( N\geq 2 \), where \( f \) is invertible and \( g \) some \emph{local generator of \( E \)}, \ie \( g=0 \) on \( E \) and \( \nabla g\neq 0 \). In particular we can compute
+        Note first, that the set of critical points of our harmonic function \( u \) on \( \boundary{M} \) cannot have any component with dimension more than \( 1  \). To see this, we follow \cite[Section 4 Lemma 1]{goldsteinGradientFlowHarmonic2009}: If \( E \) is a two-dimensional component with \( \nabla u=0 \) and \( u=0 \) on \( E \), we can locally write \( u=f\cdot g^N \) for some \( N\geq 2 \), where \( f \) is invertible and \( g \) some \emph{local generator of \( E \)}, \ie \( g=0 \) on \( E \) and \( \nabla g\neq 0 \). In particular we can compute
         \begin{equation*}
             \begin{aligned}[t]
                 \laplacian u&=f\cdot N\cdot (N-1)\cdot \abs{\nabla g}^2 g^{N-2}+g^{N-1}(\dotsc)\\
                 &=g^{N-2}(f\cdot N\cdot (N-1)\abs{\nabla g}^2+g(\dotsc)),
             \end{aligned}
         \end{equation*}
-        and this cannot be \( 0 \) everywhere near \( E \), since \( f\cdot N\cdot (N-1)\abs{\nabla g}^2\neq 0 \) but \( g=0 \) on \( E \). If \( E \) is threedimensional, then either \( u \) is constant (which is not permitted by our asymptotics) or \( \boundary{E} \) is non-empty (since surely \( E \) is closed). We can then apply the above reasoning to \( \boundary{E} \) to see that this also yields a contradiction to the harmonicity of \( u \).
+        and this cannot be \( 0 \) everywhere near \( E \), since \( f\cdot N\cdot (N-1)\abs{\nabla g}^2\neq 0 \) but \( g=0 \) on \( E \). If \( E \) is three-dimensional, then either \( u \) is constant (which is not permitted by our asymptotics) or \( \boundary{E} \) is non-empty (since surely \( E \) is closed). We can then apply the above reasoning to \( \boundary{E} \) to see that this also yields a contradiction to the harmonicity of \( u \).
 
         Thus \( \abs{\nabla u}\neq 0 \) almost everywhere on \( \boundary{M} \) and \cref{eq:main_result} together with \( \mass{M}{g}=0 \) and \( H\geq 0 \) imply directly that \( H=0 \). But exactly under this condition (that the boundary has zero mean curvature), we can also apply \cref{prop:main_inequality} successfully to \( u=x_{\alpha} \) for \( \alpha=1,2 \) (and not just to \( u=x_3 \)). We do this by using horizontal half-cylinders with symmetry along \( x_\alpha \), defining (let \( \beta=3-\alpha \) be the other direction with Neumann boundary condition on \( \boundary{M} \))
         \begin{align*}
@@ -828,7 +832,7 @@ Now the positive mass theorem follows as corollary:
         % Define now also \( \tilde{T}_L \) to be 
         A similar argument as was used for \( u=x_3 \) now shows that if \( t\in \ointerval{-L}{L} \) is a regular value of \( x_\alpha \), then \( S_t^L \) consists of a single component meeting \( T_L \) along a half-circle: Otherwise there would exist a regular value \( t \in \ointerval{-L}{L}\) with \( S' \) a connected component of \( S_t^L \) disjoint from \( T_L \). As before then there would exist a compact domain \( E\subset \Omega_L \) with \( \closure{\boundary{E}\setminus P_1}=S' \), to which we could apply \cref{thm:maximum_principle} to give \( E\subset S_t^L \), contradicting our assumption that \( t \) is regular.
 
-        Thus we can again conclude that \( \chi(S_t^L)\leq 1 \). Repeating the calculations in \cref{lem:cylinder_boundary_term} (where we now only get a \( g_{\alpha 3} \) term on \( D_L^{\pm}\cap \boundary{M} \)) and \cref{lem:geodesic_curvature_term} (where the partial integration contributes the \( g_{\alpha 3} \) term on \( T_L\cap \boundary{M} \)) with these slightly changed cylinders then leads to the equivalent of \cref{eq:main_result} for \( u=x_\alpha \):
+        Thus we can again conclude that \( \chi(S_t^L)\leq 1 \). Repeating the calculations in \cref{lem:cylinder_boundary_term} (where we now only get a \( g_{\alpha 3} \) term on \( D_L^{\pm}\cap \boundary{M} \)) and \cref{lem:geodesic_curvature_term} (where the partial integration contributes the \( g_{\alpha 3} \) term on \( T_L\cap \boundary{M} \)) with these slightly changed cylinders then leads to the equivalent of \cref{eq:main_result} for \( u=x_\alpha \),
         \begin{equation}
             \label{eq:main_result_for_minimal_boundary_and_parallel_coordinates}
             \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}\leq \mass{M}{g}.
@@ -856,7 +860,7 @@ Now the positive mass theorem follows as corollary:
 \end{proof}
 \section{A condition for equality between the lower bound and the mass}\label{sec:condition_for_mass_equality}
 \begin{remark}\label{rem:condition_for_mass_equality}
-    Recall from \cref{rem:no_critical_points_then_main_inequality_is_equality} that \cref{prop:main_inequality} is an equality if \( u \) has no critical points. If aditionally, almost all regular level sets have Euler characteristic \( \chi(S_t^L)=1 \) (instead of just \( \chi(S_t^L)\leq 1 \)), then \cref{eq:final_statement_main_result} becomes an equality! Note that this in particular requires that \( S_t^L \) has exactly one boundary component (the intersection with \( T_L \)). 
+    Recall from \cref{rem:no_critical_points_then_main_inequality_is_equality} that \cref{prop:main_inequality} is an equality if \( u \) has no critical points. If aditionally, almost all regular level sets have Euler characteristic \( \chi(S_t^L)=1 \) (instead of just \( \chi(S_t^L)\leq 1 \)), then \cref{eq:final_statement_main_result} becomes an equality. Note that this in particular requires that \( S_t^L \) has exactly one boundary component (the intersection with \( T_L \)). 
 \end{remark}
 
 
@@ -1068,20 +1072,20 @@ It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the bounda
 \begin{description}
     \item[\( a=0 \):] 
     Recall from the proof of \cref{lem:schwarzschild_spaces_are_asymptotically_flat} that \( \partial_r \) is orthogonal to \( \Sigma \). The Neumann boundary condition on \( \Sigma \) then becomes
-    \begin{align*}
-        &0\begin{aligned}[t]
+    \begin{align*}\allowdisplaybreaks
+        0&\begin{aligned}[t]
             &=\evaluateat{\partial_{r} (\tilde{u}_i(r,\theta,\varphi)/\omega)}{r=m/2}\\
             &=\evaluateat{\frac{2(r(m+2r)\partial_r \tilde{u}_i(r,\theta,\varphi)+m\cdot \tilde{u}_i(r,\theta,\varphi))}{(m+2r)^2}}{r=m/2}\\
             &=\frac{m\partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)}{2m}
         \end{aligned}\\
-        \implies &0\begin{aligned}[t]
+        \implies 0&\begin{aligned}[t]
             &=m \partial_r \tilde{u}_i(m/2,\theta,\varphi)+\tilde{u}_i(m/2,\theta,\varphi)\\
             &=\sum_{\ell=0}^\infty \sum_{m=-\ell}^\ell  Y_{\ell}^k(\theta,\varphi)\cdot  \begin{aligned}[t]
                 \big[&\tilde{u}_{i,\ell}^k\cdot ((m/2)^\ell+m\cdot \ell\cdot (m/2)^{\ell-1})\\
                 &+\tilde{u}^k_{i,-\ell-1}((m/2)^{-\ell-1}+m\cdot (-\ell-1)\cdot (m/2)^{-\ell-2})\big]
             \end{aligned}
         \end{aligned}\\
-        \explain{\text{\( Y_{\ell}^k \) are linearly independent}}{\implies} 0&=Y^m_{\ell}\quad \text{or}\quad \tilde{u}_{i,\ell}^k\cdot (m/2)^\ell\cdot (1+2\ell)-\tilde{u}^k_{i,-\ell-1}\cdot (m/2)^{-\ell-1}(1+2\ell).
+        \explain{\text{\( Y_{\ell}^k \) linearly independent}}{\implies} 0&=Y^m_{\ell}\quad \text{or}\quad \tilde{u}_{i,\ell}^k\cdot (m/2)^\ell\cdot (1+2\ell)-\tilde{u}^k_{i,-\ell-1}\cdot (m/2)^{-\ell-1}(1+2\ell).
     \end{align*}
     Since \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell>1 \) we see also that \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell< -2 \). We further have
     \begin{align*}
@@ -1170,7 +1174,7 @@ Using the same Jupyter notebook (\cite{fischerhenryrubenHarmonicFunctionMethod20
 
 Note that the method of plotting implicit surfaces we use here is susceptible to rounding errors and thus sometimes the level set of \( u_3 \) on \( M_{m,\geq a} \) corresponding to the boundary of the manifold is rendered with some slight imperfections (this specific level set should look flat in our coordinates). We can however symbolically verify even within the Jupyter notebook that in fact the boundary of the half-space is a level set.
 
-Note also that even though in the level sets of the \( u_i=t \) on \( M_{m,+} \) there seem to be disconnected components of spherical / semi-spherical shape for \( \abs{t}>0.5 \) (seemingly contradicting our argument for \( \xi(S_t^L)\leq 1 \) directly preceding \cref{eq:starting_point_individual_computations}), this portion of the level set is entirely contained within the horizon boundary \( \Sigma \), \ie not contained in \( M(\Sigma) \), and thus surely also not in \( S_t^L\subset M(\Sigma) \).
+Note also that even though in the level sets of the \( u_i=t \) on \( M_{m,+} \) there seem to be disconnected components of semi-spherical shape for \( \abs{t}>0.5 \) (seemingly contradicting our argument for \( \xi(S_t^L)\leq 1 \) directly preceding \cref{eq:starting_point_individual_computations}), this portion of the level set is entirely contained within the horizon boundary \( \Sigma \), \ie not contained in \( M(\Sigma) \), and thus surely also not in \( S_t^L\subset M(\Sigma) \).
 
 Apart from helping in visualizing in particular how the boundary conditions (both asymptotic and on horizon and noncompact boundary) are fulfilled, these plots also show what we know from our discussion of the strength of the lower bounds above: 
 \begin{itemize}
@@ -1209,7 +1213,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
 \appendix
 \section{Different exhausting sequences for computation of the mass}
 \begin{proposition}\label{prop:mass_independent_of_exhausting_sequence}
-    Suppose that \( (M,g) \) is an asymptotically flat half-space with asymptotically flat coordinates \( x_1,x_2,x_3 \) on \( \Mend \) (fulfilling the conditions of \cref{def:half_space_mass}). Let \( \Set{D_k^3}_{k=1}^{\infty} \) be an exhaustion of \( M \) by closed sets with \( \boundary{D_k}=S_k\cup (D_k\cap \boundary{M}) \), where \( S_k \) is a connected \( 2 \)-dimensional piecewise smooth submanifold of the end \( \Mend \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
+    Suppose that \( (M,g) \) is an asymptotically flat half-space with asymptotically flat coordinates \( x_1,x_2,x_3 \) on \( \Mend \) (satisfying the conditions of \cref{def:half_space_mass}). Let \( \Set{D_k^3}_{k=1}^{\infty} \) be an exhaustion of \( M \) by closed sets with \( \boundary{D_k}=S_k\cup (D_k\cap \boundary{M}) \), where \( S_k \) is a connected \( 2 \)-dimensional piecewise smooth submanifold of the end \( \Mend \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
     \begin{gather*}
         R_k\definedas \inf_{x\in S_k} \abs{x}\goesto \infty\quad \text{as \( k\goesto \infty \)},\\
         R_k^2\cdot \abs{S_k} \text{ is bounded as \( k\goesto \infty \)},
@@ -1344,7 +1348,7 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
     \end{equation*}
 \end{remark}
 \begin{recall}
-    The commutator of two vector fields \( X,Y \) is another vector field fulfilling
+    The commutator of two vector fields \( X,Y \) is another vector field satisfying
     \begin{equation*}
         \commutator{X}{Y}(f)=X(Y(f))-Y(X(f)).
     \end{equation*}
@@ -1372,7 +1376,7 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
 \end{theorem}
 
 \begin{definition}
-    We define the Laplacian (also called Laplace-Beltrami-Operator)
+    We define the \emph{Laplacian} (also called \emph{Laplace--Beltrami-Operator})
     \begin{equation*}
         \laplacian{f}=\gtrace+{g}{\nabla^2 f}=\nabla^a \nabla_a f.
     \end{equation*}
@@ -1428,7 +1432,7 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
 
 
 One major difference between the covariant and our usual partial derivatives is that covariant derivatives in different directions do not necessarily commute. The failure of this commutativity is one way to understand and measure curvature:
-\begin{definition}[Riemann curvature tensor]\label{def:riemann_curvature_tensor}
+\begin{definition}\label{def:riemann_curvature_tensor}
     We define the \emph{Riemann curvature tensor} 
     \begin{equation*}
         R\in \sheafsections{\cotangentbundle{M}\tensorproduct \tangentbundle{M}\tensorproduct \tangentbundle{M}\tensorproduct \tangentbundle{M}}
@@ -1445,7 +1449,7 @@ One major difference between the covariant and our usual partial derivatives is 
 \begin{remark}\label{rem:second_derivatives_function_commute}
     Note that we still have \( \nabla_a \nabla_b f=\nabla_b \nabla_a f \) for any function \( f \).
 \end{remark}
-Oftentimes, the \( 4 \) indices of the Riemann curvature tensor are both unwieldy to work with and not necessary to describe many phenomena. By contracting / taking traces we can get two further measures of curvature:
+Oftentimes, the four indices of the Riemann curvature tensor are both unwieldy to work with and not necessary to describe many phenomena. By contracting / taking traces we can get two further measures of curvature:
 \begin{definition}
     We define the \emph{Ricci curvature} as
     \begin{equation*}
@@ -1471,7 +1475,7 @@ The main point of this thesis is to consider manifolds \( M \) with a (non-compa
 { \newcommand{\Mconnection}{\nabla}\newcommand{\Sigmaconnection}{\hat{\nabla}}
 Let \( \Sigma^m \) be a submanifold of a Riemannian manifold \( (M^n,g) \) (equipped with Levi-Civita connection \( \Mconnection \)).
 \begin{remark}
-    \( g \) induces a metric
+    The metric \( g  \) on \( M \) induces a metric
     \begin{equation}
         \gamma=\restrict{g}{\tangentbundle{\Sigma}}\label{eq:first_fundamental_form}
     \end{equation} 
@@ -1486,8 +1490,8 @@ This metric \( \gamma \) in turn defines a Levi-Civita connection on \( \Sigma \
   \end{equation*}
   where \( \tilde{Y} \) is any extension of \( Y \) to a vector field on \( M \). Here \( (\blank)^\top \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \) (which in coordinates can be done via \( X^i\mapsto \gamma^i_j X^j \)).
 \end{fact}
-Thus \( \Sigma \) intrinsically contains information about tangential parts of tangential derivatives. But this information does not determine the orthogonal part! This motivates the following definition:
-\begin{definition}[Second fundamental form]
+Thus \( \Sigma \) intrinsically contains information about tangential parts of tangential derivatives. But this information does not determine the orthogonal part, which motivates the following definition:
+\begin{definition}
     The \emph{second fundamental form} of \( \Sigma \) is a tensor \( \mathbf{A}\in \sheafsections{\cotangentbundle{\Sigma}\tensorproduct \cotangentbundle{\Sigma}\tensorproduct \normalbundle{\Sigma}} \) such that for \( X,Y\in \tangentspace{p}{\Sigma} \)
     \begin{equation*}
         \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp,
@@ -1519,7 +1523,7 @@ Note that although \( \Mconnection \) is not a tensor (\ie although it depends o
     \begin{equation}
         A(X,Y)\definedas g(\mathbf{A}(X,Y),-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace+{\gamma}{A}.\label{eq:def_mean_curvature}
     \end{equation}
-    We also call \( A \) the second fundamental form and \( H \) the mean curvature. 
+    We also call \( A \) the \emph{second fundamental form} and \( H \) the \emph{mean curvature}. 
 \end{definition}
 Note that we have
 \begin{equation*}
@@ -1535,7 +1539,7 @@ The above in particular also implies that
 \end{equation*}
 if we extend \( \nu \) to a normal vector field in a neighborhood of \( \Sigma \). To see this, note that \( 0=\nabla_\nu(1)=\nabla_{\nu}(g(\nu,\nu)) \) implies \( g(\nu,\nabla_\nu \nu)=0 \).
 \begin{remark}\label{rem:mean_curvature_peculiarities}
-    With this definition, the mean curvature of a twodimensional surface is the sum of the principal curvatures, not the mean. Another common definition of the mean curvature is
+    With this definition, the mean curvature of a two-dimensional surface is the sum of the principal curvatures, not the mean. Another common definition of the mean curvature is
     \begin{equation*}
         H=\frac{1}{n-1}\gtrace+{\gamma}{A},
     \end{equation*}
@@ -1546,7 +1550,7 @@ if we extend \( \nu \) to a normal vector field in a neighborhood of \( \Sigma \
 We are now equipped to express an important formula relating the curvature of \( \Sigma \) to the curvature of \( M \). 
 \begin{lemma}
     Let \( \riemanncurvature,\widetilde{\riemanncurvature} \) denote the Riemann curvature of \( M \) and \( \Sigma \) respectively.
-    For \( X,Y,Z,W \in \tangentspace{\Sigma}\), the \emph{Gauss-Codazzi equation} states
+    For \( X,Y,Z,W \in \tangentspace{\Sigma}\), the \emph{Gauss--Codazzi equation} states
     \begin{equation}
         \scalarproduct{\riemanncurvature_(X,Y)Z}{W}=\scalarproduct{\widetilde{\riemanncurvature}(X,Y)Z}{W}+A(X,Z)A(Y,W)-A(X,W)A(Y,Z)\label{eq:gauss_codazzi}
     \end{equation}
@@ -1585,9 +1589,9 @@ The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is
 }
 \section{Miscellaneous definitions and results}\label{sec:miscellaneous}
 
-\subsection{Gauss-Bonnet and the Euler characteristic}
+\subsection{Gauss--Bonnet and the Euler characteristic}
 One of the main reasons for why the harmonic function technique discused in this thesis does not readily seem to extend to higher dimensions is its reliance on applying the following theorem (which is specific to two dimensions) to level sets of harmonic functions on three-dimensional space:
-\begin{theorem}[Gauss-Bonnet Theorem]\label{thm:gauss_bonnet}
+\begin{theorem}[Gauss--Bonnet Theorem]\label{thm:gauss_bonnet}
     Let \( \Sigma \) be a compact two-dimensional Riemannian manifold with boundary \( \boundary{\Sigma} \). Let \( R \) be the scalar curvature of \( \Sigma \) and let \( \kappa_{\boundary{\Sigma}} \) be the geodesic curvature of \( \boundary{\Sigma} \) in \( \Sigma \). Then
    \begin{equation*}
     \int_\Sigma R/2 \odif{A}+\int_{\boundary{\Sigma}}\kappa_{\boundary{\Sigma}}\odif{t}=2\pi \chi(\Sigma),
@@ -1596,7 +1600,7 @@ One of the main reasons for why the harmonic function technique discused in this
 \end{theorem}
 For a proof see \cite[Chapter 4.3]{petersenRiemannianGeometry2006}. 
 
-\begin{definition}[Euler Characteristic]
+\begin{definition}
     For a compact, connected, oriented surface \( \Sigma \) (two-dimensional manifold with boundary), the \emph{Euler characteristic} is given by
     \begin{equation}
         \chi(\Sigma)=2-2g-b,\label{eq:def_euler_characteristic}
@@ -1748,21 +1752,4 @@ We then can prove in particular that the level sets of our harmonic coordinate \
 % \section{Python code for computations and graphs}
 % \lstinputlisting[language=Python,frame=lines,caption={Numerical computation of the mass lower bound for the Schwarzschild examples},label={lst:computations_and_graph_for_example},basicstyle=\footnotesize]{computations_and_graphs/computations_and_graphs.py}
 \printbibliography
-\newpage
-\thispagestyle{empty}
-\vspace*{1cm}
-\vfill  % Selbstständigkeitserklärung
-~\\
-\begin{large} % Schriftgroße = large (sonst normal)
-\textbf{Selbstständigkeitserklärung}
-\end{large}
-~\\
-Hiermit erkläre ich, dass ich die vorliegende Arbeit
-selbstständig und nur unter Verwendung der angegebenen
-Quellen und Hilfsmittel verfasst habe.\\
-~\\
-Göttingen, den 30.09.2023 \hspace*{4cm} \begin{tabular}{l}
-    {}\\
-    \makebox[2.5in]{\hrulefill}\\
-    Henry Ruben Fischer \end{tabular}
 \end{document}
