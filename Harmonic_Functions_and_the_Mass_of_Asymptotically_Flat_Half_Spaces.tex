@@ -19,6 +19,12 @@ english,%lockflag%
 % \usepackage{newpxtext}.
 \ExecuteBibliographyOptions{maxnames=4}
 
+% % upright differential
+% \derivset{\odif}{upright=true}
+
+% math punctation
+\newcommand*{\mathcomma}{\,,}
+\newcommand*{\mathfullstop}{\,.}
 
 \let\sphere\relax
 \newcommand{\sphere}{\mathbb{S}}
@@ -166,7 +172,7 @@ Note that, along \( \boundary{M}\cap \Mend^i \), the set \( \Set{\partial_\alpha
 \begin{definition}\label{def:half_space_mass}
     If \( R \) and \( H \) are integrable over \( M \) and \( \boundary{M} \) respectively and \( \tau>1/2 \), then the \emph{mass} of each end of \( M \) is well defined and (introducing the notation \( G_i \) for the coordinate dependent quantity \( \sum_j (g_{ij,j}-g_{jj,i}) \), see also \cite[Definition 1.1]{almarazPositiveMassTheorem2016} where instead the notation \( C_i \) is used) given by
     \begin{equation*}
-        \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\Biggl(\int_{\sphere_{r,+}^{2}}G_i\mu^i\odif{A}+\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}\Biggr),
+        \mass{M_{\mathrm{end}}^i}{g}=\frac{1}{16\pi}\lim_{r \goesto \infty}\Biggl(\int_{\sphere_{r,+}^{2}}G_i\mu^i\odif{A}+\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}\Biggr)\mathcomma
     \end{equation*}
     where \( \sphere_{r,+}^{2}(0)=\reals^3_+\cap \sphere_r^2(0) \) is a large upper coordinate hemisphere with outward unit normal \( \mu \), and \( \theta \) is the outward pointing unit co-normal to \( \sphere_{r}^1=(\reals^2\times \Set{0})\cap \sphere_r^2(0)=\boundary{\sphere_{r,+}^2} \), oriented as the boundary of \( (\boundary{M})_r\subset \boundary{M} \).
 \end{definition}
@@ -191,7 +197,7 @@ Note that, along \( \boundary{M}\cap \Mend^i \), the set \( \Set{\partial_\alpha
     \end{equation*}
     will be
     \begin{equation*}
-        \mass{M_{m,+}}{g_m}=\frac{m}{2},
+        \mass{M_{m,+}}{g_m}=\frac{m}{2}\mathcomma
     \end{equation*}
     which is half the ADM mass of the standard Schwarzschild space.
 \end{remark}
@@ -199,7 +205,7 @@ In \cite{almarazPositiveMassTheorem2016}, Almaraz, Barbosa, and de Lima showed t
 \begin{theorem}\label{thm:positive_mass_theorem_for_half_spaces}
     For \( (M,g) \) as above in \cref{def:half_space_mass}, if \( R\geq 0 \) and \( H\geq 0 \) on \( M \) and \( \boundary{M} \) respectively, then
     \begin{equation*}
-        \mass{M}{g}\geq 0,
+        \mass{M}{g}\geq 0\mathcomma
     \end{equation*}  
     with equality occurring if and only if \( (M,g) \) is isometric to \( (\reals^3_+,\delta) \).
 \end{theorem}
@@ -219,7 +225,7 @@ The main result of this thesis is then the following, which will prove \cref{thm
     %  if \( R\geq 0 \) and \( H\geq 0 \) on \( M \) and \( \boundary{M} \) respectively, then 
     there exists a unique harmonic function \( u \) asymptotic to the linear function \( x_3 \), satisfying zero Dirichlet boundary conditions on \( \boundary{M} \) and zero Neumann boundary conditions on the horizon boundary \( \Sigma \), and we have
     \begin{equation}
-        \mass{M}{g}\geq \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}\cap M(\Sigma)}H \abs{\nabla u}\odif{A}.\label{eq:main_result}
+        \mass{M}{g}\geq \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}\cap M(\Sigma)}H \abs{\nabla u}\odif{A}\mathfullstop\label{eq:main_result}
     \end{equation} 
     In particular, if \( R \) and \( H \) are nonnegative then the mass is nonnegative. Furthermore the assumption that \( M(\Sigma) \) exists is automatically fulfilled in this case by \cref{rem:exterior_region_existence}.
 \end{theorem} 
@@ -239,7 +245,7 @@ Our main tool motivating our use of harmonic functions is the following integral
     Let \( (\Omega,g) \) be a compact 3-dimensional oriented Riemannian manifold with piecewise smooth boundary \( \boundary{\Omega}=P_1\disjointunion P_2 \), having outward unit normal \( \nu \). Let \( u\maps \Omega\to \reals \) be a harmonic function (\ie \( \laplacian u=0 \)) such that \( \partial_{\nu}u=0 \) on \( P_1 \). Let \( \tilde{P}_2=\Set{x\in P_2\given \nabla u\neq 0} \) be the set of regular points of \( u \) in \( P_2 \). If \( \maxu \) and \( \minu \) denote the maximum and minimum of \( u \) and \( S_t \) are \( t \)-level sets of \( u \), then
     \begin{multline*}
         \int_{\minu}^{\maxu} \int_{S_t} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{A}+\int_{\boundary{S_t}\cap P_1}H_{P_1}\odif{l}\odif{t}\\
-        \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t} \cap P_2}\kappa_{\boundary{S_t}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{\nu} \abs{\nabla u}\odif{A},
+        \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t} \cap P_2}\kappa_{\boundary{S_t}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{\nu} \abs{\nabla u}\odif{A}\mathcomma
     \end{multline*} 
     where \( \chi(S_t) \) denotes the Euler characteristic of the level sets, \( \kappa_{\boundary{S_t}} \) denotes the geodesic curvature of \( \boundary{S_t} \) in \( S_t \) (see \cref{def:geodesic_curvature}) and \( H_{P_1} \) denotes the mean curvature of \( P_1 \).
 \end{proposition}
@@ -248,7 +254,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
 \begin{lemma}\label{lem:main_identity}
     For \( u \) harmonic with level set \( S \) we have
     \begin{equation*}
-        \Ricci(\grad u, \grad u)=\frac{1}{2}\abs{\nabla u}^2(R_\Omega-R_S)+\abs{\nabla\abs{\nabla u}}^2-\frac{1}{2}\abs{\nabla^2 u}.
+        \Ricci(\grad u, \grad u)=\frac{1}{2}\abs{\nabla u}^2(R_\Omega-R_S)+\abs{\nabla\abs{\nabla u}}^2-\frac{1}{2}\abs{\nabla^2 u}\mathfullstop
     \end{equation*}
 \end{lemma}
 \begin{proof}  
@@ -273,20 +279,20 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
             &=\frac{\abs{\nabla^2 u}^2-2g^{jk}\nabla^2_{kl}u\nabla^l u\nabla^2_{ij}u \nabla^i{u}/(\abs{\nabla u}^2)+(\nabla^2_{\nu\nu}u)^2}{\abs{\nabla u}^2}\\
             &=\frac{\abs{\nabla^2 u}^2-(\nabla_k(\nabla_l u \nabla^l u)\nabla^k(\nabla_l \nabla^l u))/(2\abs{\nabla u}^2) +(\nabla^2_{\nu\nu}u)^2}{\abs{\nabla u}^2}\\
             &=\frac{\abs{\nabla^2 u}^2-\abs{\nabla\abs{\nabla u}^2}^2/(2\abs{\nabla u}^2)+(\nabla^2_{\nu\nu}u)^2}{\abs{\nabla u}^2}\\
-            &=\frac{1}{\abs{\nabla u}^2}(\abs{\nabla^2 u}^2-2\abs{\nabla \abs{\nabla u}}^2+(\nabla^2_{\nu\nu}u)^2)
+            &=\frac{1}{\abs{\nabla u}^2}(\abs{\nabla^2 u}^2-2\abs{\nabla \abs{\nabla u}}^2+(\nabla^2_{\nu\nu}u)^2)\mathfullstop
         \end{aligned}
     \end{equation*}
     On the other hand contracting \( A_{ij} \) gives
     \begin{equation*}
-        H=\frac{1}{\abs{\nabla u}}(\underbrace{\laplacian u}_{=0}-\nabla^2_{\nu \nu} u).
+        H=\frac{1}{\abs{\nabla u}}(\underbrace{\laplacian u}_{=0}-\nabla^2_{\nu \nu} u)\mathfullstop
     \end{equation*}
     and thus
     \begin{equation*}
-        \abs{A}^2-H^2=\abs{\nabla u}^{-2}(\abs{\nabla^2 u}^2-2\abs{\nabla\abs{\nabla u}}^2).
+        \abs{A}^2-H^2=\abs{\nabla u}^{-2}(\abs{\nabla^2 u}^2-2\abs{\nabla\abs{\nabla u}}^2)\mathfullstop
     \end{equation*}
     Combining with \cref{eq:contracted_gauss_codazzi},
     \begin{equation*}
-        \Ricci((\grad u)/\abs{\nabla u},(\grad u)/\abs{\nabla u})=\frac{1}{2}(R_\Omega-R_S+H^2-\abs{A}^2),
+        \Ricci((\grad u)/\abs{\nabla u},(\grad u)/\abs{\nabla u})=\frac{1}{2}(R_\Omega-R_S+H^2-\abs{A}^2)\mathcomma
     \end{equation*} 
     then yields the result.
 \end{proof}
@@ -303,14 +309,14 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
             \laplacian \phi&=\nabla_i \nabla^i \sqrt{\abs{\nabla u}^2+\varepsilon}\\
             &=\nabla_i \frac{\nabla^i \abs{\nabla u}^2}{2\phi}\\
             &=\frac{\laplacian \abs{\nabla u}^2}{2\phi}-\frac{\abs{\nabla\abs{\nabla u}^2}^2}{4\phi^3}\\
-            &\explain{\text{\cref{lem:bochner_identity}}}{=}\inverse{\phi}(\abs{\nabla^2 u}^2+\Ricci(\nabla u,\nabla u)-\phi^{-2}\abs{\nabla u}^2\abs{\nabla \abs{\nabla u}}^2),
+            &\explain{\text{\cref{lem:bochner_identity}}}{=}\inverse{\phi}(\abs{\nabla^2 u}^2+\Ricci(\nabla u,\nabla u)-\phi^{-2}\abs{\nabla u}^2\abs{\nabla \abs{\nabla u}}^2)\mathcomma
         \end{aligned}
     \end{equation}
     where we have used Bochner's identity (and \( \laplacian u=0 \)) in the last line.
 
     Thus on a regular level set \( S \) we can apply \cref{lem:main_identity} to get
     \begin{equation}
-        \laplacian \phi\geq \frac{1}{2}\inverse{\phi}(\abs{\nabla^2 u}^2+\abs{\nabla u}^2(R_\Omega-R_S)).\label{eq:main_inequality_applied_main_identity}
+        \laplacian \phi\geq \frac{1}{2}\inverse{\phi}(\abs{\nabla^2 u}^2+\abs{\nabla u}^2(R_\Omega-R_S))\mathfullstop\label{eq:main_inequality_applied_main_identity}
     \end{equation}
 
     Let now \( \mathcal{A}\subset \interval{\minu}{\maxu} \) be an open set containing all the critical values of \( u \) (images of points where \( \nabla u=0 \)), and let \( \mathcal{B}=\interval{\minu}{\maxu}\setminus \mathcal{A} \) be the complementary set.
@@ -318,15 +324,15 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     Then the divergence theorem yields (since \( \laplacian =\divergence;\grad \))
     \begin{multline}
         \int_{P_1\cap \inverse{u}(\mathcal{A})}\partial_\nu \phi\odif{A}+\int_{P_1\cap \inverse{u}(\mathcal{B})}\partial_\nu \phi\odif{A}+\int_{P_2}\partial_\nu \phi\odif{A}=\int_{\boundary{\Omega}}\partial_\nu \phi\odif{A}\\
-        =\int_{\Omega}\laplacian \phi\odif{V}=\int_{\inverse{u}(\mathcal{A})}\laplacian \phi\odif{V}+\int_{\inverse{u}(\mathcal{B})}\laplacian \phi\odif{V}.\label{eq:main_inequality_branching_point}
+        =\int_{\Omega}\laplacian \phi\odif{V}=\int_{\inverse{u}(\mathcal{A})}\laplacian \phi\odif{V}+\int_{\inverse{u}(\mathcal{B})}\laplacian \phi\odif{V}\mathfullstop\label{eq:main_inequality_branching_point}
     \end{multline}
     We first deal with the integrals over \( P_1\cap \inverse{u}(\mathcal{A}) \) and \( \inverse{u}(\mathcal{A}) \). Since
     \begin{equation*}
-        \frac{\abs{\nabla u}}{\phi}\abs{\nabla \abs{\nabla u}}=\frac{1}{2\phi}\nabla(g(\nabla u,\nabla u))=\frac{g(\nabla^2 u,\nabla u)}{\phi}\explain{\text{Cauchy--Schwarz}}{\leq}\frac{\abs{\nabla^2 u}\abs{\nabla u}}{\phi}\explain{\abs{\nabla u}\leq \phi}{\leq} \abs{\nabla^2 u},
+        \frac{\abs{\nabla u}}{\phi}\abs{\nabla \abs{\nabla u}}=\frac{1}{2\phi}\nabla(g(\nabla u,\nabla u))=\frac{g(\nabla^2 u,\nabla u)}{\phi}\explain{\text{Cauchy--Schwarz}}{\leq}\frac{\abs{\nabla^2 u}\abs{\nabla u}}{\phi}\explain{\abs{\nabla u}\leq \phi}{\leq} \abs{\nabla^2 u}\mathcomma
     \end{equation*}
     \cref{eq:main_inequality_applied_bochner} and another application of Cauchy--Schwarz give on \( \inverse{u}(\mathcal{A}) \)
     \begin{equation*}
-        \laplacian\phi\geq \inverse{\Phi}\Ricci(\nabla u, \nabla u)\geq -\abs{\Ricci}\abs{\nabla u}.
+        \laplacian\phi\geq \inverse{\Phi}\Ricci(\nabla u, \nabla u)\geq -\abs{\Ricci}\abs{\nabla u}\mathfullstop
     \end{equation*}
     Then we can decompose into level sets of \( u \) using the coarea formula (note that we need to divide by \( \abs{\nabla u} \)) to get
     \begin{equation*}
@@ -334,7 +340,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
             -\int_{\inverse{u}(\mathcal{A})}\laplacian\phi\odif{V}&\leq \int_{\inverse{u}(\mathcal{A})}\abs{\Ricci}\abs{\nabla u}\odif{V}\\ 
             &=\int_{t\in \mathcal{A}}\int_{S_t}\abs{\Ricci}\odif{A}\odif{t}\\
             &\leq C\int_{t\in \mathcal{A}}\mathcal{H}^2(S_t)\odif{t}
-        \end{aligned},
+        \end{aligned}\mathcomma
     \end{equation*}
     where \( \mathcal{H}^2(S_t) \) is the Hausdorff measure of the level sets and \( C \) is some constant bounding the Ricci curvature.
 
@@ -346,11 +352,11 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
             &=\frac{g(\nabla_{\nabla u}\nabla u,\nu)}{\phi}\\
             &=-\frac{g(\nabla_{\nabla u}\nu,\nabla u)}{\phi}\\
             &\leq \abs{\nabla u}\abs{A_{P_1}}\leq \abs{\nabla u}C
-        \end{aligned},
+        \end{aligned}\mathcomma
     \end{equation*}
     where we have used \( g(\nabla u,\nu)=0 \) by the Neumann boundary condition of \( u \) on \( P_1 \). We thus get by the coarea formula
     \begin{equation*}
-        \int_{P_1\cap \inverse{u}(\mathcal{A})}\partial_{\nu} \phi\odif{A}\leq \int_{t\in \mathcal{A}}\int_{P_1\cap S_t}\abs{A_{P_1}}\odif{l}\odif{t}\leq C\int_{t\in \mathcal{A}}\mathcal{H}^1(\boundary{S_t}\cap P_1)\odif{t}.
+        \int_{P_1\cap \inverse{u}(\mathcal{A})}\partial_{\nu} \phi\odif{A}\leq \int_{t\in \mathcal{A}}\int_{P_1\cap S_t}\abs{A_{P_1}}\odif{l}\odif{t}\leq C\int_{t\in \mathcal{A}}\mathcal{H}^1(\boundary{S_t}\cap P_1)\odif{t}\mathfullstop
     \end{equation*}
     Let us now deal with the integrals over \( P_1\cap \inverse{u}(\mathcal{B}) \) and \( \inverse{u}(\mathcal{B}) \). On \( P_1 \) we have as before
     \begin{equation*}
@@ -358,19 +364,19 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     \end{equation*}
     where we have used the Neumann boundary condition in the last line. Let \( n \) now denote the normal vector \( n^i=\frac{\nabla^i u}{\abs{\nabla u}} \) to \( S_t \). This yields
     \begin{equation*}
-        \partial_\nu\phi=-\inverse{\phi}\abs{\nabla u}^2A_{P_1}(n,n)=-\inverse{\phi}\abs{\nabla u}^2(H_{P_1}-\trace;_{S_t}A_{P_1}).
+        \partial_\nu\phi=-\inverse{\phi}\abs{\nabla u}^2A_{P_1}(n,n)=-\inverse{\phi}\abs{\nabla u}^2(H_{P_1}-\trace;_{S_t}A_{P_1})\mathfullstop
     \end{equation*}
     Let \( v\in \tangentspace{p}{P_1}\cap\tangentspace{p}{S_t} \) be a normed vector (there are only two choices, since the vector space is one-dimensional). Then (as \( S_t \) is orthogonal to \( P_1 \) by the Neumann boundary condition of \( u \) on \( P_1 \))
     \begin{equation*}
-        \trace;_{S_t}A_{P_1}=A_{\boundary{\Omega}}(v,v)=\scalarproduct{\nabla_{v}v}{-n}=\kappa_{S_t\cap P_1}=\kappa_{\boundary{S_t}}.
+        \trace;_{S_t}A_{P_1}=A_{\boundary{\Omega}}(v,v)=\scalarproduct{\nabla_{v}v}{-n}=\kappa_{S_t\cap P_1}=\kappa_{\boundary{S_t}}\mathfullstop
     \end{equation*}
     Thus decomposing \( P_1 \) into level sets of \( u \) using the coarea formula yields 
     \begin{equation*}
-        \int_{P_1\cap \inverse{u}(\mathcal{B})}\partial_{\nu}\phi\odif{A}=-\int_{t\in \mathcal{B}}\p*{\int_{\boundary{S_t}\cap P_1}\inverse{\phi}\abs{\nabla u}(H_{P_1}-\kappa_{\boundary{S_t}})}\odif{t}.
+        \int_{P_1\cap \inverse{u}(\mathcal{B})}\partial_{\nu}\phi\odif{A}=-\int_{t\in \mathcal{B}}\p*{\int_{\boundary{S_t}\cap P_1}\inverse{\phi}\abs{\nabla u}(H_{P_1}-\kappa_{\boundary{S_t}})}\odif{t}\mathfullstop
     \end{equation*}
     Meanwhile on \( \inverse{\mathcal{B}} \) applying the coarea formula and \cref{eq:main_inequality_applied_main_identity} produces
     \begin{equation*}
-        \int_{\inverse{u}(\mathcal{B})}\laplacian\phi\odif{V}\geq \frac{1}{2}\int_{t\in \mathcal{B}}\int_{S_t}\inverse{\phi}\abs{\nabla u}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}^2}+(R_{\Omega}-R_{S_t})}\odif{A}\odif{t}.
+        \int_{\inverse{u}(\mathcal{B})}\laplacian\phi\odif{V}\geq \frac{1}{2}\int_{t\in \mathcal{B}}\int_{S_t}\inverse{\phi}\abs{\nabla u}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}^2}+(R_{\Omega}-R_{S_t})}\odif{A}\odif{t}\mathfullstop
     \end{equation*}
     Note that 
     \begin{equation*}
@@ -381,8 +387,8 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
         \frac{1}{2}\int_{t\in \mathcal{B}}\int_{S_t}\frac{\abs{\nabla u}}{\phi}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}^2}+R_{\Omega}}\odif{A}\odif{t}\leq\\
          \begin{aligned}[t]
             &\int_{t\in \mathcal{B}}\p*{\frac{1}{2}\int_{S_t}\frac{\abs{\nabla u}}{\phi}R_{S_t}\odif{A}+\int_{\boundary{S_t}\cap P_1}\frac{\abs{\nabla u}}{\phi}(\kappa_{\boundary{S_t}}-H_{P_1})} \odif{t}  \\
-            &+\int_{\tilde{P}_2}\partial_{\nu}\phi\odif{A}+C\int_{t\in \mathcal{A}}(\mathcal{H}^1(\boundary{S_t}\cap P_1)+\mathcal{H}^2(S_t))\odif{t}
-         \end{aligned}.
+            &+\int_{\tilde{P}_2}\partial_{\nu}\phi\odif{A}+C\int_{t\in \mathcal{A}}(\mathcal{H}^1(\boundary{S_t}\cap P_1)+\mathcal{H}^2(S_t))\odif{t}\mathfullstop
+         \end{aligned}
     \end{multline}
     
     Since \( \Omega \) is compact and \( \mathcal{B} \) closed, \( \abs{\nabla u} \) is uniformly bounded from below on \( \inverse{u}(\mathcal{B}) \). Furthermore on \( \tilde{P}_2 \) (where \( \abs{\nabla u}\neq 0 \)) we have
@@ -399,7 +405,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
             \end{aligned}\\
             &=\begin{aligned}[t]
             &\int_{t\in \mathcal{B}}\p*{2\pi \chi(S_t)-\int_{\boundary{S_t}\cap P_2}\kappa_{\boundary{S_t}}-\int_{\boundary{S_t}\cap P_1}H_{P_1}} \odif{t}\\
-            &+\int_{\tilde{P}_2}\partial_{\nu}\abs{\nabla u}\odif{A}+C\int_{t\in \mathcal{A}}(\mathcal{H}^1(\boundary{S_t}\cap P_1)+\mathcal{H}^2(S_t))\odif{t},
+            &+\int_{\tilde{P}_2}\partial_{\nu}\abs{\nabla u}\odif{A}+C\int_{t\in \mathcal{A}}(\mathcal{H}^1(\boundary{S_t}\cap P_1)+\mathcal{H}^2(S_t))\odif{t}\mathcomma
         \end{aligned}
         \end{aligned} \label{eq:inequality_with_critical_values_removed}
     \end{multline}
@@ -413,7 +419,7 @@ For the proof we follow the \cite[Proof of Proposition 4.2 in][]{brayHarmonicFun
     is integrable by the coarea formula, taking \( \abs{\mathcal{A}}\to 0 \) in \cref{eq:inequality_with_critical_values_removed} leads to
     \begin{multline*}
         \int_{\minu}^{\maxu} \int_{S_t} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}^2}+R }\odif{A}+\int_{\boundary{S_t}\cap P_1}H_{P_1}\odif{l}\odif{t}\\
-        \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t} \cap P_2}\kappa_{\boundary{S_t}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{\nu} \abs{\nabla u}\odif{A}.
+        \leq\int_{\minu}^{\maxu}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t} \cap P_2}\kappa_{\boundary{S_t}}\odif{l}}\odif{t}+ \int_{\tilde{P}_2}\partial_{\nu} \abs{\nabla u}\odif{A}\mathfullstop
     \end{multline*} 
 \end{proof}}
 \begin{remark}\label{rem:no_critical_points_then_main_inequality_is_equality}
@@ -437,13 +443,13 @@ That is we want functions \( \tilde{x}_1,\tilde{x}_2,\tilde{x}_3 \) that
     \item fulfill boundary conditions on \( \boundary{M} \) mimicking the behaviour of the standard coordinates on Euclidean half-space, \ie
     \begin{equation*}
         \begin{cases}
-            \partial_\nu \tilde{x}_\alpha=0 &\text{ on \( \boundary{M} \cap M(\Sigma) \), for \( \alpha=1,2 \)}\\
-            \tilde{x}_3=0 &\text{on \( \boundary{M}\cap M(\Sigma) \)}.
+            \partial_\nu \tilde{x}_\alpha=0 &\text{ on \( \boundary{M} \cap M(\Sigma) \), for \( \alpha=1,2 \)\mathcomma}\\
+            \tilde{x}_3=0 &\text{on \( \boundary{M}\cap M(\Sigma) \)}\mathfullstop
         \end{cases}
     \end{equation*}
     Note that in such coordinates the part of the mass \cref{def:half_space_mass} given by the integral over \( \sphere^1_r \) vanishes: To see this, note first that since \( \boundary{M} \) is a level set of \( \tilde{x}_3 \), we have \( \nabla \tilde{x}_3=\abs{\nabla \tilde{x}_3}\cdot \nu \). Then we can compute
     \begin{equation}
-        g_{\alpha 3}=g(\partial_\alpha,\partial_3)=\odif{x_{\alpha}}(\partial_3)=\partial_{3}(x_\alpha)=\abs{\nabla u}\cdot \partial_\nu (x_\alpha)=0,\label{eq:mass_expression_simplifies}
+        g_{\alpha 3}=g(\partial_\alpha,\partial_3)=\odif{x_{\alpha}}(\partial_3)=\partial_{3}(x_\alpha)=\abs{\nabla u}\cdot \partial_\nu (x_\alpha)=0\mathcomma\label{eq:mass_expression_simplifies}
     \end{equation}
     where we have used that \( \abs{\nabla u}>0 \) for large enough \( r \). This also shows that even though \( \mass{M}{g} \) is coordinate independent, the two terms that define it (the integrals over \( \sphere^2_{r,+} \) and \( \sphere_r^1 \)) individually are coordinate dependent.
 
@@ -459,21 +465,21 @@ Even though we normally only work with a single end, our proof of the existence 
     \begin{equation*}
         \begin{cases}
             \laplacian \tilde{x}_\beta=0& \text{in \( M(\Sigma) \)},\\
-            \partial_\nu \tilde{x}_\beta=0& \text{on \( \boundary{M}\cap M(\Sigma) \)},\\
-            \partial_{n_\Sigma}\tilde{x}_\beta=0&\text{on \( \Sigma \)},
+            \partial_\nu \tilde{x}_\beta=0& \text{on \( \boundary{M}\cap M(\Sigma) \)}\mathcomma\\
+            \partial_{n_\Sigma}\tilde{x}_\beta=0&\text{on \( \Sigma \)}\mathcomma
         \end{cases}
     \end{equation*}
     for \( \beta=1,2 \),
     \begin{equation*}
         \begin{cases}
             \laplacian \tilde{x}_3=0& \text{in \( M(\Sigma) \)},\\
-            \tilde{x}_3=0& \text{on \( \boundary{M}\cap M(\Sigma) \)},\\
-            \partial_{n_{\Sigma}}\tilde{x}_3=0& \text{on \( \Sigma \)},
+            \tilde{x}_3=0& \text{on \( \boundary{M}\cap M(\Sigma) \)}\mathcomma\\
+            \partial_{n_{\Sigma}}\tilde{x}_3=0& \text{on \( \Sigma \)}\mathcomma
         \end{cases}
     \end{equation*}
     and
     \begin{equation*}
-        x_i^j-\tilde{x}_i\in C_{1-\tau+\varepsilon}^{2,\alpha} \quad \text{in \( \Mend^j \)}.
+        x_i^j-\tilde{x}_i\in C_{1-\tau+\varepsilon}^{2,\alpha} \quad \text{in \( \Mend^j \)}\mathfullstop
     \end{equation*}
     Moreover, for each end \( \Mend^j \), the functions \( \Set{\tilde{x}_i} \) form an asymptotically flat coordinate system in a neighborhood of infinity.
 \end{proposition} 
@@ -487,20 +493,20 @@ Even though we normally only work with a single end, our proof of the existence 
         
         We want to show uniqueness for the case \( \Sigma=\emptyset \). Let \( \Set{\tilde{x}_i} \) and \( \tilde{x}_i' \) be two harmonic coordinates satisfying all the properties. By \cite[Proposition 3.9]{almarazPositiveMassTheorem2016} (the proof of which extends without changes to the case with multiple ends), there exist an orthogonal matrix \( (Q_{i}^j)_{i,j=1}^3 \) and constants \( \Set{a_i}_{i=1}^3 \), such that
         \begin{equation*}
-            \tilde{x}_i'=Q_i^k\tilde{x}_k+a_i.
+            \tilde{x}_i'=Q_i^k\tilde{x}_k+a_i\mathfullstop
         \end{equation*}
         Note that by the asymptotics of our harmonic coordinates we have 
         \begin{align*}
             (\delta_i^k-Q_i^k)\tilde{x}_k-a_i=\tilde{x}_i-\tilde{x}_i'&=\smallo{r^{1/2}} \quad \text{as \( r\goesto \infty \)},\\
-            (\delta_i^k-Q_i^k)(x_k^j-\tilde{x}_k)+a_i&=\smallo{r^{1/2}},
+            (\delta_i^k-Q_i^k)(x_k^j-\tilde{x}_k)+a_i&=\smallo{r^{1/2}}\mathcomma
         \end{align*}
         which implies 
         \begin{equation*}
-            (\delta_i^k-Q_i^k)x_k^j=\smallo{r^1},
+            (\delta_i^k-Q_i^k)x_k^j=\smallo{r^1}\mathcomma
         \end{equation*}
         and thus we must have \( Q_i^k=\delta_i^k \) (since otherwise \( (\delta_i^k-Q_i^k)x_k^j \) would be linear in \( r \) and nonzero, which is not \( \smallo{r^1} \)). Hence
         \begin{equation*}
-            \tilde{x}_i=\tilde{x}_i'+a_i.
+            \tilde{x}_i=\tilde{x}_i'+a_i\mathfullstop
         \end{equation*} 
         Note that \( a_3=0 \), since \( \tilde{x}_3=0=\tilde{x}_3' \) on \( \boundary{M} \).
 
@@ -533,7 +539,7 @@ To this end, let \( (M,g) \) be an asymptotically flat half-space and horizon bo
 By \cite[Proposition 3.7]{almarazPositiveMassTheorem2016}, we can compute the mass in these harmonic coordinates. For \( L>r_0 \) define coordinate half-cylinders \( C_L=D_L\cup T_L \) given by
 \begin{align*}
     D_L&=\Set{x\in \Mend\given (x_1)^2+(x_2)^2\leq L^2,\logicspace x_3=L}\\
-    T_L&=\Set{x\in \Mend\given (x_1)^2+(x_2)^2=L^2,\logicspace 0\leq x_3\leq L}.
+    T_L&=\Set{x\in \Mend\given (x_1)^2+(x_2)^2=L^2,\logicspace 0\leq x_3\leq L}\mathfullstop
 \end{align*}
 Further define
 \begin{align*}
@@ -556,7 +562,7 @@ To prove our main result \cref{eq:main_result}, we will recover the mass as the 
 
 Write \( S_t^L\definedas \inverse{u}(t)\cap \Omega_L \). Setting \( P_1=\Sigma\) and \( P_2=C_L\cup (\boundary{M})_L \) yields (since \( \Sigma \) is a minimal surface, \ie \( H_{P_1}=H_\Sigma=0 \))
 \begin{equation}
-    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R\abs{\nabla u} }\odif{V} \leq\int_{0}^{L}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}}\odif{t}+ \int_{\tilde{P_2}}\partial_{n} \abs{\nabla u}\odif{A},\label{eq:just_insert_cylinder_into_main_inequality}
+    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R\abs{\nabla u} }\odif{V} \leq\int_{0}^{L}\p[\Big]{2\pi \chi(S_t)-\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}}\odif{t}+ \int_{\tilde{P_2}}\partial_{n} \abs{\nabla u}\odif{A}\mathcomma\label{eq:just_insert_cylinder_into_main_inequality}
 \end{equation}
 where \( \kappa_{t,L} \) is the geodesic curvature of \( S_{t}^L \cap T_L\) viewed as the boundary of \( S_t^L \), \( n \) is the outward unit normal to \( P_2 \) and \( \tilde{P}_2=P_2\cap \Set{\nabla u\neq 0} \). We have used the coarea formula to express the integral on the left as being over \( \Omega_L \).
 
@@ -566,7 +572,7 @@ Note now \( u-t \) is still harmonic, has Dirichlet boundary condition \( u-t=0 
 
 Thus \( S_t^L \) consists of a single connected component and meets \( T_L \) along a circle. In particular, we can apply \cref{eq:def_euler_characteristic} with \( b\geq 1 \) and get \( \chi(S_t^L)\leq 1 \). Then \cref{eq:just_insert_cylinder_into_main_inequality} becomes
 \begin{equation}
-    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R\abs{\nabla u} }\odif{V} \leq2\pi L- \int_{0}^{L}\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}\odif{t}+ \int_{\tilde{P}_2}\partial_{n} \abs{\nabla u}\odif{A}.\label{eq:starting_point_individual_computations}
+    \int_{\Omega_L} \frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R\abs{\nabla u} }\odif{V} \leq2\pi L- \int_{0}^{L}\int _{\boundary{S_t^L} \cap T_L}\kappa_{t,L}\odif{l}\odif{t}+ \int_{\tilde{P}_2}\partial_{n} \abs{\nabla u}\odif{A}\mathfullstop\label{eq:starting_point_individual_computations}
 \end{equation}
 It now only remains to compute the boundary terms in \cref{eq:starting_point_individual_computations}. Note first that for large enough \( L \), we can be sure that \( \nabla u\neq 0 \) on \( C_L \) due to the asymptotic behaviour of \( u \). We thus define \( \widetilde{\boundary{M}_L}=\boundary{M}_L\cap \Set{\nabla u\neq 0} \) so that we have \( \tilde{P}_2=C_L\cup \widetilde{\boundary{M}_L} \) for large enough \( L \) (which we assume from now on, since we are taking the limit \( L\goesto \infty \) later on anyway).
 
@@ -584,30 +590,30 @@ The following is just the equivalent of \cite[Lemma 6.1]{brayHarmonicFunctionsMa
 
     Note that in our coordinates \( \nabla_i u=\delta_{i3} \) (since \( \nabla_i u \) are the coordinates of \( \nabla u=\odif{u} \), this is independent of the metric). Thus
     \begin{equation}
-        \nabla\abs{\nabla u}=\nabla (\sqrt{g^{33}})=-\frac{1}{2}\nabla g_{33}+\bigo{\abs{x}^{-1-2\tau}},\label{eq:asymptotic_derivative_of_nabla_u_norm}
+        \nabla\abs{\nabla u}=\nabla (\sqrt{g^{33}})=-\frac{1}{2}\nabla g_{33}+\bigo{\abs{x}^{-1-2\tau}}\mathcomma\label{eq:asymptotic_derivative_of_nabla_u_norm}
     \end{equation}
     where we have used \cref{eq:def_asymptotically_flat} and the fact that for any matrix \( A \) (for our case we can set \( A_{ij}=g_{ij}-\delta_{ij} \)),
     \begin{equation*}
-        \inverse+{I+t\cdot A}=\sum_{n=0}^{\infty}(-1)^n\cdot t^n\cdot A^n,
+        \inverse+{I+t\cdot A}=\sum_{n=0}^{\infty}(-1)^n\cdot t^n\cdot A^n\mathcomma
     \end{equation*}
     where the series on the right converges if \( \norm{A}\abs{t}<1 \) (in particular we have \( g^{33}-\delta^{33}=\delta_{33}-g_{33}+\bigo((g_{33}-\delta_{33})^2) \)). Next, note that the outer normal to \( C_L \) is given by
     \begin{equation*}
-        \mu^i=g^{ij}\frac{\delta_{j3}}{\abs{\nabla u}}=\delta^{i3}+\bigo{\abs{x}^{-\tau}}\quad \text{on \( D_L^+ \)},
+        \mu^i=g^{ij}\frac{\delta_{j3}}{\abs{\nabla u}}=\delta^{i3}+\bigo{\abs{x}^{-\tau}}\quad \text{on \( D_L^+ \)}\mathcomma
     \end{equation*}
     \ie on \( D_L^+ \) we have \( \mu=\partial_3+\bigo{\abs{x}^{-\tau}} \). Similarly we have
     \begin{equation*}
-        \mu=\frac{x_1 \partial_1+x_2 \partial_2}{L}+\bigo{\abs{x}^{-\tau}} \quad \text{on \( T_L \)}.
+        \mu=\frac{x_1 \partial_1+x_2 \partial_2}{L}+\bigo{\abs{x}^{-\tau}} \quad \text{on \( T_L \)}\mathfullstop
     \end{equation*}
     Hence
     \begin{equation*}
-        \int_{C_L} \partial_{\nu}\abs{\nabla u}=-\frac{1}{2}\int_{D_L}g_{33,3}\odif{A}-\frac{1}{2L}\int_{T_L}(x_1 g_{33,1}+x_2 g_{33,2})\odif{A}+\bigo{L^{1-2\tau}}.
+        \int_{C_L} \partial_{\nu}\abs{\nabla u}=-\frac{1}{2}\int_{D_L}g_{33,3}\odif{A}-\frac{1}{2L}\int_{T_L}(x_1 g_{33,1}+x_2 g_{33,2})\odif{A}+\bigo{L^{1-2\tau}}\mathfullstop
     \end{equation*}
     Now notice that (using the Koszul formula \cref{eq:koszul_formula})
     \begin{equation}\label{eq:asymptotic_christoffel_symbols}
         \begin{aligned}[t]
             \Gamma_{ij}^k&=\frac{1}{2}g^{kl}(g_{lj,i}+g_{li,j}-g_{ij,l})\\
             &=\frac{1}{2}(\delta^{il}+\bigo{\abs{x}^{-\tau}})(\underbrace{g_{lj,i}+g_{li,j}-g_{ij,l}}_{\bigo{\abs{x}^{-\tau-1}}})\\
-            &=\frac{1}{2}(g_{kj,i}+g_{ki,j}-g_{ij,k})+\bigo{\abs{x}^{-1-2\tau}}.
+            &=\frac{1}{2}(g_{kj,i}+g_{ki,j}-g_{ij,k})+\bigo{\abs{x}^{-1-2\tau}}\mathfullstop
         \end{aligned}
     \end{equation}
     Then since (recall that \( u \) is linear in our chosen coordinates, so \( \partial_i\partial_j u=0 \))
@@ -616,7 +622,7 @@ The following is just the equivalent of \cite[Lemma 6.1]{brayHarmonicFunctionsMa
             0&=\nabla_i \nabla^i u\\
             &=\underbrace{g^{ij}\partial_i \partial_j u}_{=0}+\partial_i(g^{ij}) \partial_j u+\underbrace{\Gamma^{i}_{ij}}_{\mathclap{=\bigo{\abs{x}^{-1-\tau}}}}\overbrace{\partial^j u}^{\smash{\mathclap{=\delta^{j3}+\bigo{\abs{x}^{-\tau}}}}}\\
             &=-\partial_i(g_{i3})+\Gamma^i_{i3}+\bigo{\abs{x}^{-1-2\tau}}\\
-            &=-\Gamma^3_{11}-\Gamma^3_{22}-\Gamma^3_{33}+\bigo{\abs{x}^{-1-2\tau}}.
+            &=-\Gamma^3_{11}-\Gamma^3_{22}-\Gamma^3_{33}+\bigo{\abs{x}^{-1-2\tau}}\mathfullstop
         \end{aligned}
     \end{equation*}
     we have
@@ -624,7 +630,7 @@ The following is just the equivalent of \cite[Lemma 6.1]{brayHarmonicFunctionsMa
         \begin{aligned}[t]
             g_{33,3}&=2\Gamma_{33}^3+\bigo{\abs{x}^{-1-2\tau}}\\
             &=-2\Gamma_{11}^3-2\Gamma_{22}^3+\bigo{\abs{x}^{-1-2\tau}}\\
-            &=-2g_{31,1}-2g_{32,2}+g_{22,3}+g_{11,3}+\bigo{\abs{x}^{-1-2\tau}}.
+            &=-2g_{31,1}-2g_{32,2}+g_{22,3}+g_{11,3}+\bigo{\abs{x}^{-1-2\tau}}\mathfullstop
         \end{aligned}
     \end{equation*}
     Applying this to our integral yields
@@ -633,7 +639,7 @@ The following is just the equivalent of \cite[Lemma 6.1]{brayHarmonicFunctionsMa
                 &\frac{1}{2}\int_{D_L}(g_{31,1}-g_{11,3}+g_{32,2}-g_{22,3})\odif{A}\\
                 &+\int_{D_L}\frac{1}{2}(g_{32,2}+g_{31,1})\odif{A}\\
                 &-\frac{1}{2L}\int_{T_L}(x_1 g_{33,1}+x_2 g_{33,2})\odif{A}+\bigo{L^{1-2\tau}}
-            \end{aligned}.
+            \end{aligned}\mathfullstop
     \end{equation*}
     Using first the divergence theorem on \( D_L \) and then the fundamental theorem of calculus on \( T_L \) then gives
     \begin{equation*}
@@ -663,7 +669,7 @@ Meanwhile we can use \cite[Lemma 6.2]{brayHarmonicFunctionsMass2019} without sub
     \begin{equation*}
         \int_0^L \int_{S_t^L\cap T_L}\kappa_{t,L}\odif{l}\odif{t}=\begin{aligned}[t]
             &2\pi L+\frac{1}{2L}\int_{T_L}[x_1(g_{22,1}-g_{12,2})+x_3(g_{11,2}-g_{21,1})]\odif{A}\\
-            &+\bigo{L^{1-2\tau}+L^{-\tau}}.
+            &+\bigo{L^{1-2\tau}+L^{-\tau}}\mathfullstop
         \end{aligned}
     \end{equation*}
 \end{lemma}
@@ -672,39 +678,39 @@ Meanwhile we can use \cite[Lemma 6.2]{brayHarmonicFunctionsMass2019} without sub
 
     Let \( \tau \) be a unit tangent vector to \( S_t^L\cap T_L \) and let \( \beta \) be the outward pointing unit normal to \( S_t^L\cap T_L \) along \( S_t^L \). Recall that the geodesic curvature \( \kappa_{t,L} \) is then given by 
     \begin{equation*}
-        \kappa_{t,L}=-\scalarproduct{\beta}{\nabla_{\tau}\tau}.
+        \kappa_{t,L}=-\scalarproduct{\beta}{\nabla_{\tau}\tau}\mathfullstop
     \end{equation*}
     Let
     \begin{equation*}
-        X\definedas x_1 \partial_1+x_2 \partial_2,\qquad Y\definedas x_2 \partial_1-x_1 \partial_2,
+        X\definedas x_1 \partial_1+x_2 \partial_2,\qquad Y\definedas x_2 \partial_1-x_1 \partial_2\mathcomma
     \end{equation*}
     then we have
     \begin{equation*}
-        \tau=\frac{Y}{\abs{Y}}\quad \text{and}\quad \beta=\frac{\tilde{X}}{\abs{\tilde{X}}},\quad \text{where \( \tilde{X}\definedas X-\scalarproduct{X}{\tau}\tau \)},
+        \tau=\frac{Y}{\abs{Y}}\quad \text{and}\quad \beta=\frac{\tilde{X}}{\abs{\tilde{X}}},\quad \text{where \( \tilde{X}\definedas X-\scalarproduct{X}{\tau}\tau \)}\mathcomma
     \end{equation*}
     and we can compute
     \begin{equation*}
        \kappa_{t,L}\begin{aligned}[t]
             &=-\scalarproduct*{\frac{X}{\abs{\tilde{X}}}}{\nabla_{\tau}\tau}\\
             &=\frac{-1}{\abs{\tilde{X}}\abs{Y}}\scalarproduct*{X}{\nabla_Y\frac{Y}{\abs{Y}}}\\
-            &=\frac{-1}{\abs{\tilde{X}}\abs{Y}^3}(\abs{Y}\scalarproduct{X}{\nabla_Y Y}-\scalarproduct{X}{Y}\scalarproduct{\nabla\abs{Y}}{Y}),
+            &=\frac{-1}{\abs{\tilde{X}}\abs{Y}^3}(\abs{Y}\scalarproduct{X}{\nabla_Y Y}-\scalarproduct{X}{Y}\scalarproduct{\nabla\abs{Y}}{Y})\mathcomma
         \end{aligned}
     \end{equation*}
     where we have used that \( \scalarproduct{\tau}{\nabla_{\tau}\tau}=0 \). Note that we have
     \begin{align*}
         \abs{\nabla\abs{Y}}&\begin{aligned}[t]
             &=\frac{\abs{\nabla \abs{Y}^2}}{2\abs{Y}}=\frac{\abs{\nabla(g^{ij}Y_i Y_j)}}{2\abs{Y}}\\
-            &=\frac{L^2 \cdot \bigo{\abs{x}^{-1-\tau}}+2L\cdot \bigo{\abs{x}^{-\tau}}}{2L+\bigo{\abs{x}^{-\tau}}}=\bigo{\abs{x}^{-\tau}},
+            &=\frac{L^2 \cdot \bigo{\abs{x}^{-1-\tau}}+2L\cdot \bigo{\abs{x}^{-\tau}}}{2L+\bigo{\abs{x}^{-\tau}}}=\bigo{\abs{x}^{-\tau}}\mathcomma
         \end{aligned}\\
         \scalarproduct{X}{Y}&=(x_1x_2-x_2x_1)+\bigo{\abs{x}^{-\tau}}\cdot\bigo{\abs{x}}\cdot \bigo{\abs{x}}=\bigo{\abs{x}}^{2-\tau}\\
         \implies \frac{\scalarproduct{X}{Y}\scalarproduct{\nabla\abs{Y}}{Y}}{\abs{\tilde{X}}\abs{Y}^3}&=\bigo{\abs{x}^{-1-2\tau}},\\
-        \implies \kappa_{t,L}&=\frac{-\scalarproduct{X}{\nabla_Y Y}}{\abs{\tilde{X}}\abs{Y}^2}+\bigo{\abs{x}^{-1-2\tau}}.
+        \implies \kappa_{t,L}&=\frac{-\scalarproduct{X}{\nabla_Y Y}}{\abs{\tilde{X}}\abs{Y}^2}+\bigo{\abs{x}^{-1-2\tau}}\mathfullstop
     \end{align*}
     Proceeding by writing \( \nabla_Y Y \) in terms of the partial derivatives and the Christoffel symbols and then using the Koszul formula (\cref{eq:koszul_formula}) gives
     \begin{equation}
         \kappa_{t,L}=\begin{aligned}[t]
             &\frac{\abs{X}}{\abs{Y}^2}-\frac{1}{2L^3}(x_1(x_2)^2 g_{11,1}+x_1^2 x_2 g_{22,2})\\
-            &+(x_1^2 x_2+x_2^3/2)\frac{g_{11,2}}{L^2}+(x_2^2 x_1+x_1^3/2)\frac{g_{22,1}}{L^2}-x_1^3 \frac{g_{12,2}}{L^3}-x_2^3\frac{g_{21,1}}{L^3}.
+            &+(x_1^2 x_2+x_2^3/2)\frac{g_{11,2}}{L^2}+(x_2^2 x_1+x_1^3/2)\frac{g_{22,1}}{L^2}-x_1^3 \frac{g_{12,2}}{L^3}-x_2^3\frac{g_{21,1}}{L^3}\mathfullstop
         \end{aligned}\label{eq:geodesic_curvature_asymptotic}
     \end{equation}
     Parametrizing \( S_t^L\cap T_L \) as
@@ -716,7 +722,7 @@ Meanwhile we can use \cite[Lemma 6.2]{brayHarmonicFunctionsMass2019} without sub
         \begin{aligned}[t]
             \int_{S_t^L\cap T_L}\frac{\abs{X}}{\abs{Y}^2}\odif{l}&=\int_{0}^{2\pi}\frac{\abs{X}}{\abs{Y}}(\gamma(s))\odif{s}\\
             &=\int_0^{2\pi}\p[\bigg]{1+\frac{\abs{X}^2-\abs{Y}^2}{\abs{Y}(\abs{X}+\abs{Y})}}(\gamma(s))\odif{s}\\
-            &=2\pi+\frac{1}{2L^2}\int_0^{2\pi}(\abs{X}^2-\abs{Y}^2)(\gamma(s))\odif{s}+\bigo{L^{-2\tau}}.
+            &=2\pi+\frac{1}{2L^2}\int_0^{2\pi}(\abs{X}^2-\abs{Y}^2)(\gamma(s))\odif{s}+\bigo{L^{-2\tau}}\mathfullstop
         \end{aligned}
     \end{equation*}
     In this parametrization we then get
@@ -726,19 +732,19 @@ Meanwhile we can use \cite[Lemma 6.2]{brayHarmonicFunctionsMass2019} without sub
                 &(\cos^2(s)-\sin^2(s))g_{11}(\gamma(s))+(\sin^2(s)-\cos^2(s))g_{22}(\gamma(s))\\
                 &+4\Sin{s}\Cos{s}g_{12}(\gamma(s))
             \end{aligned}\\
-            &=\frac{1}{2}\odv{\Sin{2s}}{s}(g_{11}-g_{22})(\gamma(s))-\odv{\Cos{2s}}{s}g_{12}(\gamma(s)),
+            &=\frac{1}{2}\odv{\Sin{2s}}{s}(g_{11}-g_{22})(\gamma(s))-\odv{\Cos{2s}}{s}g_{12}(\gamma(s))\mathcomma
         \end{aligned}
     \end{equation*}
     and then integrating by parts and using the double angle formula to express \( \Sin{2s} \) and \( \Cos{2s} \) in terms of \( x_1 \) and \( x_2 \) gives
     \begin{equation*}
         \int_{S_t^L\cap T_L}\frac{\abs{X}}{\abs{Y}^2}\odif{l}=2\pi+\frac{1}{2L^3}\int_{S_t^L\cap T_L}\begin{aligned}[t]
             (&x_1x_2(x_1 g_{22,2}-x_1 g_{11,2}+x_2 g_{11,1}-x_2 g_{22,1})\\
-            &+(x_1^2-x_2^2)(x_1 g_{12,2}-x_2 g_{21,1}))\odif{l}+\bigo{L^{-2\tau}}.
+            &+(x_1^2-x_2^2)(x_1 g_{12,2}-x_2 g_{21,1}))\odif{l}+\bigo{L^{-2\tau}}\mathfullstop
         \end{aligned}
     \end{equation*}
     We can combine this with \cref{eq:geodesic_curvature_asymptotic} to conclude
     \begin{equation*}
-        \int_{S_t^L \cap T_L}\kappa_{t,L}\odif{l}=2\pi+\frac{1}{2L}\int_{S_t^L \cap T_L}(x_2 g_{11,2}-x_2 g_{21,1}+x_1 g_{22,1}-x_1 g_{12,2})\odif{l}+\bigo{L^{-1-\tau}+L^{-2\tau}},
+        \int_{S_t^L \cap T_L}\kappa_{t,L}\odif{l}=2\pi+\frac{1}{2L}\int_{S_t^L \cap T_L}(x_2 g_{11,2}-x_2 g_{21,1}+x_1 g_{22,1}-x_1 g_{12,2})\odif{l}+\bigo{L^{-1-\tau}+L^{-2\tau}}\mathcomma
     \end{equation*}
     and then integrating over \( t\in \interval{0}{L} \) gives the desired identity.
 \end{proof}
@@ -747,7 +753,7 @@ It remains to consider the boundary term on \( \widetilde{(\boundary{M})_L} \):
 \begin{lemma}\label{lem:half_space_boundary_boundary_term}
     Using the notation from above, we have
     \begin{equation*}
-        \int_{\widetilde{(\boundary{M})_L}} \partial_\nu \abs{\nabla u}=-\int_{ (\boundary{M})_L}H\abs{\nabla u}\odif{A}.
+        \int_{\widetilde{(\boundary{M})_L}} \partial_\nu \abs{\nabla u}=-\int_{ (\boundary{M})_L}H\abs{\nabla u}\odif{A}\mathfullstop
     \end{equation*}
 \end{lemma}
 \begin{proof}
@@ -760,7 +766,7 @@ It remains to consider the boundary term on \( \widetilde{(\boundary{M})_L} \):
             &=-\frac{\nabla^i u \nabla^j u \nabla_i \nabla_j u}{\abs{\nabla u}^2}\\
             &=-n^i n^j \nabla_i \nabla_j u\\
             &=-\nabla_{\nu}\nabla_{\nu} u\\
-            &\explain{\text{\cref{fact:laplacian_and_hypersurface_laplacian}}}{=}-\laplacian_M u+\laplacian_{\boundary{M}} u +H\cdot \nabla_{\nu} u.
+            &\explain{\text{\cref{fact:laplacian_and_hypersurface_laplacian}}}{=}-\laplacian_M u+\laplacian_{\boundary{M}} u +H\cdot \nabla_{\nu} u\mathfullstop
         \end{aligned}
     \end{equation*}
     But \( u \) is harmonic, so \( \laplacian_M u=0 \). Also, \( u \) is constant on \( \boundary{M} \), and thus \( \laplacian_{\boundary{M}}u=0 \). Then recognizing that \( \nabla_{\nu} u=-\abs{\nabla u} \) yields the statement of the Lemma, where we can integrate over \(  (\boundary{M})_L \) instead of \( \widetilde{(\boundary{M})_L} \) since on the critical points the integrand \( H\abs{\nabla u} \) is zero anyway.
@@ -782,24 +788,24 @@ It remains to consider the boundary term on \( \widetilde{(\boundary{M})_L} \):
                 &+\bigo{L^{1-2\tau}+L^{-\tau}}
             \end{aligned}\\
             &=\frac{1}{2}\int_{C_L}\sum_{j}(g_{ij,j}-g_{jj,i})\mu^i\odif{A}+\frac{1}{2}\int_{\sphere^1_L}g_{\alpha 3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}}\\
-            &=\frac{1}{2}\int_{C_L}G_i\mu^i\odif{A}+\frac{1}{2}\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}},
+            &=\frac{1}{2}\int_{C_L}G_i\mu^i\odif{A}+\frac{1}{2}\int_{\sphere_r^{1}}g_{\alpha 3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}}\mathcomma
         \end{aligned}
     \end{equation*}
     Thus we get (after also dividing by \( 8\pi \))
     \begin{multline*}
         \int_{\Omega_L} \frac{1}{16\pi}\p[\Bigg]{\frac{\abs{\nabla^2 u}}{\abs{\nabla u}}+R \abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}_L}H\abs{\nabla u}\odif{A}\\
-        \leq \frac{1}{16\pi}\int_{C_L}G_i\mu^i\odif{A}+\frac{1}{16\pi}\int_{\sphere^1_L}g_{\alpha3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}}.
+        \leq \frac{1}{16\pi}\int_{C_L}G_i\mu^i\odif{A}+\frac{1}{16\pi}\int_{\sphere^1_L}g_{\alpha3}\theta^\alpha\odif{l}+\bigo{L^{1-2\tau}+L^{-\tau}}\mathfullstop
     \end{multline*}
     Since \( \tau>\frac{1}{2} \), we can take the limit \( L\goesto \infty \) and finally arrive at \cref{eq:main_result},
     \begin{equation}
-        \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}\cap M(\Sigma)}H \abs{\nabla u}\odif{A}\leq \mass{M}{g}.\label{eq:final_statement_main_result}
+        \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}+\frac{1}{8\pi}\int_{\boundary{M}\cap M(\Sigma)}H \abs{\nabla u}\odif{A}\leq \mass{M}{g}\mathfullstop\label{eq:final_statement_main_result}
     \end{equation}
 \end{proof}
 Now the positive mass theorem follows as a corollary:
 \begin{proof}[Proof of \cref{thm:positive_mass_theorem_for_half_spaces}]
     Since \( H \) is nonnegative, the horizon boundary required by \cref{thm:main_result} is guaranteed to exist by \cref{rem:exterior_region_existence}. Then \cref{eq:main_result} together with \( R\geq 0 \) and \( H\geq 0 \) directly implies
     \begin{equation*}
-        \mass{M}{g}\geq 0.
+        \mass{M}{g}\geq 0\mathfullstop
     \end{equation*}
 
     It remains to show rigidity (\ie that \( \mass{M}{g}=0 \) if and only if \( (M,g)\) is isometric to \( (\reals^3_{+},\delta) \)):
@@ -810,7 +816,7 @@ Now the positive mass theorem follows as a corollary:
         \begin{equation*}
             \begin{aligned}[t]
                 \laplacian u&=f\cdot N\cdot (N-1)\cdot \abs{\nabla g}^2 g^{N-2}+g^{N-1}(\dotsc)\\
-                &=g^{N-2}(f\cdot N\cdot (N-1)\abs{\nabla g}^2+g(\dotsc)),
+                &=g^{N-2}(f\cdot N\cdot (N-1)\abs{\nabla g}^2+g(\dotsc))\mathcomma
             \end{aligned}
         \end{equation*}
         and this cannot be \( 0 \) everywhere near \( E \), since \( f\cdot N\cdot (N-1)\abs{\nabla g}^2\neq 0 \) but \( g=0 \) on \( E \). If \( E \) is three-dimensional, then either \( u \) is constant (which is not permitted by our asymptotics) or \( \boundary{E} \) is non-empty (since surely \( E \) is closed). We can then apply the above reasoning to \( \boundary{E} \) to see that this also yields a contradiction to the harmonicity of \( u \).
@@ -822,11 +828,11 @@ Now the positive mass theorem follows as a corollary:
             C_L&\definedas D_L^+\cup T_L \cup D_L^-,\\
             \Omega_L&\definedas \text{ closure of bounded component of } M(\Sigma)\setminus C_L,\\
             (\boundary{M})_L&\definedas \boundary{M}\cap \Omega_L,\\
-            S_t^L&=\Set{x_\alpha=t}\cap \Omega_L,
+            S_t^L&=\Set{x_\alpha=t}\cap \Omega_L\mathcomma
         \end{align*} 
         and setting \( P_1=\Sigma\cup (\boundary{M})_L \) and \( P_2=C_L \) (instead of \( P_1=\Sigma \) and \( P_2=C_L\cup (\boundary{M})_L \), as we did for \( u=x_3 \)). Since all of \( P_1 \) is a minimal surface (has zero mean curvature), we get the following equivalent of \cref{eq:just_insert_cylinder_into_main_inequality}
         \begin{equation*}
-            \frac{1}{2}\int_{\Omega_L}\frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 x_\alpha}}{\abs{\nabla x_\alpha}}+R\abs{\nabla x_{\alpha}}}\odif{V}\leq \int_{-L}^L\p[\Bigg]{2\pi \chi(S_t^L)-\int_{\boundary{S_t^L}\cap  T_L}\kappa_{t,L}\odif{l}}\odif{t}+\int_{C_L} \partial_n \abs{\nabla u}\odif{A}.
+            \frac{1}{2}\int_{\Omega_L}\frac{1}{2}\p[\Bigg]{\frac{\abs{\nabla^2 x_\alpha}}{\abs{\nabla x_\alpha}}+R\abs{\nabla x_{\alpha}}}\odif{V}\leq \int_{-L}^L\p[\Bigg]{2\pi \chi(S_t^L)-\int_{\boundary{S_t^L}\cap  T_L}\kappa_{t,L}\odif{l}}\odif{t}+\int_{C_L} \partial_n \abs{\nabla u}\odif{A}\mathfullstop
         \end{equation*}
 
         % Define now also \( \tilde{T}_L \) to be 
@@ -835,11 +841,11 @@ Now the positive mass theorem follows as a corollary:
         Thus we can again conclude that \( \chi(S_t^L)\leq 1 \). Repeating the calculations in \cref{lem:cylinder_boundary_term} (where we now only get a \( g_{\alpha 3} \) term on \( D_L^{\pm}\cap \boundary{M} \)) and \cref{lem:geodesic_curvature_term} (where the partial integration contributes the \( g_{\alpha 3} \) term on \( T_L\cap \boundary{M} \)) with these slightly changed cylinders then leads to the equivalent of \cref{eq:main_result} for \( u=x_\alpha \),
         \begin{equation}
             \label{eq:main_result_for_minimal_boundary_and_parallel_coordinates}
-            \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}\leq \mass{M}{g}.
+            \frac{1}{16\pi}\int_{M(\Sigma)}\p*{\frac{\abs{\nabla^2 u}^2}{\abs{\nabla u}}+R\abs{\nabla u}}\odif{V}\leq \mass{M}{g}\mathfullstop
         \end{equation}
         While deriving \cref{eq:starting_point_individual_computations} we also used the inequality
         \begin{equation*}
-            \int_{0}^{L}2\pi \chi(S_t)\odif{t}\leq 2\pi L,
+            \int_{0}^{L}2\pi \chi(S_t)\odif{t}\leq 2\pi L\mathcomma
         \end{equation*}
         and then the fact that we have equality in \cref{eq:main_result} also implies that we get equality here, \ie the Euler characteristic of the level sets of \( u=x_3 \) is constant \( \chi(S_t^L)=1 \). Thus there is always exactly one boundary component \( S_t^L\cap T_L \) and a horizon boundary \( \Sigma \) cannot exist. Hence \( M(\Sigma)=M \) and \( M \) is diffeomorphic to \( \reals^3_+ \) (since \( M(\Sigma) \) is always diffeomorphic to \( \reals^3_+ \) with a finite number of balls removed). 
 
@@ -848,7 +854,7 @@ Now the positive mass theorem follows as a corollary:
             \begin{aligned}[t]
                 \nabla (g^{jk})&=\nabla(g(\nabla x_j,\nabla x_k))\\
                 &=g(\nabla^2 x_j,\nabla x_k)+g(\nabla x_j,\nabla^2 x_k)\\
-                &=0,
+                &=0\mathcomma
             \end{aligned}
         \end{equation*}
         \ie the metric is constant in these coordinates. We can then easily transform our coordinates linearly (while only rescaling \( x_3 \), such that on \( \boundary{M} \) we still have \( x_3=0 \), since we already have \( g_{\alpha 3}=0 \) by \cref{eq:mass_expression_simplifies}) to get \( g=\delta \) everywhere. Thus we have found an isometry \( (M,g)\isomorphic (\reals^3_+,\delta) \).
@@ -939,7 +945,7 @@ In the following, we consider harmonic functions on some concrete example manifo
 \subsection{Introducing some different Schwarzschild half-spaces}
 In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_{m,+} \) (which has mass \( m/2 \)). There are many other, less symmetric half-spaces resulting from cutting the full Schwarzschild space along surfaces of nonnegative mean curvature. One possibility is what we call \( (M_{m,\geq a},g_m) \), where
 \begin{equation*}
-    M_{m,\geq a}=\Set{x\in \reals^3\given x_3\geq a},\quad g_m=\omega^4\cdot \delta,\quad \omega=1+\frac{m}{2\abs{x}},
+    M_{m,\geq a}=\Set{x\in \reals^3\given x_3\geq a},\quad g_m=\omega^4\cdot \delta,\quad \omega=1+\frac{m}{2\abs{x}}\mathcomma
 \end{equation*}
 for some \( a>0 \), equipped with the same metric \( g_m \) as the normal Schwarzschild space. We also identify \( M_{m,+} \) with \( M_{m,\geq 0} \). 
 
@@ -965,7 +971,7 @@ We already know the mean curvature of these different surfaces when considered a
 \begin{proof}
     Let \( f=\Ln{\omega^2} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
     \begin{equation*}
-        H_{g}=\frac{1}{\omega^2}(H_{\delta}+2 \delta(\grad_\delta f,n_\delta)),
+        H_{g}=\frac{1}{\omega^2}(H_{\delta}+2 \delta(\grad_\delta f,n_\delta))\mathcomma
     \end{equation*}
     where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n_\delta \) is a normal vector to the surface computed using the background metric \( \delta \), as is also the case for the \( \grad_{\delta} f \).
 
@@ -974,32 +980,32 @@ We already know the mean curvature of these different surfaces when considered a
         &(\grad_\delta f)^i f\begin{aligned}[t]
             &=\partial^i f\\
             &=\frac{1}{\omega^2}\cdot2 \omega\cdot \partial^i \omega\\
-            &=-\frac{2}{\omega}\cdot \frac{m x_i}{2\abs{x}^3}.
+            &=-\frac{2}{\omega}\cdot \frac{m x_i}{2\abs{x}^3}\mathfullstop
         \end{aligned}
     \end{align*}
     
     Note that the outward pointing normal vector \( \nu_\delta \) to \( \schwarzschildboundary \) with respect to \( \delta \) is \( -\partial_3 \).  We can then calculate
     \begin{equation*}
-        \delta(\grad_\delta f,\nu_\delta)=\frac{m}{\abs{x}^3\cdot \omega^1},
+        \delta(\grad_\delta f,\nu_\delta)=\frac{m}{\abs{x}^3\cdot \omega^1}\mathcomma
     \end{equation*}
     and thus (since the mean curvature under \( \delta \) of both \( \schwarzschildboundary \) and \( \modifiedschwarzschildboundary \) is clearly zero)
     \begin{equation*}
-        H_g=\frac{2m}{\abs{x}^3\cdot \omega^3}x_3.
+        H_g=\frac{2m}{\abs{x}^3\cdot \omega^3}x_3\mathfullstop
     \end{equation*}
     In particular, on \( \schwarzschildboundary \) we have \( H_g=0 \) (since there \( x_3=0 \)) and on \( \modifiedschwarzschildboundary \) (for \( a>0 \)) we have \( H_g>0 \) (since there \( x_3>0 \)).
 
     Similarly, the normal vector \( n_{\Sigma,\delta} \) to \( \Sigma \) pointing out of our manifold is
     \begin{equation*}
-        n_{\Sigma,\delta} =-\frac{1}{\abs{x}} \begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix},
+        n_{\Sigma,\delta} =-\frac{1}{\abs{x}} \begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix}\mathcomma
     \end{equation*}
     and thus
     \begin{equation*}
-        \delta(\grad_\delta f,n_{\Sigma,\delta})=\frac{\abs{x}^2\cdot m}{\omega\abs{x}^4}=\frac{m}{\abs{x}^2\cdot \omega}\explain{\abs{x}=m/2}{=}\frac{2}{m}.
+        \delta(\grad_\delta f,n_{\Sigma,\delta})=\frac{\abs{x}^2\cdot m}{\omega\abs{x}^4}=\frac{m}{\abs{x}^2\cdot \omega}\explain{\abs{x}=m/2}{=}\frac{2}{m}\mathfullstop
     \end{equation*}
 
     On the other hand, the mean curvature of a sphere of radius \( r \) in \( \reals^3 \) is (under our definition and with respect to our normal vector) \( -\frac{2}{r} \). Thus for \( \Sigma \) we have
     \begin{equation*}
-        H_g=\frac{1}{\omega^2}\cdot \p[\Bigg]{-\frac{2}{m/2}+\frac{4}{m}}=0.
+        H_g=\frac{1}{\omega^2}\cdot \p[\Bigg]{-\frac{2}{m/2}+\frac{4}{m}}=0\mathfullstop
     \end{equation*}
 
     Lastly, since angles under \( g \) and \( \delta \) are the same, \( \Sigma \) and \( M_{m,+} \) are surely orthogonal. 
@@ -1015,7 +1021,7 @@ We can reduce the Laplacian \( \laplacian_g \) for a conformally euclidean metri
 \begin{lemma}\label{lem:laplacian_on_schwarzschild}
     In the above notation, we have on \( \reals^3\setminus \zeroset \)
     \begin{equation*}
-        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u).
+        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u)\mathfullstop
     \end{equation*}
 \end{lemma}
 \begin{remark}
@@ -1032,7 +1038,7 @@ We can reduce the Laplacian \( \laplacian_g \) for a conformally euclidean metri
                 &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)\\
                 &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
                 &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
-                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u).
+                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u)\mathfullstop
             \end{aligned}
         \end{aligned}
     \end{equation*}
@@ -1042,7 +1048,7 @@ We can reduce the Laplacian \( \laplacian_g \) for a conformally euclidean metri
 \end{remark}
 By \cref{lem:laplacian_on_schwarzschild}, finding harmonic functions \( u_i \) under the metric \( g \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) under the euclidean metric. For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics,
 \begin{equation*}
-    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \p*{\tilde{u}^k_{i,\ell} r^\ell + \tilde{u}^k_{i,-\ell-1} r^{-\ell-1}}Y^k_{\ell}(\theta,\varphi),
+    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \p*{\tilde{u}^k_{i,\ell} r^\ell + \tilde{u}^k_{i,-\ell-1} r^{-\ell-1}}Y^k_{\ell}(\theta,\varphi)\mathcomma
 \end{equation*}
 where \( \tilde{u}^k_{i,\ell} \) are real coefficients and \( Y^k_{\ell} \) the spherical harmonics.
 % \begin{equation*}
@@ -1059,13 +1065,13 @@ for any \( \varepsilon>0 \). Note that for \( M_g \) the strongest possible choi
     \begin{aligned}[t]
         (\tilde{u}_i-x_i)&=u_i\cdot (1+m/2\abs{x})-x_i\\
         &=(u_i-x_i)-m\frac{m\cdot x_i}{2\abs{x}}\\
-        &=\bigo{\abs{x}^0}.
+        &=\bigo{\abs{x}^0}\mathfullstop
     \end{aligned}
 \end{equation*}
 
 Hence we can conclude for the expansion in terms of solid harmonics that \( \tilde{u}^k_{i,\ell}=0 \) for all \( \ell>1 \) and that
 \begin{equation}
-    \sum_{k=-1}^1 \tilde{u}^k_{i,1}\cdot r \cdot Y^k_l(\theta,\varphi)=x_i.\label{eq:schwarzschld_harmonic_linear_part}
+    \sum_{k=-1}^1 \tilde{u}^k_{i,1}\cdot r \cdot Y^k_l(\theta,\varphi)=x_i\mathfullstop\label{eq:schwarzschld_harmonic_linear_part}
 \end{equation}
 
 It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the boundary conditions on the \( u_i \) are satisfied. We will treat the cases \( a=0 \) and \( a>0 \) separately. Note that while we are interested in determining all the \( u_i \) for \( a=0 \) (so that we can look at the resulting coordinate system), for \( a>0 \) we will not go this extra effort and instead only determine \( u_3 \).
@@ -1085,19 +1091,19 @@ It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the bounda
                 &+\tilde{u}^k_{i,-\ell-1}((m/2)^{-\ell-1}+m\cdot (-\ell-1)\cdot (m/2)^{-\ell-2})\big]
             \end{aligned}
         \end{aligned}\\
-        \explain{\text{\( Y_{\ell}^k \) linearly independent}}{\implies} 0&=Y^m_{\ell}\quad \text{or}\quad \tilde{u}_{i,\ell}^k\cdot (m/2)^\ell\cdot (1+2\ell)-\tilde{u}^k_{i,-\ell-1}\cdot (m/2)^{-\ell-1}(1+2\ell).
+        \explain{\text{\( Y_{\ell}^k \) linearly independent}}{\implies} 0&=Y^m_{\ell}\quad \text{or}\quad \tilde{u}_{i,\ell}^k\cdot (m/2)^\ell\cdot (1+2\ell)-\tilde{u}^k_{i,-\ell-1}\cdot (m/2)^{-\ell-1}(1+2\ell)\mathfullstop
     \end{align*}
     Since \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell>1 \) we see also that \( \tilde{u}^k_{i,\ell}=0 \) for \( \ell< -2 \). We further have
     \begin{align*}
         \tilde{u}^0_{i,-1}&=\frac{m}{2}\tilde{u}_{i,0}^0,\\
         \sum_{k=-1}^{1}\tilde{u}^k_{i,-2}Y^k_1(\theta,\varphi)&\begin{aligned}[t]
             &=\frac{3m/2}{3\cdot 4/m^2}\sum_{k=-1}^{1}\tilde{u}^k_{i,1}Y^k_1(\theta,\varphi)\\
-            &\explain{\cref{eq:schwarzschld_harmonic_linear_part}}{=}\frac{m^3}{8}\cdot \frac{x_i}{r}.
+            &\explain{\cref{eq:schwarzschld_harmonic_linear_part}}{=}\frac{m^3}{8}\cdot \frac{x_i}{r}\mathfullstop
         \end{aligned}
     \end{align*}
     In particular our solution so far looks like
     \begin{equation*}
-        \tilde{u}_i=x_i+\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i+\frac{C_i\cdot m}{2\cdot r}=x_i+\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i\cdot \omega.
+        \tilde{u}_i=x_i+\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i+\frac{C_i\cdot m}{2\cdot r}=x_i+\frac{m^3}{8}\cdot \frac{x_i}{r^3}+C_i\cdot \omega\mathfullstop
     \end{equation*}
     
     For \( i=3 \) the Dirichlet boundary condition \( u_3=0 \) (and thus also \( \tilde{u}_3=\omega\cdot u_3=0 \)) on \( \schwarzschildboundary \) (where \( x_3=0 \)) then gives \( C_3=0 \). For \( i=1,2 \) the choice of \( C_i \) is free and we choose \( C_1=C_2=0 \). We can check that the Neumann boundary condition on \( \schwarzschildboundary \) for these coordinates (we use \( \alpha=1,2 \) instead of \( i \) to make clear that we do not consider \( i=3 \)) is fulfilled:
@@ -1109,12 +1115,12 @@ It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the bounda
     \end{equation*}
     Here we have for the first equality used that \( \partial_\nu x_\alpha=0 \). For the second equality note that both expressions in the derivatives with respect to \( \nu \) only depended on \( r \), but 
     \begin{equation*}
-        \partial_\nu r=\evaluateat{\partial_{x_3} \sqrt{x_1^2+x_2^2+x_3^2}}{x_3=0}=0.
+        \partial_\nu r=\evaluateat{\partial_{x_3} \sqrt{x_1^2+x_2^2+x_3^2}}{x_3=0}=0\mathfullstop
     \end{equation*}
 
     We thus have for all \( i=1,2,3 \)
     \begin{equation*}
-        \tilde{u}_i=x_i\cdot \p[\Big]{1+\frac{m^3}{8r^3}}.
+        \tilde{u}_i=x_i\cdot \p[\Big]{1+\frac{m^3}{8r^3}}\mathfullstop
     \end{equation*}
     \item[\( a>0 \):] Here we only have to consider the boundary conditions on \( \modifiedschwarzschildboundary \). To make this easier to work with we shift \( u_3 \) such that \( u_3=a \) on \( \modifiedschwarzschildboundary \) (no arguments in this thesis require the boundary to be anything more than a level set, we just normally use \( u_3=0 \) on the boundary for convenience).
     
@@ -1124,11 +1130,11 @@ It remains to find the remaining \( \tilde{u}^k_{i,\ell} \) such that the bounda
             a\cdot \omega&=\tilde{u}_3(a/\Cos{\theta},\theta,\varphi)\\
             &=\evaluateat{x_3}{x_3=a}+C+\sum_{\ell=0}^{\infty}\tilde{u}_{3,\ell}^m a^{-\ell-1}\cdot (\Cos{\theta})^{\ell+1}\cdot Y^m_{\ell}(\theta,\varphi)
         \end{aligned}\\
-        \implies &\frac{m}{2}\cdot \Cos{\theta}=C+\sum_{\ell=0}^{\infty}\tilde{u}_{3,\ell}^m a^{-\ell-1}\cdot (\Cos{\theta})^{\ell+1}\cdot Y^m_{\ell}(\theta,\varphi).
+        \implies &\frac{m}{2}\cdot \Cos{\theta}=C+\sum_{\ell=0}^{\infty}\tilde{u}_{3,\ell}^m a^{-\ell-1}\cdot (\Cos{\theta})^{\ell+1}\cdot Y^m_{\ell}(\theta,\varphi)\mathfullstop
     \end{align*}
     It is then easy to guess the solution \( C=0 \) and \( \tilde{u}_{3,-1}^0\cdot Y_0^0(\theta,\varphi)=\frac{m}{2}\cdot a \), \( \tilde{u}_{3,\ell}^m=0 \) for \( \ell< -1 \), which gives
     \begin{equation*}
-        \tilde{u}_3=x_3+\frac{m\cdot a}{2 r}.
+        \tilde{u}_3=x_3+\frac{m\cdot a}{2 r}\mathfullstop
     \end{equation*}
 
     For \( u_1 \) and \( u_2 \), finding a solution for the Neumann boundary condition on \( \modifiedschwarzschildboundary \) gets a lot more involved.
@@ -1143,7 +1149,7 @@ For \( m=1 \) and our example \( M_{m,+}=M_{m,\geq 0} \) we get a lower bound of
     \item \( u_3 \) has a critical value at \( (0,0,m/2) \) (this is computed symbolically in the Jupyter Notebook). Thus we cannot apply \cref{rem:no_critical_points_then_main_inequality_is_equality} and do not know whether \cref{prop:main_inequality} is a strict inequality or an equality.
     \item More importantly, for \( t\in \interval{0}{u_3(0,0,m/2)}=\interval{0}{m/2} \) the level set \( S_t \) intersects the horizon boundary, and thus \( S_t^L \) has two boundary components, \ie \( \chi(S_t^L)=0 \). In particular we expect the difference between the mass and the lower bound given by \cref{eq:main_result} to be at least
     \begin{equation*}
-        \int_{0}^{m/2}(1-\chi(S_t^L))\cdot \frac{2\pi}{8\pi} \odif{t}=\int_0^{m/2}\frac{1}{4}\odif{t}=\frac{m}{8}.
+        \int_{0}^{m/2}(1-\chi(S_t^L))\cdot \frac{2\pi}{8\pi} \odif{t}=\int_0^{m/2}\frac{1}{4}\odif{t}=\frac{m}{8}\mathfullstop
     \end{equation*}
     In our numerical calculations we set \( m=1 \), and we thus can get a corrected stronger lower bound as \( 0.33+0.125\approx 0.46 \) (still with an estimated absolute error of \( 0.14 \)).
 \end{enumerate}
@@ -1159,11 +1165,11 @@ For the modified example \( M_{m,\geq a} \) for \( a>0 \) and \( m=1 \), the act
 
 And in fact by our argument in \cref{sec:condition_for_mass_equality} we should have equality between our lower bound and the mass, since \( u_3 \) (for the case \( M_{m,\geq a} \) and \( a>0 \)) has no critical points: We compute in our Jupyter Notebook that
 \begin{equation*}
-    \partial_3 u_3=\frac{m x_{3}(a m + 2 x_{3} \abs{x}) -(m + 2 \abs{x}) (a m x_{3} - 2 \abs{x}^3)}{(m + 2 \abs{x})^{2} \cdot \abs{x}^2},
+    \partial_3 u_3=\frac{m x_{3}(a m + 2 x_{3} \abs{x}) -(m + 2 \abs{x}) (a m x_{3} - 2 \abs{x}^3)}{(m + 2 \abs{x})^{2} \cdot \abs{x}^2}\mathcomma
 \end{equation*}
 where the denominator is always positive (since \( a>0 \) and thus \( \abs{x}>0 \)) and where we we can express the numerator as
 \begin{equation*}
-    2x_3\cdot m\cdot \abs{x}\cdot (x_3-a)+(m+2\abs{x})\cdot 2\abs{x}^3,
+    2x_3\cdot m\cdot \abs{x}\cdot (x_3-a)+(m+2\abs{x})\cdot 2\abs{x}^3\mathcomma
 \end{equation*}
 which is surely positive (since \( x_3\geq a \) and \( \abs{x}>0 \)). Thus \( \partial_3 u_3>0 \) everywhere on \( M_{m,\geq a} \) and there cannot be any critical points.
 
@@ -1216,7 +1222,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
     Suppose that \( (M,g) \) is an asymptotically flat half-space with asymptotically flat coordinates \( x_1,x_2,x_3 \) on \( \Mend \) (satisfying the conditions of \cref{def:half_space_mass}). Let \( \Set{D_k^3}_{k=1}^{\infty} \) be an exhaustion of \( M \) by closed sets with \( \boundary{D_k}=S_k\cup (D_k\cap \boundary{M}) \), where \( S_k \) is a connected \( 2 \)-dimensional piecewise smooth submanifold of the end \( \Mend \) with \( \boundary{S_k}=\boundary{M}\cap S_k \) such that
     \begin{gather*}
         R_k\definedas \inf_{x\in S_k} \abs{x}\goesto \infty\quad \text{as \( k\goesto \infty \)},\\
-        R_k^2\cdot \abs{S_k} \text{ is bounded as \( k\goesto \infty \)},
+        R_k^2\cdot \abs{S_k} \text{ is bounded as \( k\goesto \infty \)}\mathcomma
     \end{gather*}
     where \( \abs{S_k} \), the area of \( S_k \), and \( \abs{x} \) are as usual calculated with respect to the euclidean background metric (possible since we are in \( \Mend \)). Then
     \begin{equation*}
@@ -1233,11 +1239,11 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
     \begin{align*}
         \int_{\tilde{D}_k}{R}\odif{V}&=\begin{aligned}[t]
             &\int_{S_k}G_i\tilde{\mu}^i \odif{A}-\int_{\sphere^2_{R_k,+}}G_i\mu^i\odif{A}\\
-            &+\int_{\tilde{D}_k \cap \boundary{M}}G_i\nu^i \odif{A}+\int_{\tilde{D}_k}\bigo{r^{-2\tau-2}},
+            &+\int_{\tilde{D}_k \cap \boundary{M}}G_i\nu^i \odif{A}+\int_{\tilde{D}_k}\bigo{r^{-2\tau-2}}\mathcomma
         \end{aligned}\\
         \int_{\tilde{D}_k\cap \boundary{M}}G_i \nu^i\odif{A}&=\begin{aligned}[t]
             &\int_{S_k\cap \boundary{M}}g_{\alpha 3}\tilde{\theta}^\alpha\odif{l}-\int_{\sphere{R_k}^1}g_{\alpha3}\theta^\alpha\odif{l}\\
-            &-2\int_{\tilde{D}_k\cap \boundary{M}}H+\int_{\tilde{D}\cap \boundary{M}}\bigo{r^{-2\tau-1}},
+            &-2\int_{\tilde{D}_k\cap \boundary{M}}H+\int_{\tilde{D}\cap \boundary{M}}\bigo{r^{-2\tau-1}}\mathcomma
         \end{aligned}
     \end{align*}
     and thus
@@ -1262,7 +1268,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
         \item \( \tangentspace{p}{M} \) is the collection of vectors tangent at \( p \) tangent to \( M \). 
         \item \( X\in \sheafsections{\tangentbundle{M}} \) is a \emph{vector field} on \( M \). In general a \( (k,l) \)-tensor (\( k \)-times covariant and \( l \)-times contravariant) \( T^{a_1\dotsm a_k}_{b_1\dotsm b_l} \) will be written as 
         \begin{equation*}
-            T\in \sheafsections{\underbrace{\tangentbundle{M}\tensorproduct \dotsb\tensorproduct\tangentbundle{M}}_{l \text{-times}}\tensorproduct \underbrace{\cotangentbundle{M}\tensorproduct\dotsb\tensorproduct \cotangentbundle{M}}_{k \text{-times}}}.
+            T\in \sheafsections{\underbrace{\tangentbundle{M}\tensorproduct \dotsb\tensorproduct\tangentbundle{M}}_{l \text{-times}}\tensorproduct \underbrace{\cotangentbundle{M}\tensorproduct\dotsb\tensorproduct \cotangentbundle{M}}_{k \text{-times}}}\mathfullstop
         \end{equation*}
     \end{itemize}
 \end{remark}
@@ -1275,11 +1281,11 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
 \begin{remark}
     A metric allows us to convert between vectors and covectors, \ie we have an isomorphism (called the \emph{musical isomorphism})
     \begin{equation*}
-        \tangentspace{p}{M}\to \cotangentspace{p}{M}\qquad v\mapsto v^\flat,
+        \tangentspace{p}{M}\to \cotangentspace{p}{M}\qquad v\mapsto v^\flat\mathcomma
     \end{equation*}
     (with inverse \( \alpha\mapsto \alpha^{\sharp} \)), where for \( w\in \tangentspace{p}{M} \) we define
     \begin{equation*}
-        v^{\flat}(w)=g(v,w).
+        v^{\flat}(w)=g(v,w)\mathfullstop
     \end{equation*}
     In coordinates this map is given by lowering the index of our vector \ie \( v^a\rightsquigarrow g_{ab}v^b=v_a \).
 \end{remark}
@@ -1288,7 +1294,7 @@ Apart from helping in visualizing in particular how the boundary conditions (bot
     
     In the presence of a metric, the \emph{musical isomorphism} allows us to raise and lower arbitrary indices and thus contract (originally) covariant with covariant indices and contravariant with contravariant tensors, \ie if we have a tensor \( T_{ij\dotsc} \) we can compute the contraction \( \gtrace+{g}{T}_{\dotsc}=g^{ij}T_{ij\dotsc} \). This is equivalent to choosing an orthonormal basis \( X_i \) and evaluating
     \begin{equation*}
-        \gtrace+{g}{T}(\cdots)=\sum_{i}T(X_i,X_i,\cdots).
+        \gtrace+{g}{T}(\cdots)=\sum_{i}T(X_i,X_i,\cdots)\mathfullstop
     \end{equation*}
 \end{remark}
 
@@ -1305,7 +1311,7 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
         \item \( \nabla(T\tensorproduct T')=\nabla T\tensorproduct T'+T\tensorproduct \nabla T' \), \ie a Leibniz rule for the tensor product.
         \item The covariant derivative commutes with taking traces (contracting a covariant and a contravariant part of a tensor):
         \begin{equation*}
-            \nabla_Y (\trace{T})=\trace+{\nabla_Y(T)}.
+            \nabla_Y (\trace{T})=\trace+{\nabla_Y(T)}\mathfullstop
         \end{equation*}
     \end{enumerate}
 \end{definition}
@@ -1318,21 +1324,21 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
 \begin{remark}
     If we set
     \begin{equation*}
-        \nabla_Y f =\odif{f}(Y)=Y(f),
+        \nabla_Y f =\odif{f}(Y)=Y(f)\mathcomma
     \end{equation*}
     then the first product rule involving functions and vector fields is just another incarnation of our product rule for tensors.
 \end{remark}
 \begin{remark}
     We can define higher covariant derivatives, \eg
     \begin{equation*}
-        \nabla^2_{X,Y}(Z)(\cdots)=(\nabla(\nabla Z))(X,Y).
+        \nabla^2_{X,Y}(Z)(\cdots)=(\nabla(\nabla Z))(X,Y)\mathfullstop
     \end{equation*}
     In coordinates we can then compute that
     \begin{equation*}
         \begin{aligned}[t]
             (\nabla^2_{X,Y}Z)^a&=X^b Y^c \nabla_b\nabla_c Z^a\\
             &=X^b \nabla_b (Y^c \nabla_c Z^a)-(X^b \nabla_b Y^c)(\nabla_c Z^a)\\
-            &=(\nabla_X \nabla_Y Z)^a-(\nabla_{\nabla_X Y}Z)^a.
+            &=(\nabla_X \nabla_Y Z)^a-(\nabla_{\nabla_X Y}Z)^a\mathfullstop
         \end{aligned}
     \end{equation*}
     % Note that, since coordinate vector fields commute, we have
@@ -1344,13 +1350,13 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
 \begin{remark}
     Writing \( \nabla_i \) for \( \nabla_{\partial_i} \) in coordinates, we note that the covariant derivative differs from the (coordinate dependent) partial derivative by a linear correction term given by the \emph{Christoffel symbol} (also sometimes called the connection coefficients) \( \Gamma^a_{b c} \):
     \begin{equation*}
-        \nabla_{a} X^b = \partial_a X^b+\Gamma_{ac}^b X^c.
+        \nabla_{a} X^b = \partial_a X^b+\Gamma_{ac}^b X^c\mathfullstop
     \end{equation*}
 \end{remark}
 \begin{recall}
     The commutator of two vector fields \( X,Y \) is another vector field satisfying
     \begin{equation*}
-        \commutator{X}{Y}(f)=X(Y(f))-Y(X(f)).
+        \commutator{X}{Y}(f)=X(Y(f))-Y(X(f))\mathfullstop
     \end{equation*}
 \end{recall}
 \begin{theorem}
@@ -1358,53 +1364,53 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
     \begin{enumerate}
         \item Metric compatible: \( \nabla g=0 \), and thus in particular
         \begin{equation*}
-            \nabla_Z (g(X,Y))=g(\nabla_Z X, Y)+g(X,\nabla_Z Y),
+            \nabla_Z (g(X,Y))=g(\nabla_Z X, Y)+g(X,\nabla_Z Y)\mathcomma
         \end{equation*}
         \item Torsion free: For vector fields \( X \) and \( Y \) we have
         \begin{equation*}
-            \nabla_Y X-\nabla_X Y=\commutator{X}{Y}.
+            \nabla_Y X-\nabla_X Y=\commutator{X}{Y}\mathfullstop
         \end{equation*}
         This can also, in coordinates, be expressed as
         \begin{equation*}
-            \Gamma^{a}_{bc} = \Gamma^a_{cb}.
+            \Gamma^{a}_{bc} = \Gamma^a_{cb}\mathfullstop
         \end{equation*}
     \end{enumerate}
     There always exists a unique Levi-Civita connection on \( (M,g) \). Its coefficients in coordinates are (this is also called the Koszul formula)
     \begin{equation}
-        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).\label{eq:koszul_formula}
+        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc})\mathfullstop\label{eq:koszul_formula}
     \end{equation}
 \end{theorem}
 
 \begin{definition}
     We define the \emph{Laplacian} (also called \emph{Laplace--Beltrami-Operator})
     \begin{equation*}
-        \laplacian{f}=\gtrace+{g}{\nabla^2 f}=\nabla^a \nabla_a f.
+        \laplacian{f}=\gtrace+{g}{\nabla^2 f}=\nabla^a \nabla_a f\mathfullstop
     \end{equation*}
 \end{definition}
 \begin{lemma}\label{lem:laplacian_in_terms_of_metric_determinant}
     If \( M \) is Riemannian and equipped with the Levi-Civita-connection,
     \begin{equation*}
-        \laplacian{f}=\frac{1}{\sqrt{\det{g}}}\partial_{a}(\sqrt{\det{g}}\partial^a f).
+        \laplacian{f}=\frac{1}{\sqrt{\det{g}}}\partial_{a}(\sqrt{\det{g}}\partial^a f)\mathfullstop
     \end{equation*}    
 \end{lemma}
 \begin{proof}
     Our proof proceeds entirely in coordinates. Note first that (for \( I \) the identity matrix)
     \begin{equation*}
-        \det\nolimits'(I)=\trace;.
+        \det\nolimits'(I)=\trace;\mathfullstop
     \end{equation*}
     Then consider the function
     \begin{equation*}
-        f(A)=\det{A}=\det{g}\cdot \det(\inverse{g}\cdot A).
+        f(A)=\det{A}=\det{g}\cdot \det(\inverse{g}\cdot A)\mathfullstop
     \end{equation*}
     Taking the derivative and evaluating at \( A=g \) then gives
     \begin{equation*}
-        \det\nolimits'(g)(T)=\det{g}\cdot \trace+{\inverse{g}\cdot T},
+        \det\nolimits'(g)(T)=\det{g}\cdot \trace+{\inverse{g}\cdot T}\mathcomma
     \end{equation*}
     and thus
     \begin{equation*}
         \begin{aligned}[t]
             \partial_a \det{g}&=\det{g}\cdot \trace+{\inverse{g}\cdot \partial_i g}\\
-            &=\det{g}g^{bc}\partial_{a}g_{bc}.
+            &=\det{g}g^{bc}\partial_{a}g_{bc}\mathfullstop
         \end{aligned}
     \end{equation*}
     Thus we can compute
@@ -1413,19 +1419,19 @@ Riemannian manifolds enable us to not only take derivatives of functions as is p
             \Gamma^{a}_{ab}&=\frac{1}{2}g^{ac}(\partial_a g_{bc}+\partial_b g_{ac}-\partial_c g_{ab})\\
             &=\frac{1}{2}g^{bc}\partial_b g_{ac}\\
             &=\frac{1}{2\det{g}}\partial_b(\det{g})\\
-            &=\frac{1}{\sqrt{\det{g}}}\partial_b(\sqrt{\det{g}}),
+            &=\frac{1}{\sqrt{\det{g}}}\partial_b(\sqrt{\det{g}})\mathcomma
         \end{aligned}
     \end{equation*}
     where the second equality is due to the fact that (because of symmetry of \( g \))
     \begin{equation*}
-        g^{ac}\partial_{a}g_{bc}=g^{ca}\partial_c g_{ba}.
+        g^{ac}\partial_{a}g_{bc}=g^{ca}\partial_c g_{ba}\mathfullstop
     \end{equation*}
     Then    
     \begin{equation*}
         \begin{aligned}[t]
             \nabla^a \nabla_a f&= \partial_a \nabla^a f+\Gamma^a_{ab} \nabla^b f\\
             &=\frac{1}{\sqrt{\det{g}}}\cdot \sqrt{\det{g}}\partial_a(g^{ab} \partial_b f)+\frac{1}{\sqrt{\det{g}}}\cdot (\partial_b \sqrt{\det{g}})(g^{ab}\partial_b f)\\
-            &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b f).
+            &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b f)\mathfullstop
         \end{aligned}
     \end{equation*}
 \end{proof}
@@ -1439,11 +1445,11 @@ One major difference between the covariant and our usual partial derivatives is 
     \end{equation*} 
     by writing it as a map taking at each point three tangent vectors \( X,Y,Z \) and returning another tangent vector, which we denote by \( R(X,Y)Z \):
     \begin{equation*}
-        \riemanncurvature(X,Y)Z\definedas \nabla^2_{X,Y}Z-\nabla^2_{Y,X}Z=\nabla_X \nabla_Y Z- \nabla_Y \nabla_X Z -\nabla_{\commutator{X}{Y}}Z.
+        \riemanncurvature(X,Y)Z\definedas \nabla^2_{X,Y}Z-\nabla^2_{Y,X}Z=\nabla_X \nabla_Y Z- \nabla_Y \nabla_X Z -\nabla_{\commutator{X}{Y}}Z\mathfullstop
     \end{equation*}
     The \( \nabla_{\commutator{X}{Y}}Z \) term ensures that \(  \riemanncurvature \) is a tensor. We denote \(  \riemanncurvature \) in coordinates by
     \begin{equation*}
-        \riemanncurvature^d_{cab}Z^c=\nabla_a \nabla_b Z^d-\nabla_b \nabla_a Z^d.
+        \riemanncurvature^d_{cab}Z^c=\nabla_a \nabla_b Z^d-\nabla_b \nabla_a Z^d\mathfullstop
     \end{equation*}
 \end{definition}
 \begin{remark}\label{rem:second_derivatives_function_commute}
@@ -1457,14 +1463,14 @@ Oftentimes, the four indices of the Riemann curvature tensor are both unwieldy t
     \end{equation*}
     or, in coordinates,
     \begin{equation*}
-        \Ricci_{ab}=\riemanncurvature^c_{acb}.
+        \Ricci_{ab}=\riemanncurvature^c_{acb}\mathfullstop
     \end{equation*}
 \end{definition}
 We will require the Ricci curvature only once during this thesis, as a stepping stone for our main integral inequality. A lot more important will be the scalar curvature, which in general relativity is proportional to mass density for static spacetimes, and thus is central for formulating the positive mass theorem in purely geometric terms:
 \begin{definition}
     We define the \emph{scalar curvature} as
     \begin{equation*}
-        R\definedas \gtrace{g}{\Ricci}=g^{ij}\Ricci_{ij}.
+        R\definedas \gtrace{g}{\Ricci}=g^{ij}\Ricci_{ij}\mathfullstop
     \end{equation*}
 \end{definition}
 
@@ -1480,13 +1486,13 @@ Let \( \Sigma^m \) be a submanifold of a Riemannian manifold \( (M^n,g) \) (equi
         \gamma=\restrict{g}{\tangentbundle{\Sigma}}\label{eq:first_fundamental_form}
     \end{equation} 
     (also called the \emph{first fundamental form}) on \( \Sigma^m  \). 
-    % If \( \Sigma^m \) is Riemannian inside a Lorentzian manifold \( M^n \), \ie if the induced metric \( \gamma \) is positive definite, then we call \( \Sigma^m \) a \emph{spacelike submanifold}.\label{def:spacelike_hypersurface}
+    % If \( \Sigma^m \) is Riemannian inside a Lorentzian manifold \( M^n \), \ie if the induced metric \( \gamma \) is positive definite, then we call \( \Sigma^m \) a \emph{spacelike submanifold}\mathfullstop\label{def:spacelike_hypersurface}
 \end{remark}
 This metric \( \gamma \) in turn defines a Levi-Civita connection on \( \Sigma \), which fulfills the following relation:
 \begin{fact}
   Denoting the Levi-Civita connection of \( (\Sigma,\gamma) \) by \( \Sigmaconnection \), we have for any \( p\in \Sigma \), tangent vector \( X\in \tangentspace{p}{\Sigma} \) and \( Y\in \sheafsections{\tangentbundle{\Sigma}} \),
   \begin{equation*}
-    \Sigmaconnection_X Y=(\Mconnection_X \tilde{Y})^\top,
+    \Sigmaconnection_X Y=(\Mconnection_X \tilde{Y})^\top\mathcomma
   \end{equation*}
   where \( \tilde{Y} \) is any extension of \( Y \) to a vector field on \( M \). Here \( (\blank)^\top \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to \( \tangentspace{p}{\Sigma} \) (which in coordinates can be done via \( X^i\mapsto \gamma^i_j X^j \)).
 \end{fact}
@@ -1494,7 +1500,7 @@ Thus \( \Sigma \) intrinsically contains information about tangential parts of t
 \begin{definition}
     The \emph{second fundamental form} of \( \Sigma \) is a tensor \( \mathbf{A}\in \sheafsections{\cotangentbundle{\Sigma}\tensorproduct \cotangentbundle{\Sigma}\tensorproduct \normalbundle{\Sigma}} \) such that for \( X,Y\in \tangentspace{p}{\Sigma} \)
     \begin{equation*}
-        \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp,
+        \mathbf{A}(X,Y)\definedas (\Mconnection_X \tilde{Y})^\perp\mathcomma
     \end{equation*}
     where \( (\blank)^\perp \) denotes the orthogonal projection from \( \tangentspace{p}{M} \) to the normal space \( \normalspace{p}{\Sigma} \). Here \( \tilde{Y} \) is again any extension of \( Y \) to a vector field on \( M \).
 \end{definition}  
@@ -1509,39 +1515,39 @@ Note that although \( \Mconnection \) is not a tensor (\ie although it depends o
 \begin{definition}
     The \emph{mean curvature vector} \( \mathbf{H} \) is the trace of \( \mathbf{A} \) over \( \tangentspace{p}{\Sigma} \), \ie for an orthonormal basis \( e_1,\dotsc,e_n \) of \( \tangentspace{p}{\Sigma} \) we define
     \begin{equation*}
-        \mathbf{H}\definedas \sum_{i=1}^{m}\mathbf{A}(e_i,e_i).
+        \mathbf{H}\definedas \sum_{i=1}^{m}\mathbf{A}(e_i,e_i)\mathfullstop
     \end{equation*}
 \end{definition}
 \begin{definition}\label{def:geodesic_curvature}
     Let \( \Sigma\subset \Sigma'\subset M \) be a one-dimensional submanifold of a two-dimensional submanifold \( \Sigma' \) of some ambient manifold \( M \), let \( v \) be some normed tangent vector field of \( \Sigma \) and let \( n \) be a preferred choice of normal to \( \Sigma \) inside \( \Sigma' \) (oftentimes \( \Sigma \) will be the boundary of some region in \( \Sigma' \) and we will let \( n \) be the outward unit normal), then we define the \emph{(signed) geodesic curvature of \( \Sigma \) in \( \Sigma' \)} as
     \begin{equation}\label{eq:def_geodesic_curvature}
-        \kappa_{\Sigma}=-\scalarproduct{\nabla_v v}{n}.
+        \kappa_{\Sigma}=-\scalarproduct{\nabla_v v}{n}\mathfullstop
     \end{equation}
 \end{definition}
 \begin{definition}
     If \( \Sigma \) is an orientable hypersurface of \( M \), we can choose a normal direction \( \nu \) (if \( \Sigma \) has an interior and exterior, we typically implicitly choose \( \nu \) to be the outward normal). Then we define
     \begin{equation}
-        A(X,Y)\definedas g(\mathbf{A}(X,Y),-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace+{\gamma}{A}.\label{eq:def_mean_curvature}
+        A(X,Y)\definedas g(\mathbf{A}(X,Y),-\nu)\qquad H\definedas g(\mathbf{H},-\nu)=\gtrace+{\gamma}{A}\mathfullstop\label{eq:def_mean_curvature}
     \end{equation}
     We also call \( A \) the \emph{second fundamental form} and \( H \) the \emph{mean curvature}. 
 \end{definition}
 Note that we have
 \begin{equation*}
-    A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu).
+    A(X,Y)=g(\nabla_X Y,-\nu)=\underbrace{\nabla_X (g(Y,-\nu))}_{=0}-g(Y,\nabla_X (-\nu))=g(Y,\nabla_X \nu)\mathfullstop
 \end{equation*}
 Thus by using the projection \( \gamma^i_j \) we can write \( A \) in coordinates as
 \begin{equation}
-    A_{ij}=\gamma^k_i\gamma^l_j \nabla_k \nu_l.\label{eq:second_fundamental_form_in_coordinates}
+    A_{ij}=\gamma^k_i\gamma^l_j \nabla_k \nu_l\mathfullstop\label{eq:second_fundamental_form_in_coordinates}
 \end{equation}
 The above in particular also implies that
 \begin{equation*}
-    H=\divergence_g \nu,
+    H=\divergence_g \nu\mathcomma
 \end{equation*}
 if we extend \( \nu \) to a normal vector field in a neighborhood of \( \Sigma \). To see this, note that \( 0=\nabla_\nu(1)=\nabla_{\nu}(g(\nu,\nu)) \) implies \( g(\nu,\nabla_\nu \nu)=0 \).
 \begin{remark}\label{rem:mean_curvature_peculiarities}
     With this definition, the mean curvature of a two-dimensional surface is the sum of the principal curvatures, not the mean. Another common definition of the mean curvature is
     \begin{equation*}
-        H=\frac{1}{n-1}\gtrace+{\gamma}{A},
+        H=\frac{1}{n-1}\gtrace+{\gamma}{A}\mathcomma
     \end{equation*}
     where \( n \) is the dimension of the manifold \( M \), but most of our references use the same definition as we do.
 
@@ -1556,7 +1562,7 @@ We are now equipped to express an important formula relating the curvature of \(
     \end{equation}
     or in coordinates
     \begin{equation}
-        \gamma^{i}_{i'}\gamma^j_{j'}\gamma^k_{k'}\gamma^l_{l'}\riemanncurvature_{ijkl}=\widetilde{\riemanncurvature}_{i'j'k'l'}+A_{i'k'}A_{j'l'}-A_{i'l'}A_{j'k'}\label{eq:gauss_codazzi_coordinates}.
+        \gamma^{i}_{i'}\gamma^j_{j'}\gamma^k_{k'}\gamma^l_{l'}\riemanncurvature_{ijkl}=\widetilde{\riemanncurvature}_{i'j'k'l'}+A_{i'k'}A_{j'l'}-A_{i'l'}A_{j'k'}\label{eq:gauss_codazzi_coordinates}\mathfullstop
     \end{equation}
     Contracting with \( g^{i'k'}\gamma^{j'l'} \) also yields
     \begin{equation}
@@ -1568,7 +1574,7 @@ The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is
 \begin{fact}\label{fact:laplacian_and_hypersurface_laplacian}
     Given a hypersurface \( \Sigma \) in \( (M,g) \) and a smooth function \( f \) on \( M \),
     \begin{equation*}
-        \laplacian_M f=\laplacian_\Sigma +\Mconnection_\nu\Mconnection_\nu f+H \Mconnection_\nu f.
+        \laplacian_M f=\laplacian_\Sigma +\Mconnection_\nu\Mconnection_\nu f+H \Mconnection_\nu f\mathfullstop
     \end{equation*}
 \end{fact}
 \begin{proof}
@@ -1583,7 +1589,7 @@ The following (which is \cite[Exercise 2.3 in][]{leeGeometricRelativity2019}) is
         e_i}\Mconnection_{\nu}f\cdot \underbrace{g(\nu,e_i)}_{=0}+\Mconnection_{\nu}f\cdot g(\Mconnection_{e_i}\nu,e_i))
         \end{aligned}\\
         &=\Mconnection_\nu \Mconnection_\nu f+\sum_{i=1}^{n-1}(\Sigmaconnection\Sigmaconnection f)(e_i,e_i)+\Mconnection_\nu f\cdot \sum_{i=1}^{n-1}A(e_i,e_i)\\
-        &=\Mconnection_\nu \Mconnection_\nu f+\laplacian_{\Sigma}f+\Mconnection_{\nu}f\cdot H.
+        &=\Mconnection_\nu \Mconnection_\nu f+\laplacian_{\Sigma}f+\Mconnection_{\nu}f\cdot H\mathfullstop
     \end{align*}
 \end{proof}
 }
@@ -1594,7 +1600,7 @@ One of the main reasons for why the harmonic function technique discused in this
 \begin{theorem}[Gauss--Bonnet Theorem]\label{thm:gauss_bonnet}
     Let \( \Sigma \) be a compact two-dimensional Riemannian manifold with boundary \( \boundary{\Sigma} \). Let \( R \) be the scalar curvature of \( \Sigma \) and let \( \kappa_{\boundary{\Sigma}} \) be the geodesic curvature of \( \boundary{\Sigma} \) in \( \Sigma \). Then
    \begin{equation*}
-    \int_\Sigma R/2 \odif{A}+\int_{\boundary{\Sigma}}\kappa_{\boundary{\Sigma}}\odif{t}=2\pi \chi(\Sigma),
+    \int_\Sigma R/2 \odif{A}+\int_{\boundary{\Sigma}}\kappa_{\boundary{\Sigma}}\odif{t}=2\pi \chi(\Sigma)\mathcomma
    \end{equation*} 
    where \( \chi(\Sigma) \) is the Euler characteristic (for a definition see below) of \( \Sigma \).
 \end{theorem}
@@ -1603,18 +1609,18 @@ For a proof see \cite[Chapter 4.3]{petersenRiemannianGeometry2006}.
 \begin{definition}
     For a compact, connected, oriented surface \( \Sigma \) (two-dimensional manifold with boundary), the \emph{Euler characteristic} is given by
     \begin{equation}
-        \chi(\Sigma)=2-2g-b,\label{eq:def_euler_characteristic}
+        \chi(\Sigma)=2-2g-b\mathcomma\label{eq:def_euler_characteristic}
     \end{equation}
     where \( g\geq 0 \) is the genus and \( b \) is the number of connected boundary components.
 
     For non connected surfaces \( \Sigma=\bigsqcup_{i\in I} \Sigma_i \), where the \( \Sigma_i \) are the connected components of \( \Sigma \), we have
     \begin{equation*}
-        \chi(\Sigma)=\sum_{i}\chi(\Sigma_i).
+        \chi(\Sigma)=\sum_{i}\chi(\Sigma_i)\mathfullstop
     \end{equation*}
 
     If a noncompact space \( S \) results from a puncture of a compact space (is homotopy equivalent to \( \sigma\setminus \Set{x_1,\dotsc,x_p} \), where \( p \) is the number of punctures), then we set
     \begin{equation}
-        \chi(S)=\chi(\Sigma)-p.\label{eq:def_euler_characteristic_noncompact}
+        \chi(S)=\chi(\Sigma)-p\mathfullstop\label{eq:def_euler_characteristic_noncompact}
     \end{equation}
 \end{definition}
 The following theorem (a version of the maximum principle) will then help control the Euler characteristic of the level sets of our harmonic functions:
@@ -1626,13 +1632,13 @@ The following theorem (a version of the maximum principle) will then help contro
 \begin{proof}
     We start from
     \begin{equation*}
-        0=\int_\Omega u\cdot \laplacian u\odif{\Omega}.
+        0=\int_\Omega u\cdot \laplacian u\odif{\Omega}\mathfullstop
     \end{equation*}
     Integrating by parts then yields
     \begin{align*}
         0&=\int_\Omega u\cdot g^{ij}\nabla_i \nabla_j u\odif{x}\\
         &=\int_\Omega \nabla_i u\cdot g^{ij} \nabla_j u\odif{x}-\int_{\boundary{\Omega}}u\cdot g^{ij}\nabla_i u \cdot n_j \odif{S}\\
-        &=\int_\Omega \abs{\nabla u}^2\odif{x}-\int_{\boundary{\Omega}}u\cdot \partial_n u\odif{S}.
+        &=\int_\Omega \abs{\nabla u}^2\odif{x}-\int_{\boundary{\Omega}}u\cdot \partial_n u\odif{S}\mathfullstop
     \end{align*}
     But we always have either \( u=0 \) or \( \partial_n u=0 \) on \( \boundary{\Omega} \), and we conclude that \( \abs{\nabla u}=0 \) everywhere, \ie that \( u \) is constant on \( \Omega \) (since \( \Omega \) only has one connected component).
 \end{proof}
@@ -1642,7 +1648,7 @@ A major ingredient that allows us to connect the derivatives of our harmonic fun
 \begin{lemma}\label{lem:bochner_identity}
     For any smooth function \( u \) on a Riemannian manifold \( (m,g) \),
     \begin{equation*}
-        \frac{1}{2}\laplacian(\abs{\nabla u}^2)=\abs{\nabla^2 u}^2+g(\grad (\laplacian u),\grad u)+\Ricci(\grad u, \grad u).
+        \frac{1}{2}\laplacian(\abs{\nabla u}^2)=\abs{\nabla^2 u}^2+g(\grad (\laplacian u),\grad u)+\Ricci(\grad u, \grad u)\mathfullstop
     \end{equation*} 
 \end{lemma}
 \begin{proof}
@@ -1656,7 +1662,7 @@ A major ingredient that allows us to connect the derivatives of our harmonic fun
             &=(\nabla_j \nabla_i \nabla^j u)(\nabla^i u)+\abs{\nabla^2 u}^2\\
             &\explain{\text{see \cref{def:riemann_curvature_tensor}}}{=}(\nabla_i \nabla_j \nabla^j u+\riemanncurvature_{kji}^j \nabla^k u)(\nabla^i u)+\abs{\nabla^2 u}^2\\
             &=g(\grad \laplacian u,\grad u)+\abs{\nabla^2 u}^2+\Ricci_{kj}(\nabla^k u)(\nabla^j u)\\
-            &=\abs{\nabla^2 u}^2+g(\grad (\laplacian u),\grad u)+\Ricci(\grad u, \grad u).
+            &=\abs{\nabla^2 u}^2+g(\grad (\laplacian u),\grad u)+\Ricci(\grad u, \grad u)\mathfullstop
         \end{aligned}
     \end{equation*}
 \end{proof}
@@ -1668,19 +1674,19 @@ In the following, let \( (M,\bar{g}) \) always be conformal to \( (M,g) \), \ie 
 
 \begin{lemma}\label{lem:conformal_change_connection}
     \begin{equation*}
-        \bar{\nabla}_X Y =\nabla_X Y+X(f)\cdot Y+Y(f)\cdot X-g(X,Y)\grad{f}.
+        \bar{\nabla}_X Y =\nabla_X Y+X(f)\cdot Y+Y(f)\cdot X-g(X,Y)\grad{f}\mathfullstop
     \end{equation*}
 \end{lemma}
 \begin{proof}
     We will be using the Koszul formula \cref{eq:koszul_formula},
     \begin{equation*}
-        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc}).
+        \Gamma^a_{bc}=\frac{1}{2}g^{ad}(\partial_b g_{cd}+\partial_c g_{bd}-\partial_d g_{bc})\mathfullstop
     \end{equation*}
     In particular we note that (since \( \bar{g}^{ad}=e^{-2f}g^{ad} \))
     \begin{equation*}
         \bar{\Gamma}^c_{ab}\begin{aligned}[t]
             &=\frac{1}{2}e^{-2f}g^{cd}(\partial_a(e^{2f}g_{bd})+\partial_b(e^{2f}g_{ad})-\partial_d(e^{2f}g_{ab}))\\
-            &=\Gamma^c_{ab}+\delta^c_a\partial_b f +\delta^c_b\partial_a f-g_{ab}\nabla^c f.
+            &=\Gamma^c_{ab}+\delta^c_a\partial_b f +\delta^c_b\partial_a f-g_{ab}\nabla^c f\mathfullstop
         \end{aligned}
     \end{equation*}
     Then
@@ -1689,14 +1695,14 @@ In the following, let \( (M,\bar{g}) \) always be conformal to \( (M,g) \), \ie 
             (\bar{\nabla}_X Y)^c&=X^a \bar{\nabla}_a Y^c\\
             &=X^a \partial_a Y^c + X^a\bar{\Gamma}_{ab}^c  Y^b\\
             &=X^a \partial_a Y^c +X^a \Gamma_{ab}^c Y^b+X^c Y^b \partial_b f+ Y^c X^a \partial_a f-\nabla^c f g_{ab}X^a Y^b\\
-            &=(\nabla_X Y)^c+X^c\cdot Y(f)+Y^c\cdot X(f)-\nabla^c f \cdot g(X,Y),
+            &=(\nabla_X Y)^c+X^c\cdot Y(f)+Y^c\cdot X(f)-\nabla^c f \cdot g(X,Y)\mathcomma
         \end{aligned}
     \end{equation*}
     as required.
 \end{proof}
 \begin{lemma}\label{lem:mean_curvature_under_conformal_transform}
     \begin{equation*}
-        \bar{H}=e^{-f}(H+(n-1) g(\grad f,\nu)),
+        \bar{H}=e^{-f}(H+(n-1) g(\grad f,\nu))\mathcomma
     \end{equation*}
     where \( \grad f \) and \( \nu \) are computed with respect to \( g \).
 \end{lemma}
@@ -1717,7 +1723,7 @@ In the following, let \( (M,\bar{g}) \) always be conformal to \( (M,g) \), \ie 
             &=\sum_{\alpha=1}^{n-1}\bar{A}(\bar{e}_\alpha,\bar{e_\alpha})\\
             &=\sum_{\alpha=1}^{n-1}e^{-2f}\bar{A}(e_\alpha,e_\alpha)\\
             &\explain[big]{g(e_{\alpha},\nu)=0}{=}\sum_{\alpha=1}^{n-1}e^{-f}(A(e_i,e_i)+0+0-g(\grad f,-\nu)\cdot 1)\\
-            &=e^{-f}(H+(n-1)\cdot g(\grad f,\nu)).
+            &=e^{-f}(H+(n-1)\cdot g(\grad f,\nu))\mathfullstop
         \end{aligned}
     \end{equation*}
 \end{proof}
@@ -1738,7 +1744,7 @@ To actually realize \( u \) as a Morse function on \( \Omega_L \) we will then n
 \begin{lemma}[{{\cite[Lemma 1-7]{borodzikMorseTheoryManifolds2016}}}]\label{lem:realize_harmonic_function_as_morse_function}
     Let \( \Omega \) be compact and let \( Y\subset \Omega \) be compact as well. Let further \( f\maps \Omega\to \reals \) be a smooth function. Assume that under some metric \( g \) on \( \Omega \) there exists some open set \( U\subset Y \) such that \( \grad_g f \) is tangent to \( U \) at each point in \( U \) and such that for \( y\in Y\setminus U \) we have 
     \begin{equation*}
-        \tangentspace{y}{Y}\not\subset \ker\odif{f}.
+        \tangentspace{y}{Y}\not\subset \ker\odif{f}\mathfullstop
     \end{equation*}
     Then, for any open neighborhood \( W\subset \Omega \) of \( Y\setminus U \), there exists a metric \( h \) on \( \Omega \), agreeing with \( g \) on \( \Omega\setminus W \), such that \( \grad_h f \) is everywhere tangent to \( Y \).
 \end{lemma}
