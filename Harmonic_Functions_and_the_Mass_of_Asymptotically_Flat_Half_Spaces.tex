@@ -946,71 +946,71 @@ In the following, we consider harmonic functions on some concrete example manifo
 \subsection{Introducing some different Schwarzschild half-spaces}
 In \cref{rem:mass_normalization} we introduced the half Schwarzschild space \( M_{m,+} \) (which has mass \( m/2 \)). There are many other, less symmetric half-spaces resulting from cutting the full Schwarzschild space along surfaces of nonnegative mean curvature. One possibility is what we call \( (M_{m,\geq a},g_m) \), where
 \begin{equation*}
-    M_{m,\geq a}=\Set{x\in \reals^3\given x_3\geq a},\quad g_m=\omega^4\cdot \delta,\quad \omega=1+\frac{m}{2\abs{x}}\mathcomma
+    M_{m,\geq a}=\Set{x\in \reals^n\given x_1\geq a},\quad g_m=\omega^{\frac{4}{n-2}}\cdot \delta,\quad \omega=1+\frac{\tilde{r}^{n-2}}{\abs{x}^{n-2}},\qquad \tilde{r}=(m/2)^{1/(n-2)}\mathcomma
 \end{equation*}
 for some \( a>0 \), equipped with the same metric \( g_m \) as the normal Schwarzschild space. We also identify \( M_{m,+} \) with \( M_{m,\geq 0} \). 
 
 
-Note that \( g_m=\omega^4 \delta \) is just the Euclidean metric multiplied by a strictly positive function. Metrics that are related in such a way are called \emph{conformal} (since there is a \emph{conformal transformation}, \ie an angle preserving map, between the manifolds \( (M_{m,\geq a},g_m) \) and \( (M_{m,\geq a},\delta) \)).
+Note that \( g_m=\omega^{\frac{4}{n-2}} \delta \) is just the Euclidean metric multiplied by a strictly positive function. Metrics that are related in such a way are called \emph{conformal} (since there is a \emph{conformal transformation}, \ie an angle preserving map, between the manifolds \( (M_{m,\geq a},g_m) \) and \( (M_{m,\geq a},\delta) \)).
 
-It is then easy to see that for both \( M_{m,+} \) and \( M_{m,\geq a} \) the mass \cref{def:half_space_mass} gets no contribution from the integral over \( g_{\alpha 3}=0 \). The other part of the mass is then the same for \( M_{m,+} \) and all the \( M_{m,\geq a} \) (\( g_{ij,k} \) is of order \( \bigo{r^{-\tau-1}} \) and thus the difference between the integrals, given by an integral over a piece approaching \( \sphere^1_r\times \interval{0}{a} \), is \( 0 \) in the limit \( r\to \infty \)). In particular, the mass of \( M_{m,\geq a} \) is the same as the mass of \( M_{m,+} \), \ie it is \( m/2 \).
+It is then easy to see that for both \( M_{m,+} \) and \( M_{m,\geq a} \) the mass \cref{def:half_space_mass} gets no contribution from the integral over \( g_{\alpha 1}=0 \). The other part of the mass is then the same for \( M_{m,+} \) and all the \( M_{m,\geq a} \) (\( g_{ij,k} \) is of order \( \bigo{r^{-\tau-1}} \) and thus the difference between the integrals, given by an integral over a piece approaching \( \sphere^1_r\times \interval{0}{a} \), is \( 0 \) in the limit \( r\to \infty \)). In particular, the mass of \( M_{m,\geq a} \) is the same as the mass of \( M_{m,+} \), \ie it is \( m/2 \).
 
 
 \newcommand{\schwarzschildboundary}{\widetilde{\boundary{M_{m,+}}}}
 \newcommand{\modifiedschwarzschildboundary}{\boundary{M_{m,\geq a}}}
 
 
-We will see in the Lemma below that the horizon boundary of \( M_{m,+} \) is given in our coordinates by \( \Sigma=\Set{x\in \reals^3_+\given \abs{x}=m/2} \). In fact, this space is just the exterior region of some bigger manifold, which includes some of the interior of the horizon and will then also have smooth boundary as required in \cref{def:asymptotically_flat_half_space} (which is not the case for \( M_{m,+} \)). Consequently, we should actually consider \( \Sigma \) to not be part of the noncompact boundary \( \boundary{M_{m,+}} \). To avoid confusion, we will denote this by \( \schwarzschildboundary\definedas \closure{\boundary{M_{m,+}}\setminus \Sigma} \).
+We will see in the Lemma below that the horizon boundary of \( M_{m,+} \) is given in our coordinates by \( \Sigma=\Set{x\in \reals^n_+\given \abs{x}=\tilde{r}} \). In fact, this space is just the exterior region of some bigger manifold, which includes some of the interior of the horizon and will then also have smooth boundary as required in \cref{def:asymptotically_flat_half_space} (which is not the case for \( M_{m,+} \)). Consequently, we should actually consider \( \Sigma \) to not be part of the noncompact boundary \( \boundary{M_{m,+}} \). To avoid confusion, we will denote this by \( \schwarzschildboundary\definedas \closure{\boundary{M_{m,+}}\setminus \Sigma} \).
 
 
-\begin{lemma}\label{lem:schwarzschild_spaces_are_asymptotically_flat}
-    The boundary \( \modifiedschwarzschildboundary \) has positive mean curvature for \( a>0\). Similarly, \( \schwarzschildboundary \) has zero mean curvature (in particular it is non-negative).
+% \begin{lemma}\label{lem:schwarzschild_spaces_are_asymptotically_flat}
+%     The boundary \( \modifiedschwarzschildboundary \) has positive mean curvature for \( a>0\). Similarly, \( \schwarzschildboundary \) has zero mean curvature (in particular it is non-negative).
 
-    \( \Sigma \) is a free horizon boundary component of \( M_{m,+} \) (\ie has zero mean curvature and is orthogonal to \( \schwarzschildboundary \)). 
-\end{lemma}
-We already know the mean curvature of these different surfaces when considered as surfaces under the background metric \( \delta \). It will thus be helpful to find a formula for how the mean curvature changes under a conformal change of metric. We delegate the details of this to \cref{sec:conformal_changes_of_metric}.
-\begin{proof}
-    Let \( f=\Ln{\omega^2} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
-    \begin{equation*}
-        H_{g}=\frac{1}{\omega^2}(H_{\delta}+2 \delta(\grad_\delta f,n_\delta))\mathcomma
-    \end{equation*}
-    where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n_\delta \) is a normal vector to the surface computed using the background metric \( \delta \), as is also the case for the \( \grad_{\delta} f \).
+%     \( \Sigma \) is a free horizon boundary component of \( M_{m,+} \) (\ie has zero mean curvature and is orthogonal to \( \schwarzschildboundary \)). 
+% \end{lemma}
+% We already know the mean curvature of these different surfaces when considered as surfaces under the background metric \( \delta \). It will thus be helpful to find a formula for how the mean curvature changes under a conformal change of metric. We delegate the details of this to \cref{sec:conformal_changes_of_metric}.
+% \begin{proof}
+%     Let \( f=\Ln{\omega^{\frac{2}{n-2}}} \). \Cref{lem:mean_curvature_under_conformal_transform} then yields
+%     \begin{equation*}
+%         H_{g}=\frac{1}{\omega^{\frac{2}{n-2}}}(H_{\delta}+(n-1) \delta(\grad_\delta f,n_\delta))\mathcomma
+%     \end{equation*}
+%     where \( H_g \) and \( H_\delta \) are the mean curvature of some surface under the metrics \( g \) and \( \delta \) respectively, and where \( n_\delta \) is a normal vector to the surface computed using the background metric \( \delta \), as is also the case for the \( \grad_{\delta} f \).
 
-    We can compute
-    \begin{align*}
-        &(\grad_\delta f)^i f\begin{aligned}[t]
-            &=\partial^i f\\
-            &=\frac{1}{\omega^2}\cdot2 \omega\cdot \partial^i \omega\\
-            &=-\frac{2}{\omega}\cdot \frac{m x_i}{2\abs{x}^3}\mathfullstop
-        \end{aligned}
-    \end{align*}
+%     We can compute
+%     \begin{align*}
+%         &(\grad_\delta f)^i f\begin{aligned}[t]
+%             &=\partial^i f\\
+%             &=\frac{1}{\omega^{\frac{2}{n-2}}}\cdot \frac{2}{n-2} \omega^{\frac{2}{n-2}-1}\cdot \partial^i \omega\\
+%             &=-\frac{2}{(n-2)\omega}\cdot (-(n-2))\frac{\tilde{r}^{n-2} x_i}{\abs{x}^{n}}\mathfullstop
+%         \end{aligned}
+%     \end{align*}
     
-    Note that the outward pointing normal vector \( \nu_\delta \) to \( \schwarzschildboundary \) with respect to \( \delta \) is \( -\partial_3 \).  We can then calculate
-    \begin{equation*}
-        \delta(\grad_\delta f,\nu_\delta)=\frac{m}{\abs{x}^3\cdot \omega^1}\mathcomma
-    \end{equation*}
-    and thus (since the mean curvature under \( \delta \) of both \( \schwarzschildboundary \) and \( \modifiedschwarzschildboundary \) is clearly zero)
-    \begin{equation*}
-        H_g=\frac{2m}{\abs{x}^3\cdot \omega^3}x_3\mathfullstop
-    \end{equation*}
-    In particular, on \( \schwarzschildboundary \) we have \( H_g=0 \) (since there \( x_3=0 \)) and on \( \modifiedschwarzschildboundary \) (for \( a>0 \)) we have \( H_g>0 \) (since there \( x_3>0 \)).
+%     Note that the outward pointing normal vector \( \nu_\delta \) to \( \schwarzschildboundary \) with respect to \( \delta \) is \( -\partial_3 \).  We can then calculate
+%     \begin{equation*}
+%         \delta(\grad_\delta f,\nu_\delta)=\frac{m}{\abs{x}^3\cdot \omega^1}\mathcomma
+%     \end{equation*}
+%     and thus (since the mean curvature under \( \delta \) of both \( \schwarzschildboundary \) and \( \modifiedschwarzschildboundary \) is clearly zero)
+%     \begin{equation*}
+%         H_g=\frac{2m}{\abs{x}^3\cdot \omega^3}x_3\mathfullstop
+%     \end{equation*}
+%     In particular, on \( \schwarzschildboundary \) we have \( H_g=0 \) (since there \( x_3=0 \)) and on \( \modifiedschwarzschildboundary \) (for \( a>0 \)) we have \( H_g>0 \) (since there \( x_3>0 \)).
 
-    Similarly, the normal vector \( n_{\Sigma,\delta} \) to \( \Sigma \) pointing out of our manifold is
-    \begin{equation*}
-        n_{\Sigma,\delta} =-\frac{1}{\abs{x}} \begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix}\mathcomma
-    \end{equation*}
-    and thus
-    \begin{equation*}
-        \delta(\grad_\delta f,n_{\Sigma,\delta})=\frac{\abs{x}^2\cdot m}{\omega\abs{x}^4}=\frac{m}{\abs{x}^2\cdot \omega}\explain{\abs{x}=m/2}{=}\frac{2}{m}\mathfullstop
-    \end{equation*}
+%     Similarly, the normal vector \( n_{\Sigma,\delta} \) to \( \Sigma \) pointing out of our manifold is
+%     \begin{equation*}
+%         n_{\Sigma,\delta} =-\frac{1}{\abs{x}} \begin{pNiceMatrix} x_1 \\ x_2 \\ x_3 \end{pNiceMatrix}\mathcomma
+%     \end{equation*}
+%     and thus
+%     \begin{equation*}
+%         \delta(\grad_\delta f,n_{\Sigma,\delta})=\frac{\abs{x}^2\cdot m}{\omega\abs{x}^4}=\frac{m}{\abs{x}^2\cdot \omega}\explain{\abs{x}=m/2}{=}\frac{2}{m}\mathfullstop
+%     \end{equation*}
 
-    On the other hand, the mean curvature of a sphere of radius \( r \) in \( \reals^3 \) is (under our definition and with respect to our normal vector) \( -\frac{2}{r} \). Thus for \( \Sigma \) we have
-    \begin{equation*}
-        H_g=\frac{1}{\omega^2}\cdot \p[\Bigg]{-\frac{2}{m/2}+\frac{4}{m}}=0\mathfullstop
-    \end{equation*}
+%     On the other hand, the mean curvature of a sphere of radius \( r \) in \( \reals^3 \) is (under our definition and with respect to our normal vector) \( -\frac{2}{r} \). Thus for \( \Sigma \) we have
+%     \begin{equation*}
+%         H_g=\frac{1}{\omega^2}\cdot \p[\Bigg]{-\frac{2}{m/2}+\frac{4}{m}}=0\mathfullstop
+%     \end{equation*}
 
-    Lastly, since angles under \( g \) and \( \delta \) are the same, \( \Sigma \) and \( M_{m,+} \) are surely orthogonal. 
-\end{proof}
+%     Lastly, since angles under \( g \) and \( \delta \) are the same, \( \Sigma \) and \( M_{m,+} \) are surely orthogonal. 
+% \end{proof}
 
 \begin{remark}
     We could also define \( M_{m,\geq a} \) for \( a<0 \), but then the mean curvature of the relevant portion of \( \modifiedschwarzschildboundary \) is negative and the positive mass theorem does not apply. Thus we are only interested in \( a\geq 0 \).
@@ -1022,34 +1022,34 @@ We can reduce the Laplacian \( \laplacian_g \) for a conformally euclidean metri
 \begin{lemma}\label{lem:laplacian_on_schwarzschild}
     In the above notation, we have on \( \reals^3\setminus \zeroset \)
     \begin{equation*}
-        \laplacian_g(u)=\omega^{-5}\cdot \laplacian_\delta(\omega \cdot u)\mathfullstop
+        \laplacian_g(u)=\omega^{-\frac{2n}{n-2}+1}\cdot \laplacian_\delta(\omega \cdot u)\mathfullstop
     \end{equation*}
 \end{lemma}
+% \begin{remark}
+%     This formula is specific to our case, where in particular \( M_{m,\geq a} \) and \( M_{m,+} \) have zero scalar curvature. In general the above conformal invariance is fulfilled not by \( \laplacian_g \) but by the conformal Laplacian \( L_g=\laplacian_g-\frac{n-2}{4(n-1)}R \) (see also \cite[Definition 3]{curryIntroductionConformalGeometry2015}).
+% \end{remark}
+% \begin{proof}[Proof of \Cref{lem:laplacian_on_schwarzschild}]
+%     Note first that \( \laplacian_\delta \omega=0 \) on \( \reals^3\setminus \zeroset \). Using \cref{lem:laplacian_in_terms_of_metric_determinant}, we then obtain
+%     \begin{equation*}
+%         \begin{aligned}[t]
+%             \laplacian_g(u)\begin{aligned}[t]
+%                 &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b u)\\
+%                 &=\frac{1}{\omega^6}\partial_a(\omega^{2}\cdot \delta^{ab} \partial_b u)\\
+%                 &\explain{\text{product rule for \( \omega\cdot (\omega \partial_b(u)) \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega \partial_b u)+\partial_a \omega\cdot \partial_b u)\\
+%                 &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)\\
+%                 &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
+%                 &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
+%                 &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u)\mathfullstop
+%             \end{aligned}
+%         \end{aligned}
+%     \end{equation*}
+% \end{proof}
 \begin{remark}
-    This formula is specific to our case, where in particular \( M_{m,\geq a} \) and \( M_{m,+} \) have zero scalar curvature. In general the above conformal invariance is fulfilled not by \( \laplacian_g \) but by the conformal Laplacian \( L_g=\laplacian_g-\frac{n-2}{4(n-1)}R \) (see also \cite[Definition 3]{curryIntroductionConformalGeometry2015}).
-\end{remark}
-\begin{proof}[Proof of \Cref{lem:laplacian_on_schwarzschild}]
-    Note first that \( \laplacian_\delta \omega=0 \) on \( \reals^3\setminus \zeroset \). Using \cref{lem:laplacian_in_terms_of_metric_determinant}, we then obtain
-    \begin{equation*}
-        \begin{aligned}[t]
-            \laplacian_g(u)\begin{aligned}[t]
-                &=\frac{1}{\sqrt{\det{g}}}\partial_a(\sqrt{\det{g}}g^{ab}\partial_b u)\\
-                &=\frac{1}{\omega^6}\partial_a(\omega^{2}\cdot \delta^{ab} \partial_b u)\\
-                &\explain{\text{product rule for \( \omega\cdot (\omega \partial_b(u)) \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega \partial_b u)+\partial_a \omega\cdot \partial_b u)\\
-                &\explain{\text{\( \laplacian_\delta \omega=0 \) and symmetry of \( \delta \)}}{=}\frac{1}{\omega^5}\delta^{ab}(\partial_a(\omega\cdot \partial_b u)+\partial_a u\cdot \partial_b \omega+u\cdot \partial_a \partial_b \omega)\\
-                &=\frac{1}{\omega^5}\delta^{ab}\partial_a(\omega\cdot \partial_b u +u\cdot \partial_b \omega)\\
-                &=\frac{1}{\omega^5}\delta^{ab}\partial_a  \partial_b(\omega\cdot u)\\
-                &=\frac{1}{\omega^5}\laplacian_\delta(\omega\cdot u)\mathfullstop
-            \end{aligned}
-        \end{aligned}
-    \end{equation*}
-\end{proof}
-\begin{remark}
-    In the following we will be denoting our harmonic coordinates by \( u_i \) and will reserve \( x_i \) for the original coordinates. In contrast to \cref{thm:main_result} and \cref{sec:proof_of_lower_bound}, were we used \( u \) to denote the harmonic coordinate asymptotic to \( x_3 \), we will always explicitly refer to this function as \( u_3 \) to avoid confusion.
+    In the following we will be denoting our harmonic coordinates by \( u_i \) and will reserve \( x_i \) for the original coordinates. In contrast to \cref{thm:main_result} and \cref{sec:proof_of_lower_bound}, were we used \( u \) to denote the harmonic coordinate asymptotic to \( x_1 \), we will always explicitly refer to this function as \( u_1 \) to avoid confusion.
 \end{remark}
 By \cref{lem:laplacian_on_schwarzschild}, finding harmonic functions \( u_i \) under the metric \( g \) reduces to finding harmonic functions \( \tilde{u}_i=\omega \cdot u_i \) under the euclidean metric. For this, we use spherical coordinates \( (r,\theta,\varphi) \) and expand \( \tilde{u} \) in terms of solid harmonics,
 \begin{equation*}
-    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \p*{\tilde{u}^k_{i,\ell} r^\ell + \tilde{u}^k_{i,-\ell-1} r^{-\ell-1}}Y^k_{\ell}(\theta,\varphi)\mathcomma
+    \tilde{u}_i(r,\theta,\varphi)=\sum_{\ell=0}^\infty \sum_{k=-\ell}^\ell \p*{\tilde{u}^k_{i,\ell} r^\ell + \tilde{u}^k_{i,-\ell-N+2} r^{-\ell-N+2}}Y^k_{\ell}(\theta,\varphi)\mathcomma
 \end{equation*}
 where \( \tilde{u}^k_{i,\ell} \) are real coefficients and \( Y^k_{\ell} \) the spherical harmonics.
 % \begin{equation*}
@@ -1064,8 +1064,8 @@ We want our \( u_i \) to be asymptotic to the asymptotically flat coordinates \(
 for any \( \varepsilon>0 \). Note that for \( M_g \) the strongest possible choice for the asymptotic falloff parameter \( \tau \) is \( \tau=1 \) (compare \cref{eq:def_asymptotically_flat}).Thus for \( j=0 \) in \cref{eq:weakly_asymptotically_linear} we have \( \sup_M \abs{u_i-x_i}\cdot \abs{x}^\varepsilon<\infty \) for all \( \varepsilon>0 \), \ie we can hope to find \( u_i-x_i=\bigo{\abs{x}^0} \). Then for \( \tilde{u}_i \) this implies
 \begin{equation*}
     \begin{aligned}[t]
-        (\tilde{u}_i-x_i)&=u_i\cdot (1+m/2\abs{x})-x_i\\
-        &=(u_i-x_i)-m\frac{m\cdot x_i}{2\abs{x}}\\
+        (\tilde{u}_i-x_i)&=u_i\cdot (1+\tilde{r}^{n-2}/\abs{x}^{n-2})-x_i\\
+        &=(u_i-x_i)+\frac{\tilde{r}^{n-2} u_i}{2\abs{x}^{n-2}}\\
         &=\bigo{\abs{x}^0}\mathfullstop
     \end{aligned}
 \end{equation*}
