@@ -304,3 +304,5 @@ figures/horizon_and_coordinate_sphere.tex
 
 # python stuff
 .venv
+.direnv
+.nix-venv
